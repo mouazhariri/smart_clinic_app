@@ -1,31 +1,32 @@
 import 'package:dio/dio.dart';
 
+/// Parameters collected across the 3-step signup flow.
+///
+/// Step 1 → [mobileNumber], Step 2 → [otp], Step 3 → [fullName]/[qid]/[password].
 class SignupParams {
+  const SignupParams({
+    required this.fullName,
+    required this.mobileNumber,
+    required this.qid,
+    required this.password,
+    this.otp,
+  });
 
-  final String firstName;
-  final String? lastName;
-
+  final String fullName;
   final String mobileNumber;
-
-  SignupParams(
-      {
-      required this.firstName,
-      required this.lastName,
-
-      required this.mobileNumber});
+  final String qid;
+  final String password;
+  final String? otp;
 
   Map<String, dynamic> toMap() {
-    // final totalCostWithSuplies=(discountCost?? totalNetAmount?? totalAmount)+(cleaningSuppliesFees??0);
-
     return {
-
-      'first_name': firstName,
-      'last_name': lastName,
+      'full_name': fullName,
       'mobile_no': mobileNumber,
+      'qid': qid,
+      'password': password,
+      if (otp != null) 'otp': otp,
     };
   }
 
-  FormData toFormData() {
-    return FormData.fromMap(toMap());
-  }
+  FormData toFormData() => FormData.fromMap(toMap());
 }
