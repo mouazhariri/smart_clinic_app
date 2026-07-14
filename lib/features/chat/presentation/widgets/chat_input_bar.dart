@@ -1114,7 +1114,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                     fontSize: 13,
                   ),
                   filled: true,
-                  fillColor: AppColors.grey.shade50,
+                  fillColor: AppColors.grey,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
                     borderSide: BorderSide(color: AppColors.authDivider),

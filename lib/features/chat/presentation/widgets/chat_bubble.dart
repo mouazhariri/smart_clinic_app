@@ -82,7 +82,7 @@ class ChatBubble extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 4),
-          _buildMetadata(),
+          _buildMetadata(context),
         ],
       ),
     );
@@ -245,7 +245,7 @@ class ChatBubble extends StatelessWidget {
     );
   }
 
-  Widget _buildMetadata() {
+  Widget _buildMetadata(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Row(
@@ -354,7 +354,7 @@ class _MessageOptionsSheet extends StatelessWidget {
                 Navigator.pop(context);
                 Clipboard.setData(ClipboardData(text: message.text));
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
+                   SnackBar(
                     content: Text(context.tr('copied_to_clipboard')),
                     duration: Duration(seconds: 2),
                   ),
