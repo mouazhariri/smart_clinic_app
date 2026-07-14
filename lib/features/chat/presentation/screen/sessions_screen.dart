@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_clinic_app/features/chat/domain/chat_session.dart';
@@ -14,7 +15,7 @@ class SessionsScreen extends ConsumerWidget {
     final sessionsAsync = ref.watch(sessionsControllerProvider);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F8FC),
+      backgroundColor: AppColors.authBackground,
       appBar: _buildAppBar(context, ref),
       body: sessionsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
@@ -25,11 +26,11 @@ class SessionsScreen extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _startNewChat(context, ref),
-        backgroundColor: const Color(0xFF1565C0),
-        icon: const Icon(Icons.add, color: Colors.white),
+        backgroundColor: AppColors.primary,
+        icon: const Icon(Icons.add, color: AppColors.white),
         label: const Text(
           'New Chat',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
+          style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w600),
         ),
       ).animate().scale(delay: 300.ms, duration: 400.ms, curve: Curves.elasticOut),
     );
@@ -38,20 +39,20 @@ class SessionsScreen extends ConsumerWidget {
   PreferredSizeWidget _buildAppBar(BuildContext context, WidgetRef ref) {
     return AppBar(
       elevation: 0,
-      backgroundColor: const Color(0xFF1565C0),
-      foregroundColor: Colors.white,
+      backgroundColor: AppColors.primary,
+      foregroundColor: AppColors.white,
       title: Row(
         children: [
           Container(
             width: 36,
             height: 36,
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.2),
+              color: AppColors.white.withOpacity(0.2),
               borderRadius: BorderRadius.circular(10),
             ),
             child: const Icon(
               Icons.medical_services_rounded,
-              color: Colors.white,
+              color: AppColors.white,
               size: 20,
             ),
           ),
@@ -64,14 +65,14 @@ class SessionsScreen extends ConsumerWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: AppColors.white,
                 ),
               ),
               Text(
                 'Medical Assistant',
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.white70,
+                  color: AppColors.white70,
                 ),
               ),
             ],
@@ -80,7 +81,7 @@ class SessionsScreen extends ConsumerWidget {
       ),
       actions: [
         IconButton(
-          icon: const Icon(Icons.delete_sweep_outlined, color: Colors.white70),
+          icon: const Icon(Icons.delete_sweep_outlined, color: AppColors.white70),
           tooltip: 'Clear all chats',
           onPressed: () => _showClearAllDialog(context, ref),
         ),
@@ -100,14 +101,14 @@ class SessionsScreen extends ConsumerWidget {
               height: 100,
               decoration: BoxDecoration(
                 gradient: LinearGradient(
-                  colors: [Colors.blue.shade100, Colors.blue.shade200],
+                  colors: [AppColors.primaryBg, AppColors.primaryBg],
                 ),
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 Icons.chat_bubble_outline_rounded,
                 size: 48,
-                color: Colors.blue.shade600,
+                color: AppColors.primary,
               ),
             ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
             const SizedBox(height: 24),
@@ -116,7 +117,7 @@ class SessionsScreen extends ConsumerWidget {
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
-                color: Colors.black87,
+                color: AppColors.textPrimary,
               ),
             ).animate().fadeIn(delay: 200.ms),
             const SizedBox(height: 12),
@@ -125,7 +126,7 @@ class SessionsScreen extends ConsumerWidget {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
-                color: Colors.grey.shade600,
+                color: AppColors.textSecondary,
                 height: 1.5,
               ),
             ).animate().fadeIn(delay: 300.ms),
@@ -133,8 +134,8 @@ class SessionsScreen extends ConsumerWidget {
             ElevatedButton.icon(
               onPressed: () => _startNewChat(context, ref),
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF1565C0),
-                foregroundColor: Colors.white,
+                backgroundColor: AppColors.primary,
+                foregroundColor: AppColors.white,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 32,
                   vertical: 14,
@@ -266,7 +267,7 @@ class SessionsScreen extends ConsumerWidget {
             child: const Text('Cancel'),
           ),
           FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
             onPressed: () => Navigator.pop(context, true),
             child: const Text('Delete'),
           ),
@@ -292,7 +293,7 @@ class SessionsScreen extends ConsumerWidget {
             child: const Text('Cancel'),
           ),
           FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
             onPressed: () => Navigator.pop(context, true),
             child: const Text('Clear All'),
           ),
@@ -321,7 +322,7 @@ class _DateLabel extends StatelessWidget {
         style: TextStyle(
           fontSize: 13,
           fontWeight: FontWeight.w600,
-          color: Colors.grey.shade500,
+          color: AppColors.authHint,
           letterSpacing: 0.5,
         ),
       ),
@@ -354,10 +355,10 @@ class _SessionTile extends StatelessWidget {
         padding: const EdgeInsets.only(right: 16),
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: Colors.red.shade400,
+          color: AppColors.errorRed,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: const Icon(Icons.delete_outline, color: Colors.white, size: 28),
+        child: const Icon(Icons.delete_outline, color: AppColors.white, size: 28),
       ),
       confirmDismiss: (_) async {
         onDelete();
@@ -366,11 +367,11 @@ class _SessionTile extends StatelessWidget {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.06),
+              color: AppColors.black.withOpacity(0.06),
               blurRadius: 10,
               offset: const Offset(0, 2),
             ),
@@ -387,7 +388,7 @@ class _SessionTile extends StatelessWidget {
             height: 48,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.blue.shade400, Colors.blue.shade700],
+                colors: [AppColors.secondPrimary, AppColors.secondPrimary],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -395,7 +396,7 @@ class _SessionTile extends StatelessWidget {
             ),
             child: const Icon(
               Icons.medical_services_rounded,
-              color: Colors.white,
+              color: AppColors.white,
               size: 24,
             ),
           ),
@@ -404,7 +405,7 @@ class _SessionTile extends StatelessWidget {
             style: const TextStyle(
               fontWeight: FontWeight.w600,
               fontSize: 15,
-              color: Colors.black87,
+              color: AppColors.textPrimary,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -417,7 +418,7 @@ class _SessionTile extends StatelessWidget {
                 session.lastMessagePreview,
                 style: TextStyle(
                   fontSize: 13,
-                  color: Colors.grey.shade600,
+                  color: AppColors.textSecondary,
                   height: 1.3,
                 ),
                 maxLines: 2,
@@ -429,14 +430,14 @@ class _SessionTile extends StatelessWidget {
                   Icon(
                     Icons.access_time_rounded,
                     size: 12,
-                    color: Colors.grey.shade400,
+                    color: AppColors.authIcon,
                   ),
                   const SizedBox(width: 4),
                   Text(
                     _formatDate(session.updatedAt),
                     style: TextStyle(
                       fontSize: 11,
-                      color: Colors.grey.shade400,
+                      color: AppColors.authIcon,
                     ),
                   ),
                   const Spacer(),
@@ -447,14 +448,14 @@ class _SessionTile extends StatelessWidget {
                         vertical: 2,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.blue.shade50,
+                        color: AppColors.authLightBlue,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
                         '${session.messages.length} msgs',
                         style: TextStyle(
                           fontSize: 11,
-                          color: Colors.blue.shade700,
+                          color: AppColors.secondPrimary,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
@@ -465,7 +466,7 @@ class _SessionTile extends StatelessWidget {
           ),
           trailing: const Icon(
             Icons.chevron_right_rounded,
-            color: Colors.grey,
+            color: AppColors.grey,
           ),
         ),
       ).animate().fadeIn(

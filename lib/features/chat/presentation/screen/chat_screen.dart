@@ -130,7 +130,7 @@
 //             child: const Text('Cancel'),
 //           ),
 //           FilledButton(
-//             style: FilledButton.styleFrom(backgroundColor: Colors.red),
+//             style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
 //             onPressed: () {
 //               ref.read(chatControllerProvider.notifier).clearChat();
 //               Navigator.pop(context);
@@ -160,7 +160,7 @@
 //     });
 
 //     return Scaffold(
-//       backgroundColor: const Color(0xFFF7F8FC),
+//       backgroundColor: AppColors.authBackground,
 //       appBar: _buildAppBar(messages),
 //       floatingActionButton: _buildJumpButton(),
 //       body: Column(
@@ -186,8 +186,8 @@
 //   PreferredSizeWidget _buildAppBar(List<ChatMessage>? messages) {
 //     return AppBar(
 //       elevation: 0,
-//       backgroundColor: Colors.white,
-//       surfaceTintColor: Colors.white,
+//       backgroundColor: AppColors.white,
+//       surfaceTintColor: AppColors.white,
 //       title: Row(
 //         children: [
 //           Container(
@@ -195,7 +195,7 @@
 //             height: 38,
 //             decoration: BoxDecoration(
 //               gradient: LinearGradient(
-//                 colors: [Colors.blue.shade400, Colors.blue.shade700],
+//                 colors: [AppColors.secondPrimary, AppColors.secondPrimary],
 //                 begin: Alignment.topLeft,
 //                 end: Alignment.bottomRight,
 //               ),
@@ -203,7 +203,7 @@
 //             ),
 //             child: const Icon(
 //               Icons.medical_services_rounded,
-//               color: Colors.white,
+//               color: AppColors.white,
 //               size: 20,
 //             ),
 //           ),
@@ -216,14 +216,14 @@
 //                 style: TextStyle(
 //                   fontSize: 16,
 //                   fontWeight: FontWeight.bold,
-//                   color: Colors.black87,
+//                   color: AppColors.textPrimary,
 //                 ),
 //               ),
 //               Text(
 //                 'Medical Assistant',
 //                 style: TextStyle(
 //                   fontSize: 11,
-//                   color: Colors.grey.shade500,
+//                   color: AppColors.authHint,
 //                   fontWeight: FontWeight.normal,
 //                 ),
 //               ),
@@ -234,7 +234,7 @@
 //       actions: [
 //         if (messages != null && messages.isNotEmpty)
 //           IconButton(
-//             icon: const Icon(Icons.delete_sweep_outlined, color: Colors.grey),
+//             icon: const Icon(Icons.delete_sweep_outlined, color: AppColors.grey),
 //             tooltip: 'Clear chat',
 //             onPressed: _showClearChatDialog,
 //           ),
@@ -250,7 +250,7 @@
 //       child: Padding(
 //         padding: const EdgeInsets.only(bottom: 70),
 //         child: FloatingActionButton.small(
-//           backgroundColor: Colors.white,
+//           backgroundColor: AppColors.white,
 //           elevation: 4,
 //           onPressed: _jumpToBottom,
 //           child: const Icon(
@@ -274,7 +274,7 @@
 //               height: 90,
 //               decoration: BoxDecoration(
 //                 gradient: LinearGradient(
-//                   colors: [Colors.blue.shade100, Colors.blue.shade200],
+//                   colors: [AppColors.primaryBg, AppColors.primaryBg],
 //                   begin: Alignment.topLeft,
 //                   end: Alignment.bottomRight,
 //                 ),
@@ -283,7 +283,7 @@
 //               child: Icon(
 //                 Icons.medical_services_rounded,
 //                 size: 44,
-//                 color: Colors.blue.shade600,
+//                 color: AppColors.primary,
 //               ),
 //             ),
 //             const SizedBox(height: 24),
@@ -292,7 +292,7 @@
 //               style: TextStyle(
 //                 fontSize: 22,
 //                 fontWeight: FontWeight.bold,
-//                 color: Colors.black87,
+//                 color: AppColors.textPrimary,
 //               ),
 //             ),
 //             const SizedBox(height: 12),
@@ -301,7 +301,7 @@
 //               textAlign: TextAlign.center,
 //               style: TextStyle(
 //                 fontSize: 14,
-//                 color: Colors.grey.shade600,
+//                 color: AppColors.textSecondary,
 //                 height: 1.5,
 //               ),
 //             ),
@@ -430,19 +430,19 @@
 //       padding: const EdgeInsets.symmetric(vertical: 16),
 //       child: Row(
 //         children: [
-//           Expanded(child: Divider(color: Colors.grey.shade300)),
+//           Expanded(child: Divider(color: AppColors.authInputBorder)),
 //           Padding(
 //             padding: const EdgeInsets.symmetric(horizontal: 12),
 //             child: Text(
 //               _formatDate(),
 //               style: TextStyle(
 //                 fontSize: 12,
-//                 color: Colors.grey.shade500,
+//                 color: AppColors.authHint,
 //                 fontWeight: FontWeight.w500,
 //               ),
 //             ),
 //           ),
-//           Expanded(child: Divider(color: Colors.grey.shade300)),
+//           Expanded(child: Divider(color: AppColors.authInputBorder)),
 //         ],
 //       ),
 //     );
@@ -464,12 +464,12 @@
 //       child: Container(
 //         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
 //         decoration: BoxDecoration(
-//           color: Colors.white,
+//           color: AppColors.white,
 //           borderRadius: BorderRadius.circular(20),
-//           border: Border.all(color: Colors.blue.shade200),
+//           border: Border.all(color: AppColors.primaryBg),
 //           boxShadow: [
 //             BoxShadow(
-//               color: Colors.black.withOpacity(0.04),
+//               color: AppColors.black.withOpacity(0.04),
 //               blurRadius: 4,
 //               offset: const Offset(0, 2),
 //             ),
@@ -479,7 +479,7 @@
 //           label,
 //           style: TextStyle(
 //             fontSize: 13,
-//             color: Colors.blue.shade700,
+//             color: AppColors.secondPrimary,
 //             fontWeight: FontWeight.w500,
 //           ),
 //         ),
@@ -592,7 +592,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       context: context,
       barrierDismissible: true,
       barrierLabel: 'Edit Message',
-      barrierColor: Colors.black54,
+      barrierColor: AppColors.textSecondary,
       transitionDuration: const Duration(milliseconds: 300),
       transitionBuilder: (ctx, anim, _, child) {
         return SlideTransition(
@@ -612,13 +612,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             return Align(
               alignment: Alignment.bottomCenter,
               child: Material(
-                color: Colors.transparent,
+                color: AppColors.transparent,
                 child: Container(
                   margin: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
                   ),
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(24),
                     ),
@@ -635,7 +635,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             width: 40,
                             height: 4,
                             decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
+                              color: AppColors.authInputBorder,
                               borderRadius: BorderRadius.circular(2),
                             ),
                           ),
@@ -648,12 +648,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             Container(
                               padding: const EdgeInsets.all(8),
                               decoration: BoxDecoration(
-                                color: Colors.blue.shade50,
+                                color: AppColors.authLightBlue,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: Icon(
                                 Icons.edit_rounded,
-                                color: Colors.blue.shade600,
+                                color: AppColors.primary,
                                 size: 20,
                               ),
                             ),
@@ -667,14 +667,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
+                                      color: AppColors.textPrimary,
                                     ),
                                   ),
                                   Text(
                                     'The conversation will restart from this point',
                                     style: TextStyle(
                                       fontSize: 12,
-                                      color: Colors.grey,
+                                      color: AppColors.grey,
                                     ),
                                   ),
                                 ],
@@ -688,9 +688,9 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         // ── Text Field ────────────────────────────────────
                         Container(
                           decoration: BoxDecoration(
-                            color: Colors.grey.shade50,
+                            color: AppColors.authBackground,
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.grey.shade200),
+                            border: Border.all(color: AppColors.authDivider),
                           ),
                           child: TextField(
                             controller: editController,
@@ -703,7 +703,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             ),
                             decoration: InputDecoration(
                               hintText: 'Edit your message...',
-                              hintStyle: TextStyle(color: Colors.grey.shade400),
+                              hintStyle: TextStyle(color: AppColors.authIcon),
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.all(16),
                             ),
@@ -722,7 +722,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                             '${currentText.length} characters',
                             style: TextStyle(
                               fontSize: 12,
-                              color: Colors.grey.shade400,
+                              color: AppColors.authIcon,
                             ),
                           ),
                         ),
@@ -733,21 +733,21 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         Container(
                           padding: const EdgeInsets.all(12),
                           decoration: BoxDecoration(
-                            color: Colors.amber.shade50,
+                            color: AppColors.stockMedBg,
                             borderRadius: BorderRadius.circular(12),
-                            border: Border.all(color: Colors.amber.shade200),
+                            border: Border.all(color: AppColors.stockMedBg),
                           ),
                           child: Row(
                             children: [
                               Icon(Icons.info_outline,
-                                  color: Colors.amber.shade700, size: 16),
+                                  color: AppColors.stockMedText, size: 16),
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
                                   'Messages after this will be removed and AI will respond to your edited message',
                                   style: TextStyle(
                                     fontSize: 12,
-                                    color: Colors.amber.shade800,
+                                    color: AppColors.stockMedText,
                                     height: 1.4,
                                   ),
                                 ),
@@ -771,12 +771,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                     borderRadius: BorderRadius.circular(12),
                                   ),
                                   side: BorderSide(
-                                      color: Colors.grey.shade300),
+                                      color: AppColors.authInputBorder),
                                 ),
                                 child: const Text(
                                   'Cancel',
                                   style: TextStyle(
-                                    color: Colors.black54,
+                                    color: AppColors.textSecondary,
                                     fontWeight: FontWeight.w600,
                                   ),
                                 ),
@@ -801,7 +801,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                             );
                                       },
                                 style: FilledButton.styleFrom(
-                                  backgroundColor: const Color(0xFF1565C0),
+                                  backgroundColor: AppColors.primary,
                                   padding: const EdgeInsets.symmetric(
                                       vertical: 14),
                                   shape: RoundedRectangleBorder(
@@ -845,7 +845,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             child: const Text('Cancel'),
           ),
           FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: Colors.red),
+            style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
             onPressed: () {
               ref.read(chatControllerProvider.notifier).clearChat();
               Navigator.pop(context);
@@ -892,7 +892,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   // Dev.logLine("IN CHAT SCREEN MESSAGE IS ");
   // Dev. logList(messages);
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F4F8),
+      backgroundColor: AppColors.authBackground,
       appBar: _buildAppBar(sessionTitle, messages),
       floatingActionButton: _buildJumpButton(),
       body: Column(
@@ -925,10 +925,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
   ) {
     return AppBar(
       elevation: 0,
-      backgroundColor: const Color(0xFF1565C0),
-      foregroundColor: Colors.white,
+      backgroundColor: AppColors.primary,
+      foregroundColor: AppColors.white,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: Colors.white),
+        icon: const Icon(Icons.arrow_back_ios_new_rounded, color: AppColors.white),
         onPressed: () => Navigator.pop(context),
       ),
       title: Column(
@@ -939,7 +939,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
-              color: Colors.white,
+              color: AppColors.white,
             ),
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
@@ -950,14 +950,14 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 width: 6,
                 height: 6,
                 decoration: const BoxDecoration(
-                  color: Colors.greenAccent,
+                  color: AppColors.successGreen,
                   shape: BoxShape.circle,
                 ),
               ),
               const SizedBox(width: 4),
               const Text(
                 'AI Medical Assistant',
-                style: TextStyle(fontSize: 11, color: Colors.white70),
+                style: TextStyle(fontSize: 11, color: AppColors.white70),
               ),
             ],
           ),
@@ -966,7 +966,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       actions: [
         if (messages != null && messages.isNotEmpty)
           IconButton(
-            icon: const Icon(Icons.delete_outline, color: Colors.white70),
+            icon: const Icon(Icons.delete_outline, color: AppColors.white70),
             onPressed: _showClearChatDialog,
           ),
         const SizedBox(width: 4),
@@ -981,11 +981,11 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       child: Padding(
         padding: const EdgeInsets.only(bottom: 80),
         child: FloatingActionButton.small(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.white,
           elevation: 4,
           onPressed: _jumpToBottom,
           child: const Icon(Icons.keyboard_arrow_down_rounded,
-              color: Color(0xFF1565C0)),
+              color: AppColors.primary),
         ),
       ),
     );
@@ -1003,7 +1003,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             height: 100,
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.blue.shade100, Colors.blue.shade300],
+                colors: [AppColors.primaryBg, AppColors.primaryBg],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
@@ -1012,7 +1012,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             child: const Icon(
               Icons.medical_services_rounded,
               size: 50,
-              color: Colors.white,
+              color: AppColors.white,
             ),
           ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
 
@@ -1022,7 +1022,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: Colors.black87,
+              color: AppColors.textPrimary,
             ),
           ).animate().fadeIn(delay: 200.ms),
 
@@ -1030,7 +1030,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           Text(
             'Ask about symptoms, medications, or attach medical documents for analysis',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade600, height: 1.5),
+            style: TextStyle(fontSize: 14, color: AppColors.textSecondary, height: 1.5),
           ).animate().fadeIn(delay: 300.ms),
 
           const SizedBox(height: 32),
@@ -1134,18 +1134,18 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   Widget _buildLoadingScaffold() {
     return Scaffold(
-      backgroundColor: const Color(0xFF1565C0),
+      backgroundColor: AppColors.primary,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1565C0),
+        backgroundColor: AppColors.primary,
         elevation: 0,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: Colors.white),
+              color: AppColors.white),
           onPressed: () => Navigator.pop(context),
         ),
         title: const Text(
           'Loading...',
-          style: TextStyle(color: Colors.white, fontSize: 16),
+          style: TextStyle(color: AppColors.white, fontSize: 16),
         ),
       ),
       body: Center(
@@ -1156,13 +1156,13 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               width: 80,
               height: 80,
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.15),
+                color: AppColors.white.withOpacity(0.15),
                 shape: BoxShape.circle,
               ),
               child: const Padding(
                 padding: EdgeInsets.all(20),
                 child: CircularProgressIndicator(
-                  color: Colors.white,
+                  color: AppColors.white,
                   strokeWidth: 3,
                 ),
               ),
@@ -1171,7 +1171,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             const Text(
               'Loading conversation...',
               style: TextStyle(
-                color: Colors.white70,
+                color: AppColors.white70,
                 fontSize: 16,
                 fontWeight: FontWeight.w500,
               ),
@@ -1186,10 +1186,10 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
   Widget _buildErrorScaffold(String error) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF0F4F8),
+      backgroundColor: AppColors.authBackground,
       appBar: AppBar(
-        backgroundColor: const Color(0xFF1565C0),
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.primary,
+        foregroundColor: AppColors.white,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () => Navigator.pop(context),
@@ -1202,7 +1202,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.error_outline, color: Colors.red.shade400, size: 64),
+              Icon(Icons.error_outline, color: AppColors.errorRed, size: 64),
               const SizedBox(height: 16),
               const Text(
                 'Something went wrong',
@@ -1213,7 +1213,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               Text(
                 error,
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.grey.shade600),
+                style: TextStyle(color: AppColors.textSecondary),
               ),
               const SizedBox(height: 24),
               FilledButton.icon(
@@ -1247,7 +1247,7 @@ class _OcrProcessingBanner extends StatelessWidget {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-      color: Colors.orange.shade50,
+      color: AppColors.metricOrange,
       child: Row(
         children: [
           SizedBox(
@@ -1255,14 +1255,14 @@ class _OcrProcessingBanner extends StatelessWidget {
             height: 16,
             child: CircularProgressIndicator(
               strokeWidth: 2,
-              color: Colors.orange.shade600,
+              color: AppColors.metricOrangeIcon,
             ),
           ),
           const SizedBox(width: 10),
           Text(
             '🔍 Extracting text with OCR...',
             style: TextStyle(
-              color: Colors.orange.shade800,
+              color: AppColors.metricOrangeIcon,
               fontSize: 13,
               fontWeight: FontWeight.w500,
             ),
@@ -1297,19 +1297,19 @@ class _DateDivider extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: Row(
         children: [
-          Expanded(child: Divider(color: Colors.grey.shade300)),
+          Expanded(child: Divider(color: AppColors.authInputBorder)),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(
               _formatDate(),
               style: TextStyle(
                 fontSize: 12,
-                color: Colors.grey.shade500,
+                color: AppColors.authHint,
                 fontWeight: FontWeight.w600,
               ),
             ),
           ),
-          Expanded(child: Divider(color: Colors.grey.shade300)),
+          Expanded(child: Divider(color: AppColors.authInputBorder)),
         ],
       ),
     );
@@ -1336,12 +1336,12 @@ class _SuggestionChip extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: AppColors.white,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: Colors.blue.shade200),
+          border: Border.all(color: AppColors.primaryBg),
           boxShadow: [
             BoxShadow(
-              color: Colors.blue.withOpacity(0.08),
+              color: AppColors.primary.withOpacity(0.08),
               blurRadius: 8,
               offset: const Offset(0, 2),
             ),
@@ -1356,7 +1356,7 @@ class _SuggestionChip extends StatelessWidget {
               label,
               style: TextStyle(
                 fontSize: 13,
-                color: Colors.blue.shade700,
+                color: AppColors.secondPrimary,
                 fontWeight: FontWeight.w600,
               ),
             ),

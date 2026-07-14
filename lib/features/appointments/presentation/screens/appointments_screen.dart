@@ -37,7 +37,7 @@ class AppointmentsScreen extends ConsumerWidget {
               ),
               child: TabBar(
                 indicatorSize: TabBarIndicatorSize.tab,
-                dividerColor: Colors.transparent,
+                dividerColor: AppColors.transparent,
                 indicator: BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.circular(14),

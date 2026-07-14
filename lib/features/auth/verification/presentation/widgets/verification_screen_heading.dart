@@ -30,7 +30,7 @@ class VerificationScreenHeading extends StatelessWidget {
                   borderRadius: BorderRadius.circular(100),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: AppColors.black.withOpacity(0.1),
                       blurRadius: 1,
                       offset: const Offset(0, 2),
                     ),
