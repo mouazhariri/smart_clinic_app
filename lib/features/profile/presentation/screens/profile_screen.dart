@@ -78,7 +78,7 @@ class ProfileScreen extends ConsumerWidget {
                 _ProfileTile(
                   icon: Icons.language_outlined,
                   title: context.tr('language'),
-                  value: context.locale.languageCode == 'ar' ? 'العربية' : 'English',
+                  value: context.locale.languageCode == 'ar' ? context.tr('arabic_language') : context.tr('english_language'),
                 ),
                 _ProfileTile(
                   icon: Icons.dark_mode_outlined,

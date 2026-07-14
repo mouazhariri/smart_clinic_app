@@ -19,7 +19,7 @@ class SessionsScreen extends ConsumerWidget {
       appBar: _buildAppBar(context, ref),
       body: sessionsAsync.when(
         loading: () => const Center(child: CircularProgressIndicator()),
-        error: (e, _) => Center(child: Text('Error: $e')),
+        error: (e, _) => Center(child: Text('${context.tr('error')}: $e')),
         data: (sessions) => sessions.isEmpty
             ? _buildEmptyState(context, ref)
             : _buildSessionsList(context, ref, sessions),
@@ -28,9 +28,9 @@ class SessionsScreen extends ConsumerWidget {
         onPressed: () => _startNewChat(context, ref),
         backgroundColor: AppColors.primary,
         icon: const Icon(Icons.add, color: AppColors.white),
-        label: const Text(
-          'New Chat',
-          style: TextStyle(color: AppColors.white, fontWeight: FontWeight.w600),
+        label: Text(
+          context.tr('new_chat'),
+          style: const TextStyle(color: AppColors.white, fontWeight: FontWeight.w600),
         ),
       ).animate().scale(delay: 300.ms, duration: 400.ms, curve: Curves.elasticOut),
     );
@@ -57,11 +57,11 @@ class SessionsScreen extends ConsumerWidget {
             ),
           ),
           const SizedBox(width: 10),
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Doctor AI',
+                context.tr('doctor_ai'),
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -69,7 +69,7 @@ class SessionsScreen extends ConsumerWidget {
                 ),
               ),
               Text(
-                'Medical Assistant',
+                context.tr('medical_assistant'),
                 style: TextStyle(
                   fontSize: 11,
                   color: AppColors.white70,
@@ -82,7 +82,7 @@ class SessionsScreen extends ConsumerWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.delete_sweep_outlined, color: AppColors.white70),
-          tooltip: 'Clear all chats',
+          tooltip: context.tr('clear_all_chats'),
           onPressed: () => _showClearAllDialog(context, ref),
         ),
       ],
@@ -112,8 +112,8 @@ class SessionsScreen extends ConsumerWidget {
               ),
             ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
             const SizedBox(height: 24),
-            const Text(
-              'No Conversations Yet',
+            Text(
+              context.tr('no_conversations_yet'),
               style: TextStyle(
                 fontSize: 22,
                 fontWeight: FontWeight.bold,
@@ -122,7 +122,7 @@ class SessionsScreen extends ConsumerWidget {
             ).animate().fadeIn(delay: 200.ms),
             const SizedBox(height: 12),
             Text(
-              'Start a new conversation with your AI medical assistant',
+              context.tr('start_ai_conversation'),
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 15,
@@ -145,8 +145,8 @@ class SessionsScreen extends ConsumerWidget {
                 ),
               ),
               icon: const Icon(Icons.add),
-              label: const Text(
-                'Start New Conversation',
+              label: Text(
+                context.tr('start_new_conversation'),
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ).animate().fadeIn(delay: 400.ms).slideY(begin: 0.2, end: 0),
@@ -183,7 +183,7 @@ class SessionsScreen extends ConsumerWidget {
       padding: const EdgeInsets.fromLTRB(16, 16, 16, 100),
       children: [
         if (todaySessions.isNotEmpty) ...[
-          _DateLabel(label: 'Today'),
+          _DateLabel(label: context.tr('today')),
           ...todaySessions.asMap().entries.map((e) => _SessionTile(
                 session: e.value,
                 index: e.key,
@@ -192,7 +192,7 @@ class SessionsScreen extends ConsumerWidget {
               )),
         ],
         if (yesterdaySessions.isNotEmpty) ...[
-          _DateLabel(label: 'Yesterday'),
+          _DateLabel(label: context.tr('yesterday')),
           ...yesterdaySessions.asMap().entries.map((e) => _SessionTile(
                 session: e.value,
                 index: e.key,
@@ -201,7 +201,7 @@ class SessionsScreen extends ConsumerWidget {
               )),
         ],
         if (olderSessions.isNotEmpty) ...[
-          _DateLabel(label: 'Earlier'),
+          _DateLabel(label: context.tr('earlier')),
           ...olderSessions.asMap().entries.map((e) => _SessionTile(
                 session: e.value,
                 index: e.key,
@@ -258,18 +258,17 @@ class SessionsScreen extends ConsumerWidget {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Delete Conversation'),
-        content: const Text(
-            'Are you sure you want to delete this conversation?'),
+        title: Text(context.tr('delete_conversation')),
+        content: Text(context.tr('delete_conversation_confirm')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(context.tr('cancel')),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Delete'),
+            child: Text(context.tr('delete')),
           ),
         ],
       ),
@@ -284,18 +283,18 @@ class SessionsScreen extends ConsumerWidget {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Clear All Chats'),
+        title: Text(context.tr('clear_all_chats')),
         content:
-            const Text('This will permanently delete all conversations.'),
+            Text(context.tr('clear_all_chats_warning')),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Cancel'),
+            child: Text(context.tr('cancel')),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Clear All'),
+            child: Text(context.tr('clear_all')),
           ),
         ],
       ),
@@ -452,7 +451,7 @@ class _SessionTile extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        '${session.messages.length} msgs',
+                        context.tr('messages_count_short', args: [session.messages.length.toString()]),
                         style: TextStyle(
                           fontSize: 11,
                           color: AppColors.secondPrimary,

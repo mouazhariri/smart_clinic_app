@@ -47,7 +47,7 @@ class AppDialogs {
       context: context,
       barrierDismissible: dismissible,
       builder: (_) => _ResultDialog(
-        icon: const Icon(Icons.check_circle, color: Colors.green, size: 24),
+        icon: const Icon(Icons.check_circle, color: AppColors.successGreen, size: 24),
         title: title,
         message: message,
         okText: okText,
@@ -68,7 +68,7 @@ class AppDialogs {
       context: context,
       barrierDismissible: dismissible,
       builder: (_) => _ResultDialog(
-        icon: const Icon(Icons.cancel, color: Colors.red, size: 24),
+        icon: const Icon(Icons.cancel, color: AppColors.errorRed, size: 24),
         title: title,
         message: message,
         okText: okText,
@@ -110,7 +110,7 @@ class _LoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     final bg = Theme.of(context).dialogTheme.backgroundColor;
     return Material(
-      color: Colors.black38,
+      color: AppColors.textSecondary,
       child: Center(
         child: Container(
           padding: const EdgeInsets.all(20),
@@ -220,7 +220,7 @@ class _ConfirmDialog extends StatelessWidget {
         ),
         FilledButton(
           style: destructive
-              ? FilledButton.styleFrom(backgroundColor: Colors.red)
+              ? FilledButton.styleFrom(backgroundColor: AppColors.errorRed)
               : null,
           onPressed: () => Navigator.pop(context, true),
           child: Text(confirmText),
@@ -303,7 +303,7 @@ Future<void> showAutoClosingDialog(BuildContext context, String message) async {
             "OK".tr(),
             style: Theme.of(context).textTheme.displaySmall!.copyWith(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: AppColors.black,
                   fontWeight: FontWeight.w600,
                 ),
           ).centered(),
@@ -326,7 +326,7 @@ Dialog showYesNowChoicesDialog(
 }) {
   return Dialog(
     insetPadding: EdgeInsets.symmetric(horizontal: 20),
-    backgroundColor: Colors.white.withOpacity(0.8),
+    backgroundColor: AppColors.white.withOpacity(0.8),
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
     child: Column(
       mainAxisSize: MainAxisSize.min,
@@ -549,7 +549,7 @@ Future<bool> showRemoveConfirmDialog(BuildContext context) async {
         children: [
           BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(color: Colors.transparent),
+            child: Container(color: AppColors.transparent),
           ),
           Center(
             child: Dialog(
@@ -608,7 +608,7 @@ Future<bool> showRemoveConfirmDialog(BuildContext context) async {
                       radius: 10,
                       backgroundColor: AppColors.darkRed,
                       style: AppTextStyle.interSemiBold20.copyWith(
-                        color: Colors.white,
+                        color: AppColors.white,
                       ),
                       width: double.infinity,
                     ),
@@ -695,7 +695,7 @@ Future<bool> showRemoveConfirmDialog(BuildContext context) async {
     //                   radius: 10,
     //                   backgroundColor: AppColors.red,
     //                   style: AppTextStyle.interSemiBold14.copyWith(
-    //                     color: Colors.white,
+    //                     color: AppColors.white,
     //                   ), width: double.infinity,
     //                 ),
     //               ),

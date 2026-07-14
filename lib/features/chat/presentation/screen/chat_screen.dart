@@ -1,6 +1,7 @@
 
 
-// import 'package:flutter/material.dart';
+// import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
 // import 'package:flutter_riverpod/flutter_riverpod.dart';
 // import 'package:smart_clinic_app/features/chat/Domain/chat_message.dart';
 // import 'package:smart_clinic_app/features/chat/presentation/controller/chat_controller.dart';
@@ -96,7 +97,7 @@
 //         actions: [
 //           TextButton(
 //             onPressed: Navigator.of(context).pop,
-//             child: const Text('Cancel'),
+//             child: Text(context.tr('cancel')),
 //           ),
 //           FilledButton.icon(
 //             onPressed: () {
@@ -127,7 +128,7 @@
 //         actions: [
 //           TextButton(
 //             onPressed: Navigator.of(context).pop,
-//             child: const Text('Cancel'),
+//             child: Text(context.tr('cancel')),
 //           ),
 //           FilledButton(
 //             style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
@@ -413,13 +414,13 @@
 //     if (date.day == now.day &&
 //         date.month == now.month &&
 //         date.year == now.year) {
-//       return 'Today';
+//       return 'today';
 //     }
 //     final yesterday = now.subtract(const Duration(days: 1));
 //     if (date.day == yesterday.day &&
 //         date.month == yesterday.month &&
 //         date.year == yesterday.year) {
-//       return 'Yesterday';
+//       return 'yesterday';
 //     }
 //     return '${date.day}/${date.month}/${date.year}';
 //   }
@@ -434,7 +435,7 @@
 //           Padding(
 //             padding: const EdgeInsets.symmetric(horizontal: 12),
 //             child: Text(
-//               _formatDate(),
+//               context.tr(_formatDate()),
 //               style: TextStyle(
 //                 fontSize: 12,
 //                 color: AppColors.authHint,
@@ -488,7 +489,6 @@
 //   }
 // }
 
-import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:smart_clinic_app/features/chat/domain/chat_message.dart';
@@ -592,7 +592,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
     await showGeneralDialog(
       context: context,
       barrierDismissible: true,
-      barrierLabel: 'Edit Message',
+      barrierLabel: context.tr('edit_message'),
       barrierColor: AppColors.textSecondary,
       transitionDuration: const Duration(milliseconds: 300),
       transitionBuilder: (ctx, anim, _, child) {
@@ -659,12 +659,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                               ),
                             ),
                             const SizedBox(width: 12),
-                            const Expanded(
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'Edit Message',
+                                    context.tr('edit_message'),
                                     style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
@@ -672,7 +672,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                     ),
                                   ),
                                   Text(
-                                    'The conversation will restart from this point',
+                                    context.tr('conversation_restart_notice'),
                                     style: TextStyle(
                                       fontSize: 12,
                                       color: AppColors.grey,
@@ -703,7 +703,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                               height: 1.5,
                             ),
                             decoration: InputDecoration(
-                              hintText: 'Edit your message...',
+                              hintText: context.tr('edit_message_hint'),
                               hintStyle: TextStyle(color: AppColors.authIcon),
                               border: InputBorder.none,
                               contentPadding: const EdgeInsets.all(16),
@@ -720,7 +720,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                         Align(
                           alignment: Alignment.centerRight,
                           child: Text(
-                            '${currentText.length} characters',
+                            context.tr('characters_count', args: [currentText.length.toString()]),
                             style: TextStyle(
                               fontSize: 12,
                               color: AppColors.authIcon,
@@ -745,7 +745,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                               const SizedBox(width: 8),
                               Expanded(
                                 child: Text(
-                                  'Messages after this will be removed and AI will respond to your edited message',
+                                  context.tr('edit_message_warning'),
                                   style: TextStyle(
                                     fontSize: 12,
                                     color: AppColors.stockMedText,
@@ -774,8 +774,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                   side: BorderSide(
                                       color: AppColors.authInputBorder),
                                 ),
-                                child: const Text(
-                                  'Cancel',
+                                child: Text(
+                                  context.tr('cancel'),
                                   style: TextStyle(
                                     color: AppColors.textSecondary,
                                     fontWeight: FontWeight.w600,
@@ -810,8 +810,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                                   ),
                                 ),
                                 icon: const Icon(Icons.send_rounded, size: 18),
-                                label: const Text(
-                                  'Send Edited Message',
+                                label: Text(
+                                  context.tr('send_edited_message'),
                                   style: TextStyle(fontWeight: FontWeight.w600),
                                 ),
                               ),
@@ -837,13 +837,12 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
       context: context,
       builder: (_) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Clear Conversation'),
-        content: const Text(
-            'This will delete this conversation permanently.'),
+        title: Text(context.tr('clear_conversation')),
+        content: Text(context.tr('delete_conversation_warning')),
         actions: [
           TextButton(
             onPressed: Navigator.of(context).pop,
-            child: const Text('Cancel'),
+            child: Text(context.tr('cancel')),
           ),
           FilledButton(
             style: FilledButton.styleFrom(backgroundColor: AppColors.errorRed),
@@ -852,7 +851,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               Navigator.pop(context);
               Navigator.pop(context); // Go back to sessions
             },
-            child: const Text('Delete'),
+            child: Text(context.tr('delete')),
           ),
         ],
       ),
@@ -956,8 +955,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 ),
               ),
               const SizedBox(width: 4),
-              const Text(
-                'AI Medical Assistant',
+              Text(
+                context.tr('ai_medical_assistant'),
                 style: TextStyle(fontSize: 11, color: AppColors.white70),
               ),
             ],
@@ -1018,8 +1017,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           ).animate().scale(duration: 600.ms, curve: Curves.elasticOut),
 
           const SizedBox(height: 24),
-          const Text(
-            'How can I help you today?',
+          Text(
+            context.tr('how_can_i_help'),
             style: TextStyle(
               fontSize: 22,
               fontWeight: FontWeight.bold,
@@ -1029,7 +1028,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
 
           const SizedBox(height: 12),
           Text(
-            'Ask about symptoms, medications, or attach medical documents for analysis',
+            context.tr('ask_medical_assistant_hint'),
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 14, color: AppColors.textSecondary, height: 1.5),
           ).animate().fadeIn(delay: 300.ms),
@@ -1044,7 +1043,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             children: [
               _SuggestionChip(
                 icon: '💊',
-                label: 'Explain medication',
+                label: context.tr('explain_medication'),
                 onTap: () {
                   _textController.text = 'What is ibuprofen used for?';
                   setState(() {});
@@ -1052,7 +1051,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               ),
               _SuggestionChip(
                 icon: '🩺',
-                label: 'Check symptoms',
+                label: context.tr('check_symptoms'),
                 onTap: () {
                   _textController.text =
                       'I have headache and fever, what could it be?';
@@ -1061,7 +1060,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               ),
               _SuggestionChip(
                 icon: '🔬',
-                label: 'Lab results',
+                label: context.tr('lab_results'),
                 onTap: () {
                   _textController.text = 'How do I read a CBC blood test?';
                   setState(() {});
@@ -1069,7 +1068,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               ),
               _SuggestionChip(
                 icon: '🏥',
-                label: 'Emergency signs',
+                label: context.tr('emergency_signs'),
                 onTap: () {
                   _textController.text =
                       'What are warning signs I should go to ER?';
@@ -1144,8 +1143,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               color: AppColors.white),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
-          'Loading...',
+        title: Text(
+          context.tr('loading'),
           style: TextStyle(color: AppColors.white, fontSize: 16),
         ),
       ),
@@ -1169,8 +1168,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            const Text(
-              'Loading conversation...',
+            Text(
+              context.tr('loading_conversation'),
               style: TextStyle(
                 color: AppColors.white70,
                 fontSize: 16,
@@ -1195,7 +1194,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
           icon: const Icon(Icons.arrow_back_ios_new_rounded),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text('Error'),
+        title: Text(context.tr('error')),
       ),
       body: Center(
         child: Padding(
@@ -1205,8 +1204,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
             children: [
               Icon(Icons.error_outline, color: AppColors.errorRed, size: 64),
               const SizedBox(height: 16),
-              const Text(
-                'Something went wrong',
+              Text(
+                context.tr('something_went_wrong_please_try_again_later'),
                 style: TextStyle(
                     fontSize: 18, fontWeight: FontWeight.bold),
               ),
@@ -1221,7 +1220,7 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                 onPressed: () =>
                     ref.invalidate(chatControllerProvider),
                 icon: const Icon(Icons.refresh),
-                label: const Text('Retry'),
+                label: Text(context.tr('retry')),
               ),
             ],
           ),
@@ -1261,7 +1260,7 @@ class _OcrProcessingBanner extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            '🔍 Extracting text with OCR...',
+            context.tr('extracting_text_ocr'),
             style: TextStyle(
               color: AppColors.metricOrangeIcon,
               fontSize: 13,
@@ -1280,15 +1279,15 @@ class _DateDivider extends StatelessWidget {
   final DateTime date;
   const _DateDivider({required this.date});
 
-  String _formatDate() {
+  String _formatDate(BuildContext context) {
     final now = DateTime.now();
     if (date.day == now.day &&
         date.month == now.month &&
-        date.year == now.year) return 'Today';
+        date.year == now.year) return context.tr('today');
     final yesterday = now.subtract(const Duration(days: 1));
     if (date.day == yesterday.day &&
         date.month == yesterday.month &&
-        date.year == yesterday.year) return 'Yesterday';
+        date.year == yesterday.year) return context.tr('yesterday');
     return '${date.day}/${date.month}/${date.year}';
   }
 
@@ -1302,7 +1301,7 @@ class _DateDivider extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Text(
-              _formatDate(),
+_formatDate(context),
               style: TextStyle(
                 fontSize: 12,
                 color: AppColors.authHint,

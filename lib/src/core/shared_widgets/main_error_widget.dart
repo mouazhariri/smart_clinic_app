@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({
@@ -16,7 +17,7 @@ class ErrorPage extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFF667eea), Color(0xFF764ba2)],
+            colors: [AppColors.secondPrimary, AppColors.primary],
           ),
         ),
         child: SafeArea(
@@ -29,13 +30,13 @@ class ErrorPage extends StatelessWidget {
                   width: 120,
                   height: 120,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: AppColors.white.withOpacity(0.2),
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
                     Icons.bug_report_rounded,
                     size: 60,
-                    color: Colors.white,
+                    color: AppColors.white,
                   ),
                 ),
                 const SizedBox(height: 32),
@@ -44,7 +45,7 @@ class ErrorPage extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: AppColors.white,
                     letterSpacing: 0.5,
                   ),
                   textAlign: TextAlign.center,
@@ -53,15 +54,15 @@ class ErrorPage extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.15),
+                    color: AppColors.white.withOpacity(0.15),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.white.withOpacity(0.3)),
+                    border: Border.all(color: AppColors.white.withOpacity(0.3)),
                   ),
                   child: Column(
                     children: [
                       const Icon(
                         Icons.error_outline_rounded,
-                        color: Colors.white70,
+                        color: AppColors.white70,
                         size: 28,
                       ),
                       const SizedBox(height: 8),
@@ -69,7 +70,7 @@ class ErrorPage extends StatelessWidget {
                         details.exceptionAsString(),
                         style: const TextStyle(
                           fontSize: 14,
-                          color: Colors.white70,
+                          color: AppColors.white70,
                           height: 1.5,
                         ),
                         textAlign: TextAlign.center,
@@ -86,7 +87,7 @@ class ErrorPage extends StatelessWidget {
                     vertical: 12,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.1),
+                    color: AppColors.white.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(30),
                   ),
                   child: const Row(
@@ -94,13 +95,13 @@ class ErrorPage extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.lightbulb_outline_rounded,
-                        color: Colors.amber,
+                        color: AppColors.ratingYellow,
                         size: 20,
                       ),
                       SizedBox(width: 8),
                       Text(
                         'Check console for more details',
-                        style: TextStyle(color: Colors.white70, fontSize: 13),
+                        style: TextStyle(color: AppColors.white70, fontSize: 13),
                       ),
                     ],
                   ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../../gen/assets.gen.dart';
 import '../../../../../src/application/router/app_routes.dart';
 import '../../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../../src/resourses/font_manager/app_text_style.dart';
@@ -87,27 +88,30 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                   const SizedBox(height: 30),
                   _FieldLabel(label: context.tr('phone_number')),
                   const SizedBox(height: 8),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        child: _AuthInput(
-                          controller: _nationalPhoneController,
-                          hintText: context.tr('phone_hint_syria'),
-                          keyboardType: TextInputType.phone,
-                          textAlign: TextAlign.center,
-                          validator: (value) {
-                            if (value == null || value.trim().isEmpty) {
-                              return context.tr('field_required');
-                            }
-                            return null;
-                          },
-                          onChanged: _onPhoneChanged,
+                  Directionality(
+                    textDirection: TextDirection.ltr,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: _AuthInput(
+                            controller: _nationalPhoneController,
+                            hintText: context.tr('phone_hint_syria'),
+                            keyboardType: TextInputType.phone,
+                            textAlign: TextAlign.center,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return context.tr('field_required');
+                              }
+                              return null;
+                            },
+                            onChanged: _onPhoneChanged,
+                          ),
                         ),
-                      ),
-                      const SizedBox(width: 8),
-                      const SizedBox(width: 82, child: _CountryCodeBox()),
-                    ],
+                        const SizedBox(width: 8),
+                        const SizedBox(width: 82, child: _CountryCodeBox()),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 18),
                   Row(
@@ -369,7 +373,7 @@ class _CountryCodeBox extends StatelessWidget {
             style: AppTextStyle.rubikSemiBold12.copyWith(color: AppColors.authTitle),
           ),
           const SizedBox(width: 6),
-          Container(width: 18, height: 14, color: AppColors.authFlagPlaceholder),
+          Assets.icons.syriaFlagIcon.svg(width: 18, height: 14),
         ],
       ),
     );

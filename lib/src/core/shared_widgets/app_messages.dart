@@ -6,7 +6,7 @@ import '../../resourses/color_manager/app_colors.dart';
 class AppMessages {
   static showSuccess({
     required String message,
-    Color color = const Color(0xFF222222),
+    Color color = AppColors.black900,
   }) {
     BotToast.showText(
       align: Alignment.bottomCenter,
@@ -18,14 +18,14 @@ class AppMessages {
       textStyle: TextStyle(
         fontSize: 14,
         fontWeight: FontWeight.w400,
-        color: Colors.white,
+        color: AppColors.white,
       ),
     );
   }
 
   static showError({
     required String message,
-    Color color = const Color(0xFFF91717),
+    Color color = AppColors.errorRed,
   }) {
     BotToast.showText(
       text: message,
@@ -41,8 +41,8 @@ class AppMessages {
 
   static showMessage({
     required String message,
-    Color color = const Color(0xFF222222),
-    Color textColor = Colors.white,
+    Color color = AppColors.black900,
+    Color textColor = AppColors.white,
   }) {
     BotToast.showCustomText(
       align: Alignment.bottomCenter,

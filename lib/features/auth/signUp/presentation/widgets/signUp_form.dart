@@ -88,7 +88,7 @@ class _SignUpFormState extends State<SignUpForm> {
               Consumer(builder: (context, ref, wiidget) {
                 final provider = ref.read(signUpControllerProvider.notifier);
                 return Checkbox.adaptive(
-                    activeColor: Colors.white,
+                    activeColor: AppColors.white,
                     checkColor: AppColors.primary,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     value: provider.acceptPrivacyPolicy,

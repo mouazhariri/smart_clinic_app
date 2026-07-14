@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 abstract class AppColors {
   static const Color primary = Color(0xFF005AAB);
@@ -46,6 +47,7 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color successGreen = Color(0xFF00721D);
   static const Color errorRed = Color(0xFFBB0101);
   static const Color warnYellow = Color(0xFF7A5800);
+  static const Color ratingYellow = Color(0xFFFFB800);
   static const Color filterBg = Color(0xFFF2F4F7);
   static const Color paidBg = Color(0xFFCCEACC);
   static const Color paidText = Color(0xFF4E7B4E);

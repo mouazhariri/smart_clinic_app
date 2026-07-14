@@ -43,7 +43,7 @@ abstract class AppTheme {
           textStyle: _baseTextStyle.copyWith(fontSize: 22),
           elevation: 0,
           backgroundColor: AppColors.primary,
-          foregroundColor: Colors.white,
+          foregroundColor: AppColors.white,
           padding: _buttonPadding,
         ),
       ),
@@ -63,7 +63,7 @@ abstract class AppTheme {
           textStyle: _baseTextStyle.copyWith(fontSize: 18),
         ),
       ),
-      scaffoldBackgroundColor: Colors.white,
+      scaffoldBackgroundColor: AppColors.white,
     );
   }
 }

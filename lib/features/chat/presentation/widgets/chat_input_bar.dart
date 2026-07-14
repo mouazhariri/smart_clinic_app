@@ -186,7 +186,7 @@
 //               'Add a note (optional):',
 //               style: TextStyle(
 //                 fontSize: 13,
-//                 color: Colors.grey,
+//                 color: AppColors.grey,
 //               ),
 //             ),
 //             const SizedBox(height: 8),
@@ -213,7 +213,7 @@
 //           FilledButton.icon(
 //             onPressed: () => Navigator.pop(context, true),
 //             icon: const Icon(Icons.send, size: 16),
-//             label: const Text('Analyze'),
+//             label: Text(context.tr('analyze')),
 //           ),
 //         ],
 //       ),
@@ -275,7 +275,7 @@
 //     ScaffoldMessenger.of(context).showSnackBar(
 //       SnackBar(
 //         content: Text(message),
-//         backgroundColor: Colors.red,
+//         backgroundColor: AppColors.errorRed,
 //       ),
 //     );
 //   }
@@ -291,10 +291,10 @@
 //   Widget build(BuildContext context) {
 //     return Container(
 //       decoration: BoxDecoration(
-//         color: Colors.white,
+//         color: AppColors.white,
 //         boxShadow: [
 //           BoxShadow(
-//             color: Colors.black.withOpacity(0.06),
+//             color: AppColors.black.withOpacity(0.06),
 //             blurRadius: 10,
 //             offset: const Offset(0, -2),
 //           ),
@@ -329,19 +329,19 @@
 //                     vertical: 6,
 //                   ),
 //                   decoration: BoxDecoration(
-//                     color: Colors.red.shade50,
+//                     color: AppColors.unpaidBg,
 //                     borderRadius: BorderRadius.circular(8),
-//                     border: Border.all(color: Colors.red.shade200),
+//                     border: Border.all(color: AppColors.unpaidBg),
 //                   ),
 //                   child: Row(
 //                     mainAxisSize: MainAxisSize.min,
 //                     children: [
-//                       Icon(Icons.mic, color: Colors.red.shade400, size: 16),
+//                       Icon(Icons.mic, color: AppColors.errorRed, size: 16),
 //                       const SizedBox(width: 6),
 //                       Text(
 //                         'Listening...',
 //                         style: TextStyle(
-//                           color: Colors.red.shade400,
+//                           color: AppColors.errorRed,
 //                           fontSize: 13,
 //                         ),
 //                       ),
@@ -356,7 +356,7 @@
 //                   // Attachment button
 //                   _CircleIconButton(
 //                     icon: Icons.attach_file,
-//                     color: Colors.grey.shade600,
+//                     color: AppColors.textSecondary,
 //                     onTap: widget.isLoading ? null : _showAttachmentOptions,
 //                   ),
 
@@ -366,12 +366,12 @@
 //                   Expanded(
 //                     child: Container(
 //                       decoration: BoxDecoration(
-//                         color: Colors.grey.shade100,
+//                         color: AppColors.authBackground,
 //                         borderRadius: BorderRadius.circular(12),
 //                         border: Border.all(
 //                           color: _isListening
-//                               ? Colors.red.shade300
-//                               : Colors.grey.shade300,
+//                               ? AppColors.lightRed
+//                               : AppColors.authInputBorder,
 //                         ),
 //                       ),
 //                       child: Row(
@@ -394,10 +394,10 @@
                     //           textDirection: Directionality.of(context),
                     //           decoration: InputDecoration(
                     //             hintText: _isListening
-                    //                 ? 'Speak now...'
-                    //                 : 'Ask anything medical...',
+                    //                 ? context.tr('speak_now')
+                    //                 : context.tr('ask_anything_medical'),
                     //             hintStyle: TextStyle(
-                    //               color: Colors.grey.shade400,
+                    //               color: AppColors.authIcon,
                     //               fontSize: 14,
                     //             ),
                     //             // border: InputBorder.none,
@@ -430,8 +430,8 @@
 //                           _CircleIconButton(
 //                             icon: _isListening ? Icons.mic : Icons.mic_none,
 //                             color: _isListening
-//                                 ? Colors.red
-//                                 : Colors.grey.shade500,
+//                                 ? AppColors.errorRed
+//                                 : AppColors.authHint,
 //                             onTap: _toggleListening,
 //                           ),
 //                           const SizedBox(width: 4),
@@ -449,19 +449,19 @@
 //                         ? _CircleIconButton(
 //                             key: const ValueKey('stop'),
 //                             icon: Icons.stop_rounded,
-//                             color: Colors.white,
-//                             backgroundColor: Colors.red,
+//                             color: AppColors.white,
+//                             backgroundColor: AppColors.errorRed,
 //                             onTap: widget.onStop,
 //                           )
 //                         : _CircleIconButton(
 //                             key: const ValueKey('send'),
 //                             icon: Icons.send_rounded,
-//                             color: Colors.white,
+//                             color: AppColors.white,
 //                             backgroundColor:
 //                                 widget.canSend &&
 //                                         widget.textController.text.isNotEmpty
 //                                     ? AppColors.primary
-//                                     : Colors.grey.shade300,
+//                                     : AppColors.authInputBorder,
 //                             onTap: widget.canSend &&
 //                                     widget.textController.text.isNotEmpty
 //                                 ? widget.onSend
@@ -497,9 +497,9 @@
 //       margin: const EdgeInsets.only(bottom: 8),
 //       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
 //       decoration: BoxDecoration(
-//         color: Colors.blue.shade50,
+//         color: AppColors.authLightBlue,
 //         borderRadius: BorderRadius.circular(12),
-//         border: Border.all(color: Colors.blue.shade200),
+//         border: Border.all(color: AppColors.primaryBg),
 //       ),
 //       child: Row(
 //         children: [
@@ -510,7 +510,7 @@
 //               controller: controller,
 //               autofocus: true,
 //               decoration: const InputDecoration(
-//                 hintText: 'Search medical images...',
+//                 hintText: context.tr('search_medical_images'),
 //                 border: InputBorder.none,
 //                 isDense: true,
 //                 contentPadding: EdgeInsets.zero,
@@ -531,7 +531,7 @@
 //           ),
 //           const SizedBox(width: 4),
 //           IconButton(
-//             icon: Icon(Icons.close, color: Colors.grey.shade500, size: 18),
+//             icon: Icon(Icons.close, color: AppColors.authHint, size: 18),
 //             onPressed: onClose,
 //             constraints: const BoxConstraints(),
 //             padding: EdgeInsets.zero,
@@ -569,7 +569,7 @@
 //               width: 40,
 //               height: 4,
 //               decoration: BoxDecoration(
-//                 color: Colors.grey.shade300,
+//                 color: AppColors.authInputBorder,
 //                 borderRadius: BorderRadius.circular(2),
 //               ),
 //             ),
@@ -591,13 +591,13 @@
 //                 _AttachOption(
 //                   icon: Icons.picture_as_pdf,
 //                   label: 'PDF\nReport',
-//                   color: Colors.red,
+//                   color: AppColors.errorRed,
 //                   onTap: onPickPDF,
 //                 ),
 //                 _AttachOption(
 //                   icon: Icons.receipt_long,
-//                   label: 'Prescription',
-//                   color: Colors.green,
+//                   label: context.tr('prescription'),
+//                   color: AppColors.successGreen,
 //                   onTap: onPickReceipt,
 //                 ),
 //                 _AttachOption(
@@ -696,7 +696,7 @@
 //               },
 //             ),
 //             ListTile(
-//               leading: const Icon(Icons.photo_library, color: Colors.green),
+//               leading: const Icon(Icons.photo_library, color: AppColors.successGreen),
 //               title: const Text('Choose from Gallery'),
 //               onTap: () async {
 //                 final img =
@@ -749,6 +749,7 @@
 
 import 'dart:typed_data';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart' as fp;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -847,7 +848,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
     if (!_speechInitialized) {
       await _initSpeech();
       if (!_speechInitialized) {
-        _showSnackBar('Speech recognition not available on this device', isError: true);
+        _showSnackBar(context.tr('speech_not_available'), isError: true);
         return;
       }
     }
@@ -863,7 +864,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
       // Start listening
       final available = await _speech.initialize();
       if (!available) {
-        _showSnackBar('Could not start speech recognition', isError: true);
+        _showSnackBar(context.tr('speech_start_failed'), isError: true);
         return;
       }
 
@@ -915,7 +916,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
         fileType: _FileCategory.pdf,
       );
     } catch (e) {
-      _showSnackBar('Failed to pick PDF', isError: true);
+      _showSnackBar(context.tr('failed_pick_pdf'), isError: true);
     }
   }
 
@@ -941,7 +942,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
         fileType: _FileCategory.receipt,
       );
     } catch (e) {
-      _showSnackBar('Failed to pick image', isError: true);
+      _showSnackBar(context.tr('failed_pick_image'), isError: true);
     }
   }
 
@@ -962,7 +963,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
         fileType: _FileCategory.image,
       );
     } catch (e) {
-      _showSnackBar('Failed to pick image', isError: true);
+      _showSnackBar(context.tr('failed_pick_image'), isError: true);
     }
   }
 
@@ -980,13 +981,13 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
             Container(
               width: 40, height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: AppColors.authInputBorder,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Choose Source',
+            Text(
+              context.tr('choose_source'),
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
             ),
             const SizedBox(height: 8),
@@ -994,26 +995,26 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
               leading: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: AppColors.authLightBlue,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(Icons.camera_alt_rounded, color: Colors.blue.shade600),
+                child: Icon(Icons.camera_alt_rounded, color: AppColors.primary),
               ),
-              title: const Text('Camera'),
-              subtitle: const Text('Take a new photo'),
+              title: Text(context.tr('camera')),
+              subtitle: Text(context.tr('take_new_photo')),
               onTap: () => Navigator.pop(context, ImageSource.camera),
             ),
             ListTile(
               leading: Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Colors.green.shade50,
+                  color: AppColors.metricGreen,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: Icon(Icons.photo_library_rounded, color: Colors.green.shade600),
+                child: Icon(Icons.photo_library_rounded, color: AppColors.metricGreenIcon),
               ),
-              title: const Text('Gallery'),
-              subtitle: const Text('Choose from photos'),
+              title: Text(context.tr('gallery')),
+              subtitle: Text(context.tr('choose_from_photos')),
               onTap: () => Navigator.pop(context, ImageSource.gallery),
             ),
             const SizedBox(height: 8),
@@ -1079,7 +1080,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                         fileName,
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.grey.shade600,
+                          color: AppColors.textSecondary,
                           fontWeight: FontWeight.normal,
                         ),
                         maxLines: 1,
@@ -1095,8 +1096,8 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Add context (optional):',
+              Text(
+                context.tr('add_context_optional'),
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
@@ -1109,18 +1110,18 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                 decoration: InputDecoration(
                   hintText: _getHintText(fileType),
                   hintStyle: TextStyle(
-                    color: Colors.grey.shade400,
+                    color: AppColors.authIcon,
                     fontSize: 13,
                   ),
                   filled: true,
-                  fillColor: Colors.grey.shade50,
+                  fillColor: AppColors.grey.shade50,
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: AppColors.authDivider),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.grey.shade200),
+                    borderSide: BorderSide(color: AppColors.authDivider),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -1134,20 +1135,20 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
-                  color: Colors.blue.shade50,
+                  color: AppColors.authLightBlue,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: Row(
                   children: [
                     Icon(Icons.auto_awesome,
-                        color: Colors.blue.shade600, size: 16),
+                        color: AppColors.primary, size: 16),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        'OCR will extract text automatically for better analysis',
+                        context.tr('ocr_auto_extract_hint'),
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.blue.shade700,
+                          color: AppColors.secondPrimary,
                         ),
                       ),
                     ),
@@ -1159,8 +1160,8 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: Text('Cancel',
-                  style: TextStyle(color: Colors.grey.shade600)),
+              child: Text(context.tr('cancel'),
+                  style: TextStyle(color: AppColors.textSecondary)),
             ),
             FilledButton.icon(
               onPressed: () => Navigator.pop(ctx, true),
@@ -1171,7 +1172,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                 ),
               ),
               icon: const Icon(Icons.analytics_rounded, size: 16),
-              label: const Text('Analyze'),
+              label: Text(context.tr('analyze')),
             ),
           ],
         ),
@@ -1223,9 +1224,9 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
 
   Color _getCategoryColor(_FileCategory cat) {
     switch (cat) {
-      case _FileCategory.pdf: return Colors.red.shade600;
-      case _FileCategory.receipt: return Colors.green.shade600;
-      case _FileCategory.image: return Colors.orange.shade600;
+      case _FileCategory.pdf: return AppColors.errorRed;
+      case _FileCategory.receipt: return AppColors.metricGreenIcon;
+      case _FileCategory.image: return AppColors.metricOrangeIcon;
     }
   }
 
@@ -1239,18 +1240,18 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
 
   String _getCategoryTitle(_FileCategory cat) {
     switch (cat) {
-      case _FileCategory.pdf: return 'PDF Report';
-      case _FileCategory.receipt: return 'Prescription';
-      case _FileCategory.image: return 'Medical Image';
+      case _FileCategory.pdf: return context.tr('pdf_report');
+      case _FileCategory.receipt: return context.tr('prescription');
+      case _FileCategory.image: return context.tr('medical_image');
     }
   }
 
   String _getHintText(_FileCategory cat) {
     switch (cat) {
-      case _FileCategory.pdf: return 'e.g. Summarize abnormal values...';
+      case _FileCategory.pdf: return context.tr('hint_summarize_abnormal');
       case _FileCategory.receipt:
-        return 'e.g. What are the side effects?';
-      case _FileCategory.image: return 'e.g. What does this scan show?';
+        return context.tr('hint_side_effects');
+      case _FileCategory.image: return context.tr('hint_scan_show');
     }
   }
 
@@ -1259,7 +1260,7 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(msg),
-        backgroundColor: isError ? Colors.red : Colors.green,
+        backgroundColor: isError ? AppColors.errorRed : AppColors.successGreen,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
@@ -1270,10 +1271,10 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.06),
+            color: AppColors.black.withOpacity(0.06),
             blurRadius: 10,
             offset: const Offset(0, -3),
           ),
@@ -1315,8 +1316,8 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                   // Attach button
                   _InputIconButton(
                     icon: Icons.add_rounded,
-                    backgroundColor: Colors.grey.shade100,
-                    iconColor: Colors.grey.shade700,
+                    backgroundColor: AppColors.authBackground,
+                    iconColor: AppColors.grey,
                     onTap: widget.isLoading ? null : _showAttachmentOptions,
                   ),
 
@@ -1326,12 +1327,12 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.grey.shade100,
+                        color: AppColors.authBackground,
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: _isListening
-                              ? Colors.red.shade300
-                              : Colors.grey.shade200,
+                              ? AppColors.lightRed
+                              : AppColors.authDivider,
                           width: _isListening ? 1.5 : 1,
                         ),
                       ),
@@ -1357,10 +1358,10 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                               textDirection: Directionality.of(context),
                               decoration: InputDecoration(
                                 hintText: _isListening
-                                    ? 'Speak now...'
-                                    : 'Ask anything medical...',
+                                    ? context.tr('speak_now')
+                                    : context.tr('ask_anything_medical'),
                                 hintStyle: TextStyle(
-                                  color: Colors.grey.shade400,
+                                  color: AppColors.authIcon,
                                   fontSize: 14,
                                 ),
                                 // border: InputBorder.none,
@@ -1412,8 +1413,8 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                                   height: 34,
                                   decoration: BoxDecoration(
                                     color: _isListening
-                                        ? Colors.red
-                                        : Colors.grey.shade200,
+                                        ? AppColors.errorRed
+                                        : AppColors.authDivider,
                                     shape: BoxShape.circle,
                                   ),
                                   child: Icon(
@@ -1421,8 +1422,8 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                                         ? Icons.mic_rounded
                                         : Icons.mic_none_rounded,
                                     color: _isListening
-                                        ? Colors.white
-                                        : Colors.grey.shade600,
+                                        ? AppColors.white
+                                        : AppColors.textSecondary,
                                     size: 18,
                                   ),
                                 ),
@@ -1446,8 +1447,8 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                         ? _InputIconButton(
                             key: const ValueKey('stop'),
                             icon: Icons.stop_rounded,
-                            backgroundColor: Colors.red,
-                            iconColor: Colors.white,
+                            backgroundColor: AppColors.errorRed,
+                            iconColor: AppColors.white,
                             onTap: widget.onStop,
                           )
                         : _InputIconButton(
@@ -1456,9 +1457,9 @@ class _ChatInputBarState extends ConsumerState<ChatInputBar>
                             backgroundColor:
                                 widget.canSend &&
                                         widget.textController.text.isNotEmpty
-                                    ? const Color(0xFF1565C0)
-                                    : Colors.grey.shade300,
-                            iconColor: Colors.white,
+                                    ? AppColors.primary
+                                    : AppColors.authInputBorder,
+                            iconColor: AppColors.white,
                             onTap: widget.canSend &&
                                     widget.textController.text.isNotEmpty
                                 ? widget.onSend
@@ -1494,9 +1495,9 @@ class _ListeningIndicator extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.red.shade50,
+        color: AppColors.unpaidBg,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.red.shade200),
+        border: Border.all(color: AppColors.unpaidBg),
       ),
       child: Row(
         children: [
@@ -1506,17 +1507,17 @@ class _ListeningIndicator extends StatelessWidget {
               width: 10,
               height: 10,
               decoration: BoxDecoration(
-                color: Colors.red.withOpacity(
+                color: AppColors.errorRed.withOpacity(
                     0.5 + pulseController.value * 0.5),
                 shape: BoxShape.circle,
               ),
             ),
           ),
           const SizedBox(width: 10),
-          const Text(
-            '🎤 Listening...',
+          Text(
+            context.tr('listening'),
             style: TextStyle(
-              color: Colors.red,
+              color: AppColors.errorRed,
               fontWeight: FontWeight.w600,
               fontSize: 13,
             ),
@@ -1533,8 +1534,8 @@ class _ListeningIndicator extends StatelessWidget {
                 height: active ? 16.0 - (i * 1.5) : 4,
                 decoration: BoxDecoration(
                   color: active
-                      ? Colors.red.shade400
-                      : Colors.red.shade200,
+                      ? AppColors.errorRed
+                      : AppColors.unpaidBg,
                   borderRadius: BorderRadius.circular(2),
                 ),
               );
@@ -1546,13 +1547,13 @@ class _ListeningIndicator extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
               decoration: BoxDecoration(
-                color: Colors.red,
+                color: AppColors.errorRed,
                 borderRadius: BorderRadius.circular(8),
               ),
-              child: const Text(
-                'Stop',
+              child: Text(
+                context.tr('stop'),
                 style: TextStyle(
-                  color: Colors.white,
+                  color: AppColors.white,
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -1584,23 +1585,23 @@ class _ImageSearchBar extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 4),
       decoration: BoxDecoration(
-        color: Colors.blue.shade50,
+        color: AppColors.authLightBlue,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.blue.shade200),
+        border: Border.all(color: AppColors.primaryBg),
       ),
       child: Row(
         children: [
           Icon(Icons.image_search_rounded,
-              color: Colors.blue.shade600, size: 20),
+              color: AppColors.primary, size: 20),
           const SizedBox(width: 8),
           Expanded(
             child: TextField(
               controller: controller,
               autofocus: true,
               decoration: InputDecoration(
-                hintText: 'Search medical images...',
+                hintText: context.tr('search_medical_images'),
                 hintStyle: TextStyle(
-                    color: Colors.blue.shade300, fontSize: 14),
+                    color: AppColors.primaryBg, fontSize: 14),
                 border: InputBorder.none,
                 isDense: true,
                 contentPadding: const EdgeInsets.symmetric(vertical: 10),
@@ -1609,7 +1610,7 @@ class _ImageSearchBar extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: Icon(Icons.search_rounded, color: Colors.blue.shade600),
+            icon: Icon(Icons.search_rounded, color: AppColors.primary),
             onPressed: () {
               if (controller.text.isNotEmpty) {
                 onSearch(controller.text.trim());
@@ -1620,7 +1621,7 @@ class _ImageSearchBar extends StatelessWidget {
           ),
           IconButton(
             icon: Icon(Icons.close_rounded,
-                color: Colors.grey.shade500, size: 18),
+                color: AppColors.authHint, size: 18),
             onPressed: onClose,
             constraints: const BoxConstraints(),
             padding: const EdgeInsets.all(4),
@@ -1657,40 +1658,40 @@ class _AttachmentSheet extends StatelessWidget {
             Container(
               width: 40, height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: AppColors.authInputBorder,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
             const SizedBox(height: 20),
-            const Text(
-              'Attach & Analyze',
+            Text(
+              context.tr('attach_analyze'),
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: Colors.black87,
+                color: AppColors.textPrimary,
               ),
             ),
             const SizedBox(height: 6),
             Text(
-              'Choose what to analyze with AI',
-              style: TextStyle(fontSize: 13, color: Colors.grey.shade500),
+              context.tr('choose_ai_analysis'),
+              style: TextStyle(fontSize: 13, color: AppColors.authHint),
             ),
             const SizedBox(height: 24),
             Row(
               children: [
                 _AttachTile(
                   icon: Icons.picture_as_pdf_rounded,
-                  label: 'PDF Report',
-                  subtitle: 'Lab results, medical reports',
-                  color: Colors.red.shade600,
+                  label: context.tr('pdf_report'),
+                  subtitle: context.tr('lab_results_reports'),
+                  color: AppColors.errorRed,
                   onTap: onPickPDF,
                 ),
                 const SizedBox(width: 12),
                 _AttachTile(
                   icon: Icons.receipt_long_rounded,
-                  label: 'Prescription',
-                  subtitle: 'Medication receipts',
-                  color: Colors.green.shade600,
+                  label: context.tr('prescription'),
+                  subtitle: context.tr('medication_receipts'),
+                  color: AppColors.metricGreenIcon,
                   onTap: onPickReceipt,
                 ),
               ],
@@ -1700,17 +1701,17 @@ class _AttachmentSheet extends StatelessWidget {
               children: [
                 _AttachTile(
                   icon: Icons.image_rounded,
-                  label: 'Medical Image',
-                  subtitle: 'X-rays, scans, photos',
-                  color: Colors.orange.shade600,
+                  label: context.tr('medical_image'),
+                  subtitle: context.tr('xray_scans_photos'),
+                  color: AppColors.metricOrangeIcon,
                   onTap: onPickImage,
                 ),
                 const SizedBox(width: 12),
                 _AttachTile(
                   icon: Icons.image_search_rounded,
-                  label: 'Search Images',
-                  subtitle: 'Find medical visuals',
-                  color: Colors.blue.shade600,
+                  label: context.tr('search_images'),
+                  subtitle: context.tr('find_medical_visuals'),
+                  color: AppColors.primary,
                   onTap: onSearchImages,
                 ),
               ],
@@ -1766,7 +1767,7 @@ class _AttachTile extends StatelessWidget {
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 14,
-                  color: Colors.black87,
+                  color: AppColors.textPrimary,
                 ),
               ),
               const SizedBox(height: 2),
@@ -1774,7 +1775,7 @@ class _AttachTile extends StatelessWidget {
                 subtitle,
                 style: TextStyle(
                   fontSize: 11,
-                  color: Colors.grey.shade500,
+                  color: AppColors.authHint,
                 ),
               ),
             ],
