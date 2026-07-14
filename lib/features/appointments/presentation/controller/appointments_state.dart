@@ -1,32 +1,37 @@
-import 'package:equatable/equatable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../doctors/domain/entities/doctor.dart';
 import '../../domain/entities/appointment.dart';
 
-class AppointmentsState extends Equatable {
+class AppointmentsState {
   const AppointmentsState({
-    this.appointments = const [],
+    required this.appointments,
     this.selectedDate,
     this.selectedTime,
-    this.isLoading = false,
-    this.errorMessage,
+    required this.bookingState,
     this.successMessage,
   });
 
-  final List<Appointment> appointments;
+  factory AppointmentsState.init() {
+    return const AppointmentsState(
+      appointments: AsyncData([]),
+      bookingState: AsyncData(null),
+    );
+  }
+
+  final AsyncValue<List<Appointment>> appointments;
   final DateTime? selectedDate;
   final String? selectedTime;
-  final bool isLoading;
-  final String? errorMessage;
+  final AsyncValue<void> bookingState;
   final String? successMessage;
 
-  List<Appointment> get upcomingAppointments => appointments
+  List<Appointment> get upcomingAppointments => (appointments.valueOrNull ?? [])
       .where((appointment) => appointment.status != AppointmentStatus.cancelled)
       .where((appointment) => appointment.date
           .isAfter(DateTime.now().subtract(const Duration(days: 1))))
       .toList();
 
-  List<Appointment> get historyAppointments => appointments
+  List<Appointment> get historyAppointments => (appointments.valueOrNull ?? [])
       .where((appointment) =>
           appointment.status == AppointmentStatus.cancelled ||
           appointment.status == AppointmentStatus.completed ||
@@ -38,31 +43,19 @@ class AppointmentsState extends Equatable {
   }
 
   AppointmentsState copyWith({
-    List<Appointment>? appointments,
+    AsyncValue<List<Appointment>>? appointments,
     DateTime? selectedDate,
     String? selectedTime,
     bool clearSelection = false,
-    bool? isLoading,
-    String? errorMessage,
+    AsyncValue<void>? bookingState,
     String? successMessage,
   }) {
     return AppointmentsState(
       appointments: appointments ?? this.appointments,
       selectedDate: clearSelection ? null : selectedDate ?? this.selectedDate,
       selectedTime: clearSelection ? null : selectedTime ?? this.selectedTime,
-      isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
+      bookingState: bookingState ?? this.bookingState,
       successMessage: successMessage,
     );
   }
-
-  @override
-  List<Object?> get props => [
-        appointments,
-        selectedDate,
-        selectedTime,
-        isLoading,
-        errorMessage,
-        successMessage,
-      ];
 }

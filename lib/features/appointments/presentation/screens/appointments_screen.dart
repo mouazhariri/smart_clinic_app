@@ -6,6 +6,7 @@ import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../src/resourses/font_manager/app_text_style.dart';
 import '../../../doctors/presentation/widgets/smart_clinic_app_bar.dart';
 import '../controller/appointments_controller.dart';
+import '../controller/appointments_state.dart';
 import '../widgets/appointment_card_widget.dart';
 
 class AppointmentsScreen extends ConsumerWidget {
@@ -13,7 +14,8 @@ class AppointmentsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(appointmentsControllerProvider);
+    final state =
+        ref.watch(appointmentsControllerProvider).valueOrNull ?? AppointmentsState.init();
     final controller = ref.read(appointmentsControllerProvider.notifier);
 
     return Scaffold(

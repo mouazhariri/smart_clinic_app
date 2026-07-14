@@ -5,7 +5,6 @@ import '../../../../../src/logger/failure/exceptions/app_exception.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/model/signin_response_model.dart';
-import '../../domain/repositories/sign_in_repository_contract.dart';
 import '../datasources/sign_in_data_source.dart';
 part 'sign_in_repository.g.dart';
 
@@ -14,7 +13,7 @@ SignInRepository signInRepository(Ref ref) {
   final networkService = ref.watch(networkServiceProvider());
   return SignInRepository(SignInRemoteDataSource(networkService));
 }
-class SignInRepository implements SignInRepositoryContract {
+class SignInRepository {
   final SignInRemoteDataSource _remoteDataSource;
 
   SignInRepository(this._remoteDataSource);

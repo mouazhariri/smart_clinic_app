@@ -20,11 +20,12 @@ class HomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final homeState = ref.watch(homeControllerProvider).valueOrNull;
     final dashboard = homeState?.homeModel.valueOrNull;
-    final doctorsState = ref.watch(doctorsControllerProvider);
-    final appointmentState = ref.watch(appointmentsControllerProvider);
-    final nextAppointment = appointmentState.upcomingAppointments.isEmpty
-        ? null
-        : appointmentState.upcomingAppointments.first;
+    final doctorsState = ref.watch(doctorsControllerProvider).valueOrNull;
+    final doctors = doctorsState?.doctors.valueOrNull ?? [];
+    final appointmentState = ref.watch(appointmentsControllerProvider).valueOrNull;
+    final upcomingAppointments = appointmentState?.upcomingAppointments ?? [];
+    final nextAppointment =
+        upcomingAppointments.isEmpty ? null : upcomingAppointments.first;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -104,7 +105,7 @@ class HomeScreen extends ConsumerWidget {
                     onTap: () => context.go(AppRoutes.doctorsScreen),
                   ),
                   const SizedBox(height: 12),
-                  ...doctorsState.doctors.take(2).map(
+                  ...doctors.take(2).map(
                         (doctor) => Padding(
                           padding: const EdgeInsets.only(bottom: 14),
                           child: DoctorCardWidget(doctor: doctor),

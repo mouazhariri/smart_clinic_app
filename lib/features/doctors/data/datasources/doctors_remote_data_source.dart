@@ -1,32 +1,52 @@
-import 'package:dio/dio.dart';
-
+import '../../../../src/infrastructure/api/endpoint/api_endpoints.dart';
+import '../../../../src/infrastructure/api/response/api_response.dart';
 import '../../../../src/infrastructure/network/services/network_service.dart';
+import '../../../../src/logger/log_services/dev_logger.dart';
 import '../models/doctor_model.dart';
 
-abstract class DoctorsRemoteDataSource {
-  Future<List<DoctorModel>> getDoctors();
-  Future<DoctorModel> getDoctorById(String id);
-}
+class DoctorsRemoteDataSource {
+  const DoctorsRemoteDataSource(this._networkService);
 
-class DoctorsRemoteDataSourceImpl implements DoctorsRemoteDataSource {
-  const DoctorsRemoteDataSourceImpl(this._networkService);
+  final NetworkService _networkService;
 
-  final NetworkService<Response> _networkService;
+  Future<ApiResponse<List<DoctorModel>>> getDoctors() async {
+    try {
+      final response = await _networkService.get(ApiEndPoints.doctors);
 
-  @override
-  Future<List<DoctorModel>> getDoctors() async {
-    final response = await _networkService.get('/doctors');
-    final data = response.data as Map<String, dynamic>;
-    final items = data['data'] as List<dynamic>;
-    return items
-        .map((item) => DoctorModel.fromJson(item as Map<String, dynamic>))
-        .toList();
+      if (response.data == null || response.statusCode != 200) {
+        throw Exception('Failed to load doctors');
+      }
+
+      return ApiResponse.fromJson(
+        response.data as Map<String, dynamic>,
+        (json) => (json as List<dynamic>)
+            .map((item) => DoctorModel.fromJson(item as Map<String, dynamic>))
+            .toList(),
+      );
+    } catch (e) {
+      Dev.logError('Error in getDoctors: $e');
+      rethrow;
+    }
   }
 
-  @override
-  Future<DoctorModel> getDoctorById(String id) async {
-    final response = await _networkService.get('/doctors/$id');
-    final data = response.data as Map<String, dynamic>;
-    return DoctorModel.fromJson(data['data'] as Map<String, dynamic>);
+  Future<ApiResponse<DoctorModel>> getDoctorById(String id) async {
+    try {
+      final response = await _networkService.get(
+        ApiEndPoints.doctorDetails,
+        queryParameters: {'doctor_id': id},
+      );
+
+      if (response.data == null || response.statusCode != 200) {
+        throw Exception('Failed to load doctor details');
+      }
+
+      return ApiResponse.fromJson(
+        response.data as Map<String, dynamic>,
+        (json) => DoctorModel.fromJson(json as Map<String, dynamic>),
+      );
+    } catch (e) {
+      Dev.logError('Error in getDoctorById: $e');
+      rethrow;
+    }
   }
 }

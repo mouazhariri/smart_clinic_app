@@ -1,26 +1,27 @@
-import 'package:equatable/equatable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/entities/user_profile.dart';
 
-class ProfileState extends Equatable {
-  const ProfileState({this.profile, this.isLoading = false, this.errorMessage});
+class ProfileState {
+  const ProfileState({required this.profile, required this.logoutState});
 
-  final UserProfile? profile;
-  final bool isLoading;
-  final String? errorMessage;
-
-  ProfileState copyWith({
-    UserProfile? profile,
-    bool? isLoading,
-    String? errorMessage,
-  }) {
-    return ProfileState(
-      profile: profile ?? this.profile,
-      isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
+  factory ProfileState.init() {
+    return const ProfileState(
+      profile: AsyncData(null),
+      logoutState: AsyncData(null),
     );
   }
 
-  @override
-  List<Object?> get props => [profile, isLoading, errorMessage];
+  final AsyncValue<UserProfile?> profile;
+  final AsyncValue<void> logoutState;
+
+  ProfileState copyWith({
+    AsyncValue<UserProfile?>? profile,
+    AsyncValue<void>? logoutState,
+  }) {
+    return ProfileState(
+      profile: profile ?? this.profile,
+      logoutState: logoutState ?? this.logoutState,
+    );
+  }
 }

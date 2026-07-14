@@ -8,14 +8,16 @@ import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../src/resourses/font_manager/app_text_style.dart';
 import '../../../doctors/presentation/widgets/smart_clinic_app_bar.dart';
 import '../controller/profile_controller.dart';
+import '../controller/profile_state.dart';
 
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final profileState = ref.watch(profileControllerProvider);
-    final profile = profileState.profile;
+    final profileState =
+        ref.watch(profileControllerProvider).valueOrNull ?? ProfileState.init();
+    final profile = profileState.profile.valueOrNull;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Column(

@@ -6,6 +6,7 @@ import '../../../../src/core/shared_widgets/app_loader.dart';
 import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../src/resourses/font_manager/app_text_style.dart';
 import '../controller/doctors_controller.dart';
+import '../controller/doctors_state.dart';
 import '../widgets/doctor_card_widget.dart';
 import '../widgets/smart_clinic_app_bar.dart';
 
@@ -14,7 +15,8 @@ class DoctorsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(doctorsControllerProvider);
+    final asyncState = ref.watch(doctorsControllerProvider);
+    final state = asyncState.valueOrNull ?? DoctorsState.init();
     final controller = ref.read(doctorsControllerProvider.notifier);
 
     return Scaffold(
@@ -42,7 +44,7 @@ class DoctorsScreen extends ConsumerWidget {
             ),
           ),
           Expanded(
-            child: state.isLoading
+            child: state.doctors.isLoading
                 ? const Center(child: AppLoader())
                 : state.filteredDoctors.isEmpty
                     ? Center(

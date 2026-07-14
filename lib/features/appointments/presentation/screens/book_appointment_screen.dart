@@ -10,6 +10,7 @@ import '../../../../src/resourses/font_manager/app_text_style.dart';
 import '../../../doctors/presentation/controller/doctors_controller.dart';
 import '../../../doctors/presentation/widgets/smart_clinic_app_bar.dart';
 import '../controller/appointments_controller.dart';
+import '../controller/appointments_state.dart';
 import '../widgets/appointment_date_selector.dart';
 import '../widgets/appointment_summary.dart';
 import '../widgets/available_time_widget.dart';
@@ -22,7 +23,8 @@ class BookAppointmentScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final doctorAsync = ref.watch(doctorDetailsProvider(doctorId));
-    final appointmentState = ref.watch(appointmentsControllerProvider);
+    final appointmentState =
+        ref.watch(appointmentsControllerProvider).valueOrNull ?? AppointmentsState.init();
     final appointmentController = ref.read(appointmentsControllerProvider.notifier);
 
     return Scaffold(
@@ -69,7 +71,7 @@ class BookAppointmentScreen extends ConsumerWidget {
                       width: double.infinity,
                       height: 56,
                       child: FilledButton(
-                        onPressed: appointmentState.canConfirm(doctor) && !appointmentState.isLoading
+                        onPressed: appointmentState.canConfirm(doctor) && !appointmentState.bookingState.isLoading
                             ? () async {
                                 final booked = await appointmentController.bookAppointment(doctor);
                                 if (context.mounted && booked) {
@@ -87,7 +89,7 @@ class BookAppointmentScreen extends ConsumerWidget {
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
-                        child: appointmentState.isLoading
+                        child: appointmentState.bookingState.isLoading
                             ? const SizedBox(
                                 width: 22,
                                 height: 22,

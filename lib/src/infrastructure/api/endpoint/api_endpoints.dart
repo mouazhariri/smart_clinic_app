@@ -5,7 +5,11 @@ class ApiEndPoints {
   static const String homeDashboard = '$domain.dashboard.get_dashboard';
   static const String homeServices = '$domain.smart_clinic.get_home_services';
   static const String doctors = '$domain.smart_clinic.get_doctors';
+  static const String doctorDetails = '$domain.smart_clinic.get_doctor_details';
   static const String appointments = '$domain.smart_clinic.get_appointments';
+  static const String bookAppointment = '$domain.smart_clinic.book_appointment';
+  static const String cancelAppointment = '$domain.smart_clinic.cancel_appointment';
+  static const String profile = '$domain.smart_clinic.get_profile';
 
   //? --- Customers ---
   static const String createCustomer = '$domain.customer.create_customer';

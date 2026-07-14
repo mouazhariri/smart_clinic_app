@@ -1,66 +1,59 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-import '../../../../src/infrastructure/network/services/dio_client.dart';
-import '../../data/datasources/doctors_local_data_source.dart';
-import '../../data/datasources/doctors_remote_data_source.dart';
-import '../../data/repositories/doctors_repository_impl.dart';
+import '../../data/repositories/doctors_repository.dart';
 import '../../domain/entities/doctor.dart';
-import '../../domain/repositories/doctors_repository.dart';
-import '../../domain/usecases/get_doctor_by_id_use_case.dart';
-import '../../domain/usecases/get_doctors_use_case.dart';
 import 'doctors_state.dart';
 
-final doctorsLocalDataSourceProvider = Provider<DoctorsLocalDataSource>(
-  (ref) => const DoctorsLocalDataSourceImpl(),
-);
+part 'doctors_controller.g.dart';
 
-final doctorsRemoteDataSourceProvider = Provider<DoctorsRemoteDataSource>(
-  (ref) => DoctorsRemoteDataSourceImpl(ref.watch(networkServiceProvider())),
-);
+@Riverpod(keepAlive: true)
+class DoctorsController extends _$DoctorsController {
+  @override
+  FutureOr<DoctorsState> build() async {
+    Future<void>.microtask(() async { await getDoctors(); });
+    return DoctorsState.init();
+  }
 
-final doctorsRepositoryProvider = Provider<DoctorsRepository>(
-  (ref) => DoctorsRepositoryImpl(
-    localDataSource: ref.watch(doctorsLocalDataSourceProvider),
-    remoteDataSource: ref.watch(doctorsRemoteDataSourceProvider),
-  ),
-);
-
-final getDoctorsUseCaseProvider = Provider<GetDoctorsUseCase>(
-  (ref) => GetDoctorsUseCase(ref.watch(doctorsRepositoryProvider)),
-);
-
-final getDoctorByIdUseCaseProvider = Provider<GetDoctorByIdUseCase>(
-  (ref) => GetDoctorByIdUseCase(ref.watch(doctorsRepositoryProvider)),
-);
-
-final doctorsControllerProvider =
-    StateNotifierProvider<DoctorsController, DoctorsState>(
-  (ref) => DoctorsController(ref.watch(getDoctorsUseCaseProvider))..loadDoctors(),
-);
-
-final doctorDetailsProvider = FutureProvider.family<Doctor, String>((ref, id) {
-  return ref.watch(getDoctorByIdUseCaseProvider).call(id);
-});
-
-class DoctorsController extends StateNotifier<DoctorsState> {
-  DoctorsController(this._getDoctorsUseCase) : super(const DoctorsState());
-
-  final GetDoctorsUseCase _getDoctorsUseCase;
-
-  Future<void> loadDoctors() async {
-    state = state.copyWith(isLoading: true);
+  Future<List<Doctor>?> getDoctors() async {
     try {
-      final doctors = await _getDoctorsUseCase();
-      state = state.copyWith(doctors: doctors, isLoading: false);
-    } catch (_) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'something_went_wrong_please_try_again_later',
-      );
+      state = AsyncData(state.value!.copyWith(doctors: const AsyncLoading()));
+      final repo = ref.read(doctorsRepositoryProvider);
+      final response = await repo.getDoctors();
+
+      if (response.hasFailed) {
+        state = AsyncData(
+          state.value!.copyWith(
+            doctors: AsyncError(
+              response.message ?? 'Something went wrong',
+              StackTrace.fromString(response.message ?? ''),
+            ),
+          ),
+        );
+        return null;
+      }
+
+      final doctors = response.data?.map((model) => model.toEntity()).toList() ?? [];
+      state = AsyncData(state.value!.copyWith(doctors: AsyncData(doctors)));
+      return doctors;
+    } catch (e, st) {
+      state = AsyncData(state.value!.copyWith(doctors: AsyncError(e, st)));
+      return null;
     }
   }
 
   void updateSearchQuery(String query) {
-    state = state.copyWith(searchQuery: query);
+    final currentState = state.value;
+    if (currentState == null) return;
+    state = AsyncData(currentState.copyWith(searchQuery: query));
   }
 }
+
+final doctorDetailsProvider = FutureProvider.family<Doctor, String>((ref, id) async {
+  final repo = ref.read(doctorsRepositoryProvider);
+  final response = await repo.getDoctorById(id);
+  if (response.hasFailed || response.data == null) {
+    throw response.message ?? 'Something went wrong';
+  }
+  return response.data!.toEntity();
+});

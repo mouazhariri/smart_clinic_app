@@ -1,138 +1,153 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../../../src/infrastructure/network/services/dio_client.dart';
 import '../../../doctors/domain/entities/doctor.dart';
-import '../../data/datasources/appointments_local_data_source.dart';
-import '../../data/datasources/appointments_remote_data_source.dart';
-import '../../data/repositories/appointments_repository_impl.dart';
+import '../../data/models/appointment_model.dart';
+import '../../data/repositories/appointments_repository.dart';
 import '../../domain/entities/appointment.dart';
-import '../../domain/repositories/appointments_repository.dart';
-import '../../domain/usecases/book_appointment_use_case.dart';
-import '../../domain/usecases/cancel_appointment_use_case.dart';
-import '../../domain/usecases/get_appointments_use_case.dart';
 import 'appointments_state.dart';
 
-final appointmentsLocalDataSourceProvider = Provider<AppointmentsLocalDataSource>(
-  (ref) => AppointmentsLocalDataSourceImpl(),
-);
+part 'appointments_controller.g.dart';
 
-final appointmentsRemoteDataSourceProvider = Provider<AppointmentsRemoteDataSource>(
-  (ref) => AppointmentsRemoteDataSourceImpl(ref.watch(networkServiceProvider())),
-);
+@Riverpod(keepAlive: true)
+class AppointmentsController extends _$AppointmentsController {
+  @override
+  FutureOr<AppointmentsState> build() async {
+    Future<void>.microtask(() async { await getAppointments(); });
+    return AppointmentsState.init();
+  }
 
-final appointmentsRepositoryProvider = Provider<AppointmentsRepository>(
-  (ref) => AppointmentsRepositoryImpl(
-    localDataSource: ref.watch(appointmentsLocalDataSourceProvider),
-    remoteDataSource: ref.watch(appointmentsRemoteDataSourceProvider),
-  ),
-);
-
-final getAppointmentsUseCaseProvider = Provider<GetAppointmentsUseCase>(
-  (ref) => GetAppointmentsUseCase(ref.watch(appointmentsRepositoryProvider)),
-);
-
-final bookAppointmentUseCaseProvider = Provider<BookAppointmentUseCase>(
-  (ref) => BookAppointmentUseCase(ref.watch(appointmentsRepositoryProvider)),
-);
-
-final cancelAppointmentUseCaseProvider = Provider<CancelAppointmentUseCase>(
-  (ref) => CancelAppointmentUseCase(ref.watch(appointmentsRepositoryProvider)),
-);
-
-final appointmentsControllerProvider =
-    StateNotifierProvider<AppointmentsController, AppointmentsState>(
-  (ref) => AppointmentsController(
-    getAppointmentsUseCase: ref.watch(getAppointmentsUseCaseProvider),
-    bookAppointmentUseCase: ref.watch(bookAppointmentUseCaseProvider),
-    cancelAppointmentUseCase: ref.watch(cancelAppointmentUseCaseProvider),
-  )..loadAppointments(),
-);
-
-class AppointmentsController extends StateNotifier<AppointmentsState> {
-  AppointmentsController({
-    required GetAppointmentsUseCase getAppointmentsUseCase,
-    required BookAppointmentUseCase bookAppointmentUseCase,
-    required CancelAppointmentUseCase cancelAppointmentUseCase,
-  })  : _getAppointmentsUseCase = getAppointmentsUseCase,
-        _bookAppointmentUseCase = bookAppointmentUseCase,
-        _cancelAppointmentUseCase = cancelAppointmentUseCase,
-        super(const AppointmentsState());
-
-  final GetAppointmentsUseCase _getAppointmentsUseCase;
-  final BookAppointmentUseCase _bookAppointmentUseCase;
-  final CancelAppointmentUseCase _cancelAppointmentUseCase;
   final Uuid _uuid = const Uuid();
 
-  Future<void> loadAppointments() async {
-    state = state.copyWith(isLoading: true);
+  Future<List<Appointment>?> getAppointments() async {
     try {
-      final appointments = await _getAppointmentsUseCase();
-      state = state.copyWith(appointments: appointments, isLoading: false);
-    } catch (_) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'something_went_wrong_please_try_again_later',
+      state = AsyncData(
+        state.value!.copyWith(appointments: const AsyncLoading()),
       );
+      final repo = ref.read(appointmentsRepositoryProvider);
+      final response = await repo.getAppointments();
+
+      if (response.hasFailed) {
+        state = AsyncData(
+          state.value!.copyWith(
+            appointments: AsyncError(
+              response.message ?? 'Something went wrong',
+              StackTrace.fromString(response.message ?? ''),
+            ),
+          ),
+        );
+        return null;
+      }
+
+      final appointments =
+          response.data?.map((model) => model.toEntity()).toList() ?? [];
+      state = AsyncData(
+        state.value!.copyWith(appointments: AsyncData(appointments)),
+      );
+      return appointments;
+    } catch (e, st) {
+      state = AsyncData(
+        state.value!.copyWith(appointments: AsyncError(e, st)),
+      );
+      return null;
     }
   }
 
   void selectDate(DateTime date) {
-    state = state.copyWith(selectedDate: date, selectedTime: null);
+    final currentState = state.value;
+    if (currentState == null) return;
+    state = AsyncData(
+      currentState.copyWith(selectedDate: date, selectedTime: null),
+    );
   }
 
   void selectTime(String time) {
-    state = state.copyWith(selectedTime: time);
+    final currentState = state.value;
+    if (currentState == null) return;
+    state = AsyncData(currentState.copyWith(selectedTime: time));
   }
 
   Future<bool> bookAppointment(Doctor doctor) async {
-    if (!state.canConfirm(doctor)) return false;
+    final currentState = state.value;
+    if (currentState == null || !currentState.canConfirm(doctor)) return false;
 
-    state = state.copyWith(isLoading: true);
     try {
+      state = AsyncData(currentState.copyWith(bookingState: const AsyncLoading()));
       final appointment = Appointment(
         id: _uuid.v4(),
         doctorId: doctor.id,
         doctorName: doctor.name,
         specialty: doctor.specialty,
-        date: state.selectedDate!,
-        time: state.selectedTime!,
+        date: currentState.selectedDate!,
+        time: currentState.selectedTime!,
         status: AppointmentStatus.confirmed,
         clinicAddress: doctor.clinicAddress,
       );
 
-      await _bookAppointmentUseCase(appointment);
-      final appointments = await _getAppointmentsUseCase();
-      state = state.copyWith(
-        appointments: appointments,
-        clearSelection: true,
-        isLoading: false,
-        successMessage: 'appointment_booked_successfully',
+      final repo = ref.read(appointmentsRepositoryProvider);
+      final response = await repo.bookAppointment(
+        AppointmentModel.fromEntity(appointment),
+      );
+
+      if (response.hasFailed) {
+        state = AsyncData(
+          state.value!.copyWith(
+            bookingState: AsyncError(
+              response.message ?? 'Something went wrong',
+              StackTrace.fromString(response.message ?? ''),
+            ),
+          ),
+        );
+        return false;
+      }
+
+      await getAppointments();
+      state = AsyncData(
+        state.value!.copyWith(
+          clearSelection: true,
+          bookingState: const AsyncData(null),
+          successMessage: 'appointment_booked_successfully',
+        ),
       );
       return true;
-    } catch (_) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'something_went_wrong_please_try_again_later',
+    } catch (e, st) {
+      state = AsyncData(
+        state.value!.copyWith(bookingState: AsyncError(e, st)),
       );
       return false;
     }
   }
 
   Future<void> cancelAppointment(String appointmentId) async {
-    state = state.copyWith(isLoading: true);
     try {
-      await _cancelAppointmentUseCase(appointmentId);
-      final appointments = await _getAppointmentsUseCase();
-      state = state.copyWith(
-        appointments: appointments,
-        isLoading: false,
-        successMessage: 'appointment_cancelled_successfully',
+      state = AsyncData(
+        state.value!.copyWith(bookingState: const AsyncLoading()),
       );
-    } catch (_) {
-      state = state.copyWith(
-        isLoading: false,
-        errorMessage: 'something_went_wrong_please_try_again_later',
+      final repo = ref.read(appointmentsRepositoryProvider);
+      final response = await repo.cancelAppointment(appointmentId);
+
+      if (response.hasFailed) {
+        state = AsyncData(
+          state.value!.copyWith(
+            bookingState: AsyncError(
+              response.message ?? 'Something went wrong',
+              StackTrace.fromString(response.message ?? ''),
+            ),
+          ),
+        );
+        return;
+      }
+
+      await getAppointments();
+      state = AsyncData(
+        state.value!.copyWith(
+          bookingState: const AsyncData(null),
+          successMessage: 'appointment_cancelled_successfully',
+        ),
+      );
+    } catch (e, st) {
+      state = AsyncData(
+        state.value!.copyWith(bookingState: AsyncError(e, st)),
       );
     }
   }
