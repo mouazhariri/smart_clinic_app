@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 class ImageGallerySheet extends StatefulWidget {
   final List<String> images;
@@ -34,13 +35,13 @@ class _ImageGallerySheetState extends State<ImageGallerySheet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        foregroundColor: Colors.white,
+        backgroundColor: AppColors.black,
+        foregroundColor: AppColors.white,
         title: Text(
           '${_currentIndex + 1} / ${widget.images.length}',
-          style: const TextStyle(color: Colors.white),
+          style: const TextStyle(color: AppColors.white),
         ),
         centerTitle: true,
       ),
@@ -56,7 +57,7 @@ class _ImageGallerySheetState extends State<ImageGallerySheet> {
                 fit: BoxFit.contain,
                 errorBuilder: (_, __, ___) => const Icon(
                   Icons.broken_image,
-                  color: Colors.white,
+                  color: AppColors.white,
                   size: 64,
                 ),
               ),

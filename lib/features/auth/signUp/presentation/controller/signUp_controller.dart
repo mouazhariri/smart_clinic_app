@@ -15,19 +15,17 @@ class SignUpController extends _$SignUpController {
 
   void toggleAcceptedPrivacyPolicy() {
     acceptPrivacyPolicy = !acceptPrivacyPolicy;
-    state = state; // 🔥 notify listeners
+    state = state;
   }
 
   void setPhone(String value) {
     phoneNumber = value;
-    state = state; // 🔥 notify listeners
+    state = state;
   }
 
   void setBirthDate(DateTime date) {
     selectedDate = date;
-    // 🔥 force rebuild safely
     ref.invalidateSelf();
-    // state = const AsyncData(null);
   }
 
   Future<void> signUp(SignupParams params) async {

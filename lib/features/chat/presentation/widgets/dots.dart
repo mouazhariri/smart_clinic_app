@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 class TypingDots extends StatefulWidget {
   const TypingDots({super.key});
@@ -46,7 +46,7 @@ class _TypingDotsState extends State<TypingDots>
             padding: EdgeInsets.symmetric(horizontal: 2),
             child: CircleAvatar(
               radius: 3,
-              backgroundColor: Colors.black54,
+              backgroundColor: AppColors.textSecondary,
             ),
           ),
         );

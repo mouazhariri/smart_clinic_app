@@ -69,7 +69,7 @@ class _AppTextFormFieldState extends State<AppTextFormField> {
           clipBehavior: Clip.antiAlias,
 
           decoration: BoxDecoration(
-            // color: Colors.white,
+            // color: AppColors.white,
             borderRadius: BorderRadius.circular(24),
             
           ),

@@ -40,11 +40,16 @@ class _SignInFormState extends ConsumerState<SignInForm> {
       if (next is AsyncData && prev is AsyncLoading) {
         // context.maybePop().then((_) {
         debugPrint("Success check");
-        if (next.value!.signinResponseModel!.userExist) {
-          // context.push(AppRoutes.verificationScreen,
-          //     extra: phoneController.text);
+        if (next.value?.signinResponseModel?.userExist ?? false) {
+          context.push(
+            AppRoutes.verificationScreen,
+            extra: phoneController.text,
+          );
         } else {
-          // context.go(AppRoutes.signUpScreen,extra: phoneController.text);
+          context.go(
+            AppRoutes.signUpScreen,
+            extra: phoneController.text,
+          );
         }
         // _showDialog();
         // });

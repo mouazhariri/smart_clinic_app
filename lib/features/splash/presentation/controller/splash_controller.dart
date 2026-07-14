@@ -22,7 +22,7 @@ class SplashController extends _$SplashController {
     // Use .whenComplete to check synchronously after delay
     final isFirstTime = storage.isFirstTimeOpen();
 
-    if (!await isFirstTime) {
+    if (await isFirstTime) {
       return ScreenDestination(route: AppRoutes.onBoarding);
     }
 
@@ -32,7 +32,7 @@ class SplashController extends _$SplashController {
     //     ? ScreenDestination(route: AppRoutes.homeScreen)
     //     : ScreenDestination(route: AppRoutes.signInScreen);
 
-    return ScreenDestination(route: AppRoutes.sessionScreen);
+    return ScreenDestination(route: AppRoutes.authScreen);
   }
 }
 

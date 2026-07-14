@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -23,12 +24,12 @@ class ChatBubble extends StatelessWidget {
   });
 
   Color get _bubbleColor {
-    if (message.isUser) return const Color(0xFF2196F3);
-    return const Color(0xFFF1F3F4);
+    if (message.isUser) return AppColors.primary;
+    return AppColors.authLightBlue;
   }
 
   Color get _textColor {
-    return message.isUser ? Colors.white : Colors.black87;
+    return message.isUser ? AppColors.white : AppColors.textPrimary;
   }
 
   @override
@@ -61,7 +62,7 @@ class ChatBubble extends StatelessWidget {
                   ),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.08),
+                      color: AppColors.black.withOpacity(0.08),
                       blurRadius: 6,
                       offset: const Offset(0, 2),
                     ),
@@ -114,7 +115,7 @@ class ChatBubble extends StatelessWidget {
                   data: message.text,
                   styleSheet: MarkdownStyleSheet(
                     p: const TextStyle(
-                      color: Colors.black87,
+                      color: AppColors.textPrimary,
                       fontSize: 15,
                       height: 1.5,
                     ),
@@ -125,23 +126,23 @@ class ChatBubble extends StatelessWidget {
                     h2: const TextStyle(
                       fontSize: 17,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: AppColors.textPrimary,
                     ),
                     h3: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black87,
+                      color: AppColors.textPrimary,
                     ),
                     code: TextStyle(
-                      backgroundColor: Colors.grey.shade200,
+                      backgroundColor: AppColors.authDivider,
                       fontFamily: 'monospace',
                       fontSize: 13,
                     ),
                     blockquoteDecoration: BoxDecoration(
-                      color: Colors.blue.shade50,
+                      color: AppColors.authLightBlue,
                       border: Border(
                         left: BorderSide(
-                          color: Colors.blue.shade300,
+                          color: AppColors.primaryBg,
                           width: 4,
                         ),
                       ),
@@ -166,8 +167,8 @@ class ChatBubble extends StatelessWidget {
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: message.isUser
-            ? Colors.white.withOpacity(0.2)
-            : Colors.grey.shade200,
+            ? AppColors.white.withOpacity(0.2)
+            : AppColors.authDivider,
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -179,7 +180,7 @@ class ChatBubble extends StatelessWidget {
                 : isImage
                     ? Icons.image
                     : Icons.picture_as_pdf,
-            color: message.isUser ? Colors.white : Colors.blue.shade700,
+            color: message.isUser ? AppColors.white : AppColors.secondPrimary,
             size: 20,
           ),
           const SizedBox(width: 8),
@@ -187,7 +188,7 @@ class ChatBubble extends StatelessWidget {
             child: Text(
               file.name,
               style: TextStyle(
-                color: message.isUser ? Colors.white : Colors.black87,
+                color: message.isUser ? AppColors.white : AppColors.textPrimary,
                 fontSize: 13,
                 fontWeight: FontWeight.w500,
               ),
@@ -224,13 +225,13 @@ class ChatBubble extends StatelessWidget {
                 displayImages[i],
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
-                  color: Colors.grey.shade300,
-                  child: const Icon(Icons.broken_image, color: Colors.grey),
+                  color: AppColors.authInputBorder,
+                  child: const Icon(Icons.broken_image, color: AppColors.grey),
                 ),
                 loadingBuilder: (_, child, progress) {
                   if (progress == null) return child;
                   return Container(
-                    color: Colors.grey.shade200,
+                    color: AppColors.authDivider,
                     child: const Center(
                       child: CircularProgressIndicator(strokeWidth: 2),
                     ),
@@ -254,16 +255,16 @@ class ChatBubble extends StatelessWidget {
             _formatTime(message.timestamp),
             style: TextStyle(
               fontSize: 11,
-              color: Colors.grey.shade500,
+              color: AppColors.authHint,
             ),
           ),
           if (message.isEdited) ...[
             const SizedBox(width: 4),
             Text(
-              '• edited',
+              context.tr('edited_label'),
               style: TextStyle(
                 fontSize: 11,
-                color: Colors.grey.shade500,
+                color: AppColors.authHint,
                 fontStyle: FontStyle.italic,
               ),
             ),
@@ -287,7 +288,7 @@ class ChatBubble extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.black,
       builder: (_) => ImageGallerySheet(
         images: images,
         initialIndex: initialIndex,
@@ -341,20 +342,20 @@ class _MessageOptionsSheet extends StatelessWidget {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: Colors.grey.shade300,
+                color: AppColors.authInputBorder,
                 borderRadius: BorderRadius.circular(2),
               ),
             ),
             const SizedBox(height: 12),
             _OptionTile(
               icon: Icons.copy_outlined,
-              label: 'Copy',
+              label: context.tr('copy'),
               onTap: () {
                 Navigator.pop(context);
                 Clipboard.setData(ClipboardData(text: message.text));
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
-                    content: Text('Copied to clipboard'),
+                    content: Text(context.tr('copied_to_clipboard')),
                     duration: Duration(seconds: 2),
                   ),
                 );
@@ -363,7 +364,7 @@ class _MessageOptionsSheet extends StatelessWidget {
             if (message.isUser) ...[
               _OptionTile(
                 icon: Icons.edit_outlined,
-                label: 'Edit',
+                label: context.tr('edit'),
                 onTap: () {
                   Navigator.pop(context);
                   onEdit?.call();
@@ -373,7 +374,7 @@ class _MessageOptionsSheet extends StatelessWidget {
             if (!message.isUser)
               _OptionTile(
                 icon: Icons.analytics_outlined,
-                label: 'Re-analyze',
+                label: context.tr('reanalyze'),
                 onTap: () {
                   Navigator.pop(context);
                   onAnalyze?.call();
@@ -381,8 +382,8 @@ class _MessageOptionsSheet extends StatelessWidget {
               ),
             _OptionTile(
               icon: Icons.delete_outline,
-              label: 'Delete',
-              color: Colors.red,
+              label: context.tr('delete'),
+              color: AppColors.errorRed,
               onTap: () {
                 Navigator.pop(context);
                 onDelete?.call();
@@ -410,7 +411,7 @@ class _OptionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final tileColor = color ?? Colors.black87;
+    final tileColor = color ?? AppColors.textPrimary;
     return ListTile(
       leading: Icon(icon, color: tileColor),
       title: Text(

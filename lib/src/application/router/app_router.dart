@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_clinic_app/features/appointments/presentation/screens/appointments_screen.dart';
+import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_screen.dart';
+import 'package:smart_clinic_app/features/auth/presentation/screens/auth_screen.dart';
+import 'package:smart_clinic_app/features/auth/signIn/presentation/screens/sign_in_screen.dart';
+import 'package:smart_clinic_app/features/auth/signUp/presentation/screens/signup_screen.dart';
+import 'package:smart_clinic_app/features/auth/verification/presentation/screens/verification_account_screen.dart';
+import 'package:smart_clinic_app/features/chat/presentation/screen/chat_screen.dart';
 import 'package:smart_clinic_app/features/chat/presentation/screen/sessions_screen.dart';
+import 'package:smart_clinic_app/features/doctors/presentation/screens/doctor_details_screen.dart';
+import 'package:smart_clinic_app/features/doctors/presentation/screens/doctors_screen.dart';
+import 'package:smart_clinic_app/features/home/presentation/screens/home_screen.dart';
+import 'package:smart_clinic_app/features/home/presentation/screens/main_scaffold.dart';
+import 'package:smart_clinic_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:smart_clinic_app/features/splash/presentation/pages/on_boarding.dart';
 import 'package:smart_clinic_app/features/splash/presentation/pages/splash.dart';
 
-import '../../../features/chat/presentation/screen/chat_screen.dart';
 import 'app_routes.dart';
 import 'custom_navigation_observer.dart';
 import 'fallback_screen.dart';
@@ -18,122 +29,108 @@ class AppRouter {
   AppRouter(Ref ref) : goRouter = _createRouter(ref);
 
   static GoRouter _createRouter(Ref ref) {
-    String initialRoute = AppRoutes.splashScreen;
     return GoRouter(
       navigatorKey: rootKey,
-      initialLocation: initialRoute,
+      initialLocation: AppRoutes.splashScreen,
       observers: [CustomNavigationObserver()],
       errorBuilder: (context, state) => const FallbackScreen(),
-
-      //   redirect: (context, state) async {
-      //     // Consumer(
-      //     //   builder: (context, ref, child) {
-      //     //     // return ;
-      //     //   },
-      //     // );
-      //   //  final storage = ref.read(localStorageServiceProvider);
-      //   //   final isFirstTime = await storage.isFirstTimeOpen();
-      //   //   final isAuth = await ref.read(isAuthenticatedProvider.future);
-      //   //   final currentLocation = state.matchedLocation;
-
-      //   //   Dev.logLine('Current location: $currentLocation');
-      //   //   Dev.logLine('isFirstTime: $isFirstTime, isAuth: $isAuth');
-
-      //   //   // ===== First-time onboarding =====
-      //   //   if (isFirstTime ) {
-      //   //     Dev.logLine(AppRoutes.onBoarding);
-      //   //     return AppRoutes.onBoarding;
-      //   //   }
-
-      //   //   // ===== Not authenticated =====
-      //   //   if (!isAuth ) {
-      //   //     Dev.logLine(AppRoutes.signInScreen);
-
-      //   //     return AppRoutes.signInScreen;
-      //   //   }
-
-      //   //   // ===== Authenticated users trying to access non-home pages =====
-      //   //   // if (isAuth) {
-      //   //     return AppRoutes.homeScreen;
-      //     // }
-
-      //     // No redirection needed
-      //     // return null;
-      // },
       routes: <RouteBase>[
-        GoRoute(
+        _fadeRoute(
           path: AppRoutes.splashScreen,
-          parentNavigatorKey: rootKey,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return CustomTransitionPage(
-              child: SplashScreen(),
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-            );
-          },
+          builder: (context, state) => const SplashScreen(),
         ),
-        GoRoute(
-          path: AppRoutes.sessionScreen,
-          parentNavigatorKey: rootKey,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return CustomTransitionPage(
-              child: SessionsScreen(),
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-            );
-          },
-        ),
-        GoRoute(
-          path: AppRoutes.chatScreen,
-          parentNavigatorKey: rootKey,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return CustomTransitionPage(
-              child: ChatScreen(),
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-            );
-          },
-        ),
-        GoRoute(
+        _fadeRoute(
           path: AppRoutes.onBoarding,
-          parentNavigatorKey: rootKey,
-          pageBuilder: (BuildContext context, GoRouterState state) {
-            return CustomTransitionPage(
-              child: OnBoardingScreen(),
-              key: state.pageKey,
-              transitionsBuilder:
-                  (context, animation, secondaryAnimation, child) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-            );
-          },
+          builder: (context, state) => const OnBoardingScreen(),
         ),
-        // GoRoute(
-        //   path: AppRoutes.signInScreen,
-        //   name: AppRoutes.signInScreen,
-        //   parentNavigatorKey: rootKey,
-        //   pageBuilder: (BuildContext context, GoRouterState state) {
-        //     return CustomTransitionPage(
-        //       child: SignInScreen(),
-        //       key: state.pageKey,
-        //       transitionsBuilder:
-        //           (context, animation, secondaryAnimation, child) {
-        //         return FadeTransition(opacity: animation, child: child);
-        //       },
-        //     );
-        //   },
-        // ),
-
+        _fadeRoute(
+          path: AppRoutes.authScreen,
+          builder: (context, state) => const AuthLandingScreen(),
+        ),
+        _fadeRoute(
+          path: AppRoutes.signInScreen,
+          builder: (context, state) => const SignInScreen(),
+        ),
+        _fadeRoute(
+          path: AppRoutes.signUpScreen,
+          builder: (context, state) => SignupScreen(
+            phoneNumber: state.extra is String ? state.extra as String : '',
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.verificationScreen,
+          builder: (context, state) => VerificationAccountScreen(
+            phone: state.extra is String ? state.extra as String : '',
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.homeScreen,
+          builder: (context, state) => const MainScaffold(
+            currentIndex: 0,
+            child: HomeScreen(),
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.doctorsScreen,
+          builder: (context, state) => const MainScaffold(
+            currentIndex: 1,
+            child: DoctorsScreen(),
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.doctorDetailsScreen,
+          builder: (context, state) => DoctorDetailsScreen(
+            doctorId: state.pathParameters['doctorId']!,
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.bookAppointmentScreen,
+          builder: (context, state) => BookAppointmentScreen(
+            doctorId: state.pathParameters['doctorId']!,
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.appointmentsScreen,
+          builder: (context, state) => const MainScaffold(
+            currentIndex: 2,
+            child: AppointmentsScreen(),
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.profileScreen,
+          builder: (context, state) => const MainScaffold(
+            currentIndex: 3,
+            child: ProfileScreen(),
+          ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.sessionScreen,
+          builder: (context, state) => const SessionsScreen(),
+        ),
+        _fadeRoute(
+          path: AppRoutes.chatScreen,
+          builder: (context, state) => const ChatScreen(),
+        ),
       ],
+    );
+  }
+
+  static GoRoute _fadeRoute({
+    required String path,
+    required Widget Function(BuildContext context, GoRouterState state) builder,
+  }) {
+    return GoRoute(
+      path: path,
+      parentNavigatorKey: rootKey,
+      pageBuilder: (context, state) {
+        return CustomTransitionPage(
+          key: state.pageKey,
+          child: builder(context, state),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        );
+      },
     );
   }
 }

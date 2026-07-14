@@ -88,7 +88,7 @@ class _SignUpFormState extends State<SignUpForm> {
               Consumer(builder: (context, ref, wiidget) {
                 final provider = ref.read(signUpControllerProvider.notifier);
                 return Checkbox.adaptive(
-                    activeColor: Colors.white,
+                    activeColor: AppColors.white,
                     checkColor: AppColors.primary,
                     materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                     value: provider.acceptPrivacyPolicy,
@@ -114,8 +114,10 @@ class _SignUpFormState extends State<SignUpForm> {
               if (next is AsyncData) {
                 // context.maybePop().then((_) {
                 debugPrint("Success check");
-                context.push("AppRoutes.verificationScreen",
-                    extra: widget.phoneNumber);
+                context.push(
+                  AppRoutes.verificationScreen,
+                  extra: widget.phoneNumber,
+                );
                 // context
                 //     .pushRoute(VerificationRoute(inputedPhone: _phoneNumber!));
                 // _showDialog();

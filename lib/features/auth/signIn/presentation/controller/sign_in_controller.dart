@@ -18,7 +18,7 @@ class SignInController extends _$SignInController {
       return state.value!.copyWith(signinResponseModel: response.data);
     });
   }
-  
+
   void makeResendButtonVisible(bool isVisible) {
     state = AsyncData(state.value!.copyWith(isResend: isVisible));
   }
@@ -30,12 +30,4 @@ class SignInController extends _$SignInController {
   void checkPhoneFilled(bool isFilled) {
     state = AsyncData(state.value!.copyWith(isPhoneFilled: isFilled));
   }
-
-  // void changePhoneNumber(String value) {
-  //   phoneController.setText(value);
-  //   ref.invalidateSelf();
-  //   // state=Async(value);
-  //   // Dev.logLine("value= $value");
-  //   // Dev.logLine(" phoneController.text= ${phoneController.text}");
-  // }
 }

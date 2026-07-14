@@ -45,7 +45,7 @@ class CustomButtonWidget extends StatelessWidget {
           elevation: elevation ?? 1,
           padding: EdgeInsets.zero,
           shadowColor: shadowColor,
-          backgroundColor: backgroundColor ?? Colors.transparent,
+          backgroundColor: backgroundColor ?? AppColors.transparent,
           foregroundColor: AppColors.black900,
           fixedSize: Size(
             width,
@@ -53,7 +53,7 @@ class CustomButtonWidget extends StatelessWidget {
           ),
           shape: RoundedRectangleBorder(
               side: BorderSide(
-                  color: color ?? backgroundColor ?? Colors.transparent),
+                  color: color ?? backgroundColor ?? AppColors.transparent),
               borderRadius: BorderRadius.circular(radius ?? 25))),
       onPressed: onTap != null
           ? () {
@@ -67,7 +67,7 @@ class CustomButtonWidget extends StatelessWidget {
                       Theme.of(context).textTheme.displaySmall!.copyWith(
                           fontSize: fontSize ?? 16,
                           color: color ??
-                              (isFiled ? Colors.white : color ?? Colors.black),
+                              (isFiled ? AppColors.white : color ?? AppColors.black),
                           fontWeight: FontWeight.w500))
               .centered(),
     ).onlyPadding(top: topPading ?? 0);

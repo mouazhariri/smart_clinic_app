@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 abstract class AppColors {
   static const Color primary = Color(0xFF005AAB);
@@ -46,6 +47,7 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color successGreen = Color(0xFF00721D);
   static const Color errorRed = Color(0xFFBB0101);
   static const Color warnYellow = Color(0xFF7A5800);
+  static const Color ratingYellow = Color(0xFFFFB800);
   static const Color filterBg = Color(0xFFF2F4F7);
   static const Color paidBg = Color(0xFFCCEACC);
   static const Color paidText = Color(0xFF4E7B4E);
@@ -61,6 +63,8 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color fieldBackground = Color(0xFFEFF0F6);
   static const Color dividerColor = Color(0xFFe9e9e9);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color white70 = Color(0xB3FFFFFF);
+  static const Color transparent = Color(0x00000000);
   static const Color cardWhite = Color(0xFFF5F5F5);
   static const Color shadow = Color(0x0C000000);
   static const Color darkShadow = Color(0x19000000);
@@ -172,7 +176,20 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color infoIconBg = Color(0xFFF2E1E3);
   static const Color infoText = Color(0xFF727784);
   static const Color methodSelectorBorder = Color(0xFFDBE0E6);
+
+  // ── Smart Clinic Auth UI ───────────────────────────
+  static const Color authBackground = Color(0xFFF7FAFE);
+  static const Color authTitle = Color(0xFF42526B);
+  static const Color authSubtitle = Color(0xFF7E8AA0);
+  static const Color authHint = Color(0xFF9AA6B7);
+  static const Color authInputBorder = Color(0xFFDDE5F0);
+  static const Color authLightBlue = Color(0xFFEFF5FE);
+  static const Color authDivider = Color(0xFFE9EEF6);
+  static const Color authIconMuted = Color(0xFFD4DAE4);
+  static const Color authIcon = Color(0xFFB8C1D1);
+  static const Color authFlagPlaceholder = Color(0xFFD9DDE6);
 }
+
 
 class AvatarColors {
   static final List<Color> _colors = [

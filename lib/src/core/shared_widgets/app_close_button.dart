@@ -9,7 +9,7 @@ class AppCloseButton extends StatelessWidget {
       this.icon,
       this.width,
       this.height,
-      this.backgroundColor = Colors.white,
+      this.backgroundColor = AppColors.white,
       this.iconColor = AppColors.primary});
   final Widget? icon;
   final double? width;
@@ -26,7 +26,7 @@ class AppCloseButton extends StatelessWidget {
         shape: BoxShape.circle,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.16),
+            color: AppColors.black.withOpacity(0.16),
             blurRadius: 4.0,
             offset: const Offset(0.0, 1.0),
           ),

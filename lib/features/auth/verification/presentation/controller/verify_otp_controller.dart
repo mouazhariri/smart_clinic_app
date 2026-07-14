@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../signIn/data/repositories/sign_in_repository.dart';
 import '../../../signIn/presentation/controller/sign_in_controller.dart';
 import '../../data/repositories/verify_otp_repository.dart';
 import 'verify_otp_state.dart';
 import '../../../../../src/application/data/user_information/user_information.dart';
-import '../../../../../src/core/notifications/services/notification_service.dart';
 import '../../../../../src/infrastructure/storage/local_storage_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 

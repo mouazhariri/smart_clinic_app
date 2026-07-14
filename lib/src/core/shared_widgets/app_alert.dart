@@ -6,7 +6,6 @@ import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 import 'package:smart_clinic_app/src/core/shared_widgets/app_loader.dart';
 import 'package:smart_clinic_app/src/core/shared_widgets/custom_button_widget.dart';
 import 'package:smart_clinic_app/src/core/utils/extenssions/int_extenssion.dart';
-import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 import 'package:smart_clinic_app/src/resourses/font_manager/app_text_style.dart';
 
 class AppAlert {
@@ -88,7 +87,7 @@ class AppAlert {
       context: context,
       useRootNavigator: useRootNavigator,
       barrierDismissible: false,
-      barrierColor: Colors.black.withOpacity(0.3),
+      barrierColor: AppColors.black.withOpacity(0.3),
       transitionDuration: const Duration(milliseconds: 150),
       pageBuilder: (ctx, animation, secondaryAnimation) {
         return PopScope(
@@ -161,7 +160,7 @@ class AppAlert {
 //                 borderRadius: BorderRadius.circular(12),
 //               ),
 //               alignment: Alignment.center,
-//               child: const Icon(Icons.mail, color: Colors.white, size: 40),
+//               child: const Icon(Icons.mail, color: AppColors.white, size: 40),
 //             ),
 //           ),
 //         );
