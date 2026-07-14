@@ -315,5 +315,15 @@
     "phone_hint_syria": "09XXXXXXXX",
     "password_hint": "XXXXXXXXXXXXXXX",
     "dont_have_account": "ليس لديك حساب؟",
-    "create_new_account_short": "إنشاء حساب جديد"
+    "create_new_account_short": "إنشاء حساب جديد",
+    "step_1_of_3": "الخطوة 1 من 3",
+    "step_2_of_3": "الخطوة 2 من 3",
+    "step_3_of_3": "الخطوة 3 من 3",
+    "personal_info_title": "بياناتك الشخصية",
+    "personal_info_subtitle": "بيانات ملفك الطبي الخاص",
+    "join_us_now": "انضم إلينا الآن!",
+    "join_us_subtitle": "أدخل رقم هاتفك للبدء. سنقوم بإرسال رمز تحقق (OTP) في رسالة نصية للتأكد من هويتك.",
+    "agree_privacy_full": "أوافق على شروط الاستخدام و سياسة الخصوصية الخاصة بمنصة طبيبك.",
+    "send_verification_code": "إرسال رمز التحقق!",
+    "already_have_account_prompt": "لدي حساب بالفعل؟"
 }

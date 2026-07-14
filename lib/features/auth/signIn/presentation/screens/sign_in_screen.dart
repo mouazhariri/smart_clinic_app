@@ -49,9 +49,11 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
     final isLoading = signInState is AsyncLoading;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF7FAFE),
-      body: SafeArea(
-        child: Form(
+      backgroundColor: AppColors.authBackground,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SafeArea(
+          child: Form(
           key: _formKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -64,7 +66,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     context.tr('welcome_back_title'),
                     textAlign: TextAlign.end,
                     style: AppTextStyle.rubikBold22.copyWith(
-                      color: const Color(0xFF42526B),
+                      color: AppColors.authTitle,
                       fontSize: 28,
                       height: 1.1,
                     ),
@@ -77,7 +79,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     context.tr('signin_subtitle'),
                     textAlign: TextAlign.end,
                     style: AppTextStyle.rubikRegular14.copyWith(
-                      color: const Color(0xFF7E8AA0),
+                      color: AppColors.authSubtitle,
                       height: 1.35,
                     ),
                   ),
@@ -125,12 +127,12 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     }
                     return null;
                   },
-                  prefixIcon: const Icon(Icons.lock, color: Color(0xFFD4DAE4), size: 18),
+                  prefixIcon: const Icon(Icons.lock, color: AppColors.authIconMuted, size: 18),
                   suffixIcon: IconButton(
                     onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
                     icon: Icon(
                       _obscurePassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
-                      color: const Color(0xFFB8C1D1),
+                      color: AppColors.authIcon,
                       size: 18,
                     ),
                   ),
@@ -180,7 +182,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   children: [
                     Text(
                       context.tr('dont_have_account'),
-                      style: AppTextStyle.rubikRegular12.copyWith(color: const Color(0xFF9AA6B7)),
+                      style: AppTextStyle.rubikRegular12.copyWith(color: AppColors.authHint),
                     ),
                     TextButton(
                       onPressed: () => context.go(AppRoutes.signUpScreen, extra: _phoneController.text),
@@ -228,7 +230,7 @@ class _FieldLabel extends StatelessWidget {
         padding: const EdgeInsetsDirectional.only(end: 8),
         child: Text(
           label,
-          style: AppTextStyle.rubikRegular12.copyWith(color: const Color(0xFF526278)),
+          style: AppTextStyle.rubikRegular12.copyWith(color: AppColors.bodyColor),
         ),
       ),
     );
@@ -267,10 +269,10 @@ class _AuthTextField extends StatelessWidget {
       validator: validator,
       onChanged: onChanged,
       textAlign: textAlign,
-      style: AppTextStyle.rubikRegular14.copyWith(color: const Color(0xFF42526B)),
+      style: AppTextStyle.rubikRegular14.copyWith(color: AppColors.authTitle),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: AppTextStyle.rubikRegular12.copyWith(color: const Color(0xFF9AA6B7)),
+        hintStyle: AppTextStyle.rubikRegular12.copyWith(color: AppColors.authHint),
         filled: true,
         fillColor: AppColors.white,
         prefixIcon: prefixIcon,
@@ -278,7 +280,7 @@ class _AuthTextField extends StatelessWidget {
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
-          borderSide: const BorderSide(color: Color(0xFFDDE5F0)),
+          borderSide: const BorderSide(color: AppColors.authInputBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6),
@@ -312,17 +314,17 @@ class _CountryCodeBox extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.circular(6),
-          border: Border.all(color: const Color(0xFFDDE5F0)),
+          border: Border.all(color: AppColors.authInputBorder),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               '+963',
-              style: AppTextStyle.rubikSemiBold12.copyWith(color: const Color(0xFF42526B)),
+              style: AppTextStyle.rubikSemiBold12.copyWith(color: AppColors.authTitle),
             ),
             const SizedBox(width: 6),
-            Container(width: 18, height: 14, color: const Color(0xFFD9DDE6)),
+            Container(width: 18, height: 14, color: AppColors.authFlagPlaceholder),
           ],
         ),
       ),

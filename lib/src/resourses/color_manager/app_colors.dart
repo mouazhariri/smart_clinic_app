@@ -172,7 +172,20 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color infoIconBg = Color(0xFFF2E1E3);
   static const Color infoText = Color(0xFF727784);
   static const Color methodSelectorBorder = Color(0xFFDBE0E6);
+
+  // ── Smart Clinic Auth UI ───────────────────────────
+  static const Color authBackground = Color(0xFFF7FAFE);
+  static const Color authTitle = Color(0xFF42526B);
+  static const Color authSubtitle = Color(0xFF7E8AA0);
+  static const Color authHint = Color(0xFF9AA6B7);
+  static const Color authInputBorder = Color(0xFFDDE5F0);
+  static const Color authLightBlue = Color(0xFFEFF5FE);
+  static const Color authDivider = Color(0xFFE9EEF6);
+  static const Color authIconMuted = Color(0xFFD4DAE4);
+  static const Color authIcon = Color(0xFFB8C1D1);
+  static const Color authFlagPlaceholder = Color(0xFFD9DDE6);
 }
+
 
 class AvatarColors {
   static final List<Color> _colors = [

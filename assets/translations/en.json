@@ -315,5 +315,15 @@
     "phone_hint_syria": "09XXXXXXXX",
     "password_hint": "XXXXXXXXXXXXXXX",
     "dont_have_account": "Don’t have an account?",
-    "create_new_account_short": "Create new account"
+    "create_new_account_short": "Create new account",
+    "step_1_of_3": "Step 1 of 3",
+    "step_2_of_3": "Step 2 of 3",
+    "step_3_of_3": "Step 3 of 3",
+    "personal_info_title": "Your personal information",
+    "personal_info_subtitle": "Your private profile data",
+    "join_us_now": "Join us now!",
+    "join_us_subtitle": "Enter your mobile number. We will send you a verification code (OTP) to start securing your account.",
+    "agree_privacy_full": "I agree to the Terms of Use and Privacy Policy related to protecting my data.",
+    "send_verification_code": "Send verification code!",
+    "already_have_account_prompt": "Already have an account?"
 }

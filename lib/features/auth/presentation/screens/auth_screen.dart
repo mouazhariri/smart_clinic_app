@@ -37,7 +37,7 @@ class AuthLandingScreen extends StatelessWidget {
                 context.tr('appName'),
                 textAlign: TextAlign.center,
                 style: AppTextStyle.rubikBold22.copyWith(
-                  color: const Color(0xFF42526B),
+                  color: AppColors.authTitle,
                   fontSize: 30,
                   height: 1,
                 ),
@@ -47,7 +47,7 @@ class AuthLandingScreen extends StatelessWidget {
                 context.tr('auth_landing_subtitle'),
                 textAlign: TextAlign.center,
                 style: AppTextStyle.rubikRegular14.copyWith(
-                  color: const Color(0xFF7E8AA0),
+                  color: AppColors.authSubtitle,
                   height: 1.35,
                 ),
               ),
@@ -72,32 +72,32 @@ class AuthLandingScreen extends StatelessWidget {
               const SizedBox(height: 12),
               _AuthActionButton(
                 label: context.tr('already_have_account_short'),
-                backgroundColor: const Color(0xFFEFF5FE),
+                backgroundColor: AppColors.authLightBlue,
                 foregroundColor: AppColors.primary,
                 onPressed: () => context.go(AppRoutes.signInScreen),
               ),
               const SizedBox(height: 18),
               Row(
                 children: [
-                  const Expanded(child: Divider(color: Color(0xFFE9EEF6))),
+                  const Expanded(child: Divider(color: AppColors.authDivider)),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18),
                     child: Text(
                       context.tr('or'),
                       style: AppTextStyle.rubikRegular12.copyWith(
-                        color: const Color(0xFF9AA6B7),
+                        color: AppColors.authHint,
                       ),
                     ),
                   ),
-                  const Expanded(child: Divider(color: Color(0xFFE9EEF6))),
+                  const Expanded(child: Divider(color: AppColors.authDivider)),
                 ],
               ),
               const SizedBox(height: 18),
               _AuthActionButton(
                 label: context.tr('continue_as_guest'),
                 backgroundColor: AppColors.white,
-                foregroundColor: const Color(0xFF526278),
-                borderColor: const Color(0xFFDDE5F0),
+                foregroundColor: AppColors.bodyColor,
+                borderColor: AppColors.authInputBorder,
                 onPressed: () => context.go(AppRoutes.homeScreen),
               ),
               const SizedBox(height: 28),
@@ -111,7 +111,7 @@ class AuthLandingScreen extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
                 style: AppTextStyle.interRegular10.copyWith(
-                  color: const Color(0xFF7E8AA0),
+                  color: AppColors.authSubtitle,
                   height: 1.4,
                 ),
               ),
@@ -135,7 +135,7 @@ class _FeatureChip extends StatelessWidget {
       height: 40,
       padding: const EdgeInsets.symmetric(horizontal: 18),
       decoration: BoxDecoration(
-        color: const Color(0xFFEFF5FE),
+        color: AppColors.authLightBlue,
         borderRadius: BorderRadius.circular(8),
       ),
       alignment: Alignment.center,
