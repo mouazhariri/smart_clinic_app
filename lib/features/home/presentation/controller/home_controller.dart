@@ -10,6 +10,7 @@ part 'home_controller.g.dart';
 class HomeController extends _$HomeController {
   @override
   FutureOr<HomeState> build() async {
+    Future<void>.microtask(() async { await getHomeData(); });
     return HomeState.init();
   }
 

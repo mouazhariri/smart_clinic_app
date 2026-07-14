@@ -299,5 +299,21 @@
     "date_label": "التاريخ",
     "payment_method_label": "طريقة الدفع:",
     "payment_recorded_success": "تم تسجيل الدفعة بنجاح لهذه الفاتورة.",
-    "payment_successful": "تم الدفع بنجاح"
+    "payment_successful": "تم الدفع بنجاح",
+    "auth_landing_subtitle": "أهلاً بك في طبيبك - منصتك الصحية المتكاملة في سوريا",
+    "trusted_doctors": "أطباء معتمدون",
+    "quick_booking": "حجز سريع",
+    "safe_reliable": "آمن وموثوق",
+    "create_new_account": "إنشاء حساب جديد",
+    "already_have_account_short": "لدي حساب بالفعل",
+    "or": "أو",
+    "auth_terms_prefix": "بالمتابعة، أنت توافق على ",
+    "terms_of_use": "شروط الاستخدام",
+    "and_privacy_policy": " وسياسة الخصوصية",
+    "welcome_back_title": "مرحباً بعودتك!",
+    "signin_subtitle": "قم بتسجيل الدخول لمتابعة مواعيدك، والتواصل مع أطبائك بكل سهولة.",
+    "phone_hint_syria": "09XXXXXXXX",
+    "password_hint": "XXXXXXXXXXXXXXX",
+    "dont_have_account": "ليس لديك حساب؟",
+    "create_new_account_short": "إنشاء حساب جديد"
 }

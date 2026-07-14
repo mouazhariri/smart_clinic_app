@@ -66,7 +66,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                                       .read(localStorageServiceProvider)
                                       .markAppOpened();
                                   if (context.mounted) {
-                                    context.go(AppRoutes.homeScreen);
+                                    context.go(AppRoutes.authScreen);
                                   }
                                 },
                                 child: Text(
@@ -116,7 +116,7 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
           // context.push(AppRoutes.signInScreen);
           await ref.read(localStorageServiceProvider).markAppOpened();
           if (context.mounted) {
-            context.go(AppRoutes.homeScreen);
+            context.go(AppRoutes.authScreen);
           }
         } else {
           _controller.nextPage(

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_clinic_app/features/appointments/presentation/screens/appointments_screen.dart';
 import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_screen.dart';
+import 'package:smart_clinic_app/features/auth/presentation/screens/auth_screen.dart';
 import 'package:smart_clinic_app/features/auth/signIn/presentation/screens/sign_in_screen.dart';
 import 'package:smart_clinic_app/features/auth/signUp/presentation/screens/signup_screen.dart';
 import 'package:smart_clinic_app/features/auth/verification/presentation/screens/verification_account_screen.dart';
@@ -43,8 +44,12 @@ class AppRouter {
           builder: (context, state) => const OnBoardingScreen(),
         ),
         _fadeRoute(
+          path: AppRoutes.authScreen,
+          builder: (context, state) => const AuthLandingScreen(),
+        ),
+        _fadeRoute(
           path: AppRoutes.signInScreen,
-          builder: (context, state) => SignInScreen(),
+          builder: (context, state) => const SignInScreen(),
         ),
         _fadeRoute(
           path: AppRoutes.signUpScreen,

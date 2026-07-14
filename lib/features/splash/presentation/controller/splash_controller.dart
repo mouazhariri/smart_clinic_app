@@ -32,7 +32,7 @@ class SplashController extends _$SplashController {
     //     ? ScreenDestination(route: AppRoutes.homeScreen)
     //     : ScreenDestination(route: AppRoutes.signInScreen);
 
-    return ScreenDestination(route: AppRoutes.homeScreen);
+    return ScreenDestination(route: AppRoutes.authScreen);
   }
 }
 

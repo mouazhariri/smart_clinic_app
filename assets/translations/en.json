@@ -299,5 +299,21 @@
     "verificationExpired": "Verification expired",
     "welcome_back": "Welcome back",
     "yes": "Yes",
-    "yesDelete": "Yes, delete"
+    "yesDelete": "Yes, delete",
+    "auth_landing_subtitle": "Your trusted medical platform in Syria",
+    "trusted_doctors": "Trusted doctors",
+    "quick_booking": "Quick booking",
+    "safe_reliable": "Safe and reliable",
+    "create_new_account": "Create a new account",
+    "already_have_account_short": "I already have an account",
+    "or": "or",
+    "auth_terms_prefix": "By continuing, you agree to ",
+    "terms_of_use": "Terms of Use",
+    "and_privacy_policy": " and Privacy Policy",
+    "welcome_back_title": "Welcome back!",
+    "signin_subtitle": "Access your account and appointments, and connect with your doctors easily.",
+    "phone_hint_syria": "09XXXXXXXX",
+    "password_hint": "XXXXXXXXXXXXXXX",
+    "dont_have_account": "Don’t have an account?",
+    "create_new_account_short": "Create new account"
 }
