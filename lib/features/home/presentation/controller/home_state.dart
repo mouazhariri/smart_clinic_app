@@ -1,26 +1,17 @@
-import 'package:equatable/equatable.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../domain/entities/home_dashboard.dart';
+import '../../domain/model/home_model/home_model.dart';
 
-class HomeState extends Equatable {
-  const HomeState({this.dashboard, this.isLoading = false, this.errorMessage});
+class HomeState {
+  const HomeState({required this.homeModel});
 
-  final HomeDashboard? dashboard;
-  final bool isLoading;
-  final String? errorMessage;
-
-  HomeState copyWith({
-    HomeDashboard? dashboard,
-    bool? isLoading,
-    String? errorMessage,
-  }) {
-    return HomeState(
-      dashboard: dashboard ?? this.dashboard,
-      isLoading: isLoading ?? this.isLoading,
-      errorMessage: errorMessage,
-    );
+  factory HomeState.init() {
+    return const HomeState(homeModel: AsyncData(null));
   }
 
-  @override
-  List<Object?> get props => [dashboard, isLoading, errorMessage];
+  final AsyncValue<HomeModel?> homeModel;
+
+  HomeState copyWith({AsyncValue<HomeModel?>? homeModel}) {
+    return HomeState(homeModel: homeModel ?? this.homeModel);
+  }
 }

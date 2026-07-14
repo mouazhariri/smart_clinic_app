@@ -18,8 +18,8 @@ class HomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final homeState = ref.watch(homeControllerProvider);
-    final dashboard = homeState.dashboard;
+    final homeState = ref.watch(homeControllerProvider).valueOrNull;
+    final dashboard = homeState?.homeModel.valueOrNull;
     final doctorsState = ref.watch(doctorsControllerProvider);
     final appointmentState = ref.watch(appointmentsControllerProvider);
     final nextAppointment = appointmentState.upcomingAppointments.isEmpty

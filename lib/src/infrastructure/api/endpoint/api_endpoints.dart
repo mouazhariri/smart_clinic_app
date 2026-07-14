@@ -3,6 +3,9 @@ class ApiEndPoints {
 
   //? --- Home ---
   static const String homeDashboard = '$domain.dashboard.get_dashboard';
+  static const String homeServices = '$domain.smart_clinic.get_home_services';
+  static const String doctors = '$domain.smart_clinic.get_doctors';
+  static const String appointments = '$domain.smart_clinic.get_appointments';
 
   //? --- Customers ---
   static const String createCustomer = '$domain.customer.create_customer';
