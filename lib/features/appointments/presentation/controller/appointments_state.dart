@@ -25,13 +25,13 @@ class AppointmentsState {
   final AsyncValue<void> bookingState;
   final String? successMessage;
 
-  List<Appointment> get upcomingAppointments => (appointments.valueOrNull ?? [])
+  List<Appointment> get upcomingAppointments => (appointments.value ?? [])
       .where((appointment) => appointment.status != AppointmentStatus.cancelled)
       .where((appointment) => appointment.date
           .isAfter(DateTime.now().subtract(const Duration(days: 1))))
       .toList();
 
-  List<Appointment> get historyAppointments => (appointments.valueOrNull ?? [])
+  List<Appointment> get historyAppointments => (appointments.value ?? [])
       .where((appointment) =>
           appointment.status == AppointmentStatus.cancelled ||
           appointment.status == AppointmentStatus.completed ||

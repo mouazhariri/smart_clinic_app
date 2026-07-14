@@ -16,7 +16,7 @@ class DoctorsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final asyncState = ref.watch(doctorsControllerProvider);
-    final state = asyncState.valueOrNull ?? DoctorsState.init();
+    final state = asyncState.value ?? DoctorsState.init();
     final controller = ref.read(doctorsControllerProvider.notifier);
 
     return Scaffold(

@@ -497,6 +497,7 @@ import 'package:smart_clinic_app/features/chat/presentation/controller/chat_cont
 import 'package:smart_clinic_app/features/chat/presentation/widgets/chat_bubble.dart';
 import 'package:smart_clinic_app/features/chat/presentation/widgets/chat_input_bar.dart';
 import 'package:smart_clinic_app/src/logger/log_services/dev_logger.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 class ChatScreen extends ConsumerStatefulWidget {
   final String? sessionId; // null = new chat

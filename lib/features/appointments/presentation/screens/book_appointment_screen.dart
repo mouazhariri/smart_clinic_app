@@ -24,7 +24,7 @@ class BookAppointmentScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final doctorAsync = ref.watch(doctorDetailsProvider(doctorId));
     final appointmentState =
-        ref.watch(appointmentsControllerProvider).valueOrNull ?? AppointmentsState.init();
+        ref.watch(appointmentsControllerProvider).value ?? AppointmentsState.init();
     final appointmentController = ref.read(appointmentsControllerProvider.notifier);
 
     return Scaffold(

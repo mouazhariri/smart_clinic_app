@@ -16,8 +16,8 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final profileState =
-        ref.watch(profileControllerProvider).valueOrNull ?? ProfileState.init();
-    final profile = profileState.profile.valueOrNull;
+        ref.watch(profileControllerProvider).value ?? ProfileState.init();
+    final profile = profileState.profile.value;
     return Scaffold(
       backgroundColor: AppColors.background,
       body: Column(

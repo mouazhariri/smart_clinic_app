@@ -16,7 +16,7 @@ class DoctorsState {
   final String searchQuery;
 
   List<Doctor> get filteredDoctors {
-    final items = doctors.valueOrNull ?? [];
+    final items = doctors.value ?? [];
     if (searchQuery.trim().isEmpty) return items;
     final query = searchQuery.toLowerCase();
     return items

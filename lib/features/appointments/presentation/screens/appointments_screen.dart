@@ -15,7 +15,7 @@ class AppointmentsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state =
-        ref.watch(appointmentsControllerProvider).valueOrNull ?? AppointmentsState.init();
+        ref.watch(appointmentsControllerProvider).value ?? AppointmentsState.init();
     final controller = ref.read(appointmentsControllerProvider.notifier);
 
     return Scaffold(
