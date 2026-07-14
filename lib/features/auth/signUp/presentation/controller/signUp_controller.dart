@@ -5,7 +5,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'signUp_controller.g.dart';
 
-@riverpod
+@Riverpod(keepAlive: true)
 class SignUpController extends _$SignUpController {
   @override
   Future<SignupResponseModel?>? build() => null;
