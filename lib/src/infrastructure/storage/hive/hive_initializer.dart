@@ -1,4 +1,6 @@
 import 'package:hive/hive.dart';
+import 'package:smart_clinic_app/features/appointments/data/appointment_hive_adapters.dart';
+import 'package:smart_clinic_app/features/appointments/data/models/appointment_model.dart';
 import 'package:smart_clinic_app/features/chat/data/chat_hive_adapters.dart';
 import 'package:smart_clinic_app/features/chat/domain/chat_session.dart';
 import 'package:smart_clinic_app/src/logger/log_services/dev_logger.dart';
@@ -47,6 +49,9 @@ abstract class HiveInitializer {
         Hive.registerAdapter(ChatSessionAdapter());
       }
 
+      if (isNotRegistered(HiveTypeIds.appointmentId)) {
+        Hive.registerAdapter(AppointmentModelHiveAdapter());
+      }
 
       //? Open Boxes
       // await Hive.openBox<UserLocalSettings>(
@@ -54,6 +59,7 @@ abstract class HiveInitializer {
       await Hive.openBox<UserInformation>(HiveBoxesName.userInfoBox);
       // ── Open Chat Box ──────────────────────────────────────────────────────
       await Hive.openBox<ChatSession>(HiveBoxesName.chatSessionsBox);
+      await Hive.openBox<AppointmentModel>(HiveBoxesName.appointmentsBox);
       Dev.logSuccess('FINISH HiveInitializer');
     } catch (e) {
       Dev.logError('HiveInitializer Error $e');

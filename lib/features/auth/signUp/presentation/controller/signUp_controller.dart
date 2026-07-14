@@ -1,9 +1,16 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import '../../data/repositories/signUp_repository.dart';
 import '../../domain/model/signUp_params.dart';
 import '../../domain/model/signup_response.dart';
+import '../../domain/usecases/signup_use_case.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'signUp_controller.g.dart';
+
+final signupUseCaseProvider = Provider<SignupUseCase>(
+  (ref) => SignupUseCase(ref.watch(signupRepositoryProvider)),
+);
 
 @riverpod
 class SignUpController extends _$SignUpController {
@@ -33,8 +40,8 @@ class SignUpController extends _$SignUpController {
   Future<void> signUp(SignupParams params) async {
     state = const AsyncLoading();
     state = await AsyncValue.guard(() async {
-      final repo = ref.read(signupRepositoryProvider);
-      final response = await repo.signUp(params);
+      final signupUseCase = ref.read(signupUseCaseProvider);
+      final response = await signupUseCase(params);
       return response.data;
     });
   }

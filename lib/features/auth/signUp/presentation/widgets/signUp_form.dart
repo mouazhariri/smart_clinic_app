@@ -114,8 +114,10 @@ class _SignUpFormState extends State<SignUpForm> {
               if (next is AsyncData) {
                 // context.maybePop().then((_) {
                 debugPrint("Success check");
-                context.push("AppRoutes.verificationScreen",
-                    extra: widget.phoneNumber);
+                context.push(
+                  AppRoutes.verificationScreen,
+                  extra: widget.phoneNumber,
+                );
                 // context
                 //     .pushRoute(VerificationRoute(inputedPhone: _phoneNumber!));
                 // _showDialog();

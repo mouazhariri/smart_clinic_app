@@ -61,14 +61,16 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
                         PositionedDirectional(
                             end: 20,
                             child: InkWell(
-                                onTap: () {
-                                  // ref
-                                  //     .read(localStorageServiceProvider)
-                                  //     .markAppOpened();
-                                  // context.push(AppRoutes.signInScreen);
+                                onTap: () async {
+                                  await ref
+                                      .read(localStorageServiceProvider)
+                                      .markAppOpened();
+                                  if (context.mounted) {
+                                    context.go(AppRoutes.homeScreen);
+                                  }
                                 },
                                 child: Text(
-                                  "skip".tr(),
+                                  context.tr('skip'),
                                   style: AppTextStyle.rubikSemiBold16
                                       .copyWith(color: AppColors.primary),
                                 )))
@@ -113,6 +115,9 @@ class _OnBoardingScreenState extends ConsumerState<OnBoardingScreen> {
         if (currentIndex == onBoardingItems(context, ref).length - 1) {
           // context.push(AppRoutes.signInScreen);
           await ref.read(localStorageServiceProvider).markAppOpened();
+          if (context.mounted) {
+            context.go(AppRoutes.homeScreen);
+          }
         } else {
           _controller.nextPage(
             duration: const Duration(milliseconds: 500),

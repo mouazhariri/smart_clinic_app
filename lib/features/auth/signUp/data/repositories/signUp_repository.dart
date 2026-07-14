@@ -1,4 +1,5 @@
 import '../../domain/model/signup_response.dart';
+import '../../domain/repositories/signup_repository_contract.dart';
 import '../../../../../src/infrastructure/api/response/api_response.dart';
 import '../../../../../src/infrastructure/network/services/dio_client.dart';
 import '../../../../../src/logger/failure/exceptions/app_exception.dart';
@@ -13,7 +14,7 @@ SignupRepository signupRepository(Ref ref) {
   final networkService = ref.watch(networkServiceProvider());
   return SignupRepository(SignupDataSource(networkService));
 }
-class SignupRepository {
+class SignupRepository implements SignupRepositoryContract {
   final SignupDataSource _remoteDataSource;
 
   SignupRepository(this._remoteDataSource);

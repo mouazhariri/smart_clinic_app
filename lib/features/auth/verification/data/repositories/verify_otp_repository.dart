@@ -1,4 +1,5 @@
 import '../../domain/model/verify_otp_response_model.dart';
+import '../../domain/repositories/verify_otp_repository_contract.dart';
 import '../../../../../src/infrastructure/api/response/api_response.dart';
 import '../../../../../src/infrastructure/network/services/dio_client.dart';
 import '../../../../../src/logger/failure/exceptions/app_exception.dart';
@@ -12,7 +13,7 @@ VerifyOtpRepository verifyOtpRepository(Ref ref) {
   final networkService = ref.watch(networkServiceProvider());
   return VerifyOtpRepository(VerifyOtpRemoteDataSource(networkService));
 }
-class VerifyOtpRepository {
+class VerifyOtpRepository implements VerifyOtpRepositoryContract {
   final VerifyOtpRemoteDataSource _remoteDataSource;
 
   VerifyOtpRepository(this._remoteDataSource);

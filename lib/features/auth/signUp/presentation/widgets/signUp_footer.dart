@@ -24,7 +24,7 @@ class SignUpFooter extends StatelessWidget {
             ),
           ),
           GestureDetector(
-            onTap: () => context.go("AppRoutes.signInScreen"),
+            onTap: () => context.go(AppRoutes.signInScreen),
             child: Text(
               'login'.tr(),
               style: textTheme.bodyLarge!.copyWith(

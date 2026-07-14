@@ -7,4 +7,7 @@ abstract class HiveTypeIds {
   static const int chatSessionId = 10;
   static const int chatMessageId = 11;
   static const int attachedFileId = 12;
+
+  // ── Smart Clinic Feature ───────────────────────────
+  static const int appointmentId = 20;
 }
