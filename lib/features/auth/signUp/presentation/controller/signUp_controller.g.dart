@@ -20,7 +20,7 @@ final class SignUpControllerProvider
         argument: null,
         retry: null,
         name: r'signUpControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
