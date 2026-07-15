@@ -22,6 +22,7 @@ abstract class DoctorModel with _$DoctorModel {
     required List<DateTime> availableDates,
     required List<String> availableTimes,
     required String clinicAddress,
+    @Default(0) double consultationFee,
   }) = _DoctorModel;
 
   factory DoctorModel.fromJson(Map<String, dynamic> json) =>
@@ -41,6 +42,7 @@ abstract class DoctorModel with _$DoctorModel {
       availableDates: availableDates,
       availableTimes: availableTimes,
       clinicAddress: clinicAddress,
+      consultationFee: consultationFee,
     );
   }
 }

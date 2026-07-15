@@ -14,6 +14,7 @@ class Doctor extends Equatable {
     required this.availableDates,
     required this.availableTimes,
     required this.clinicAddress,
+    this.consultationFee = 0,
   });
 
   final String id;
@@ -28,6 +29,7 @@ class Doctor extends Equatable {
   final List<DateTime> availableDates;
   final List<String> availableTimes;
   final String clinicAddress;
+  final double consultationFee;
 
   @override
   List<Object?> get props => [
@@ -43,5 +45,6 @@ class Doctor extends Equatable {
         availableDates,
         availableTimes,
         clinicAddress,
+        consultationFee,
       ];
 }

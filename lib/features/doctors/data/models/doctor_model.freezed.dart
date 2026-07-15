@@ -17,6 +17,7 @@ mixin _$DoctorModel {
   List<DateTime> get availableDates;
   List<String> get availableTimes;
   String get clinicAddress;
+  double get consultationFee;
 
   Map<String, dynamic> toJson();
 }
@@ -35,6 +36,7 @@ class _DoctorModel extends DoctorModel {
     required this.availableDates,
     required this.availableTimes,
     required this.clinicAddress,
+    required this.consultationFee,
   }) : super._();
 
   @override
@@ -61,13 +63,15 @@ class _DoctorModel extends DoctorModel {
   final List<String> availableTimes;
   @override
   final String clinicAddress;
+  @override
+  final double consultationFee;
 
   @override
   Map<String, dynamic> toJson() => _$DoctorModelToJson(this);
 
   @override
   String toString() {
-    return 'DoctorModel(id: $id, name: $name, specialty: $specialty, about: $about, imageUrl: $imageUrl, rating: $rating, reviewsCount: $reviewsCount, experienceYears: $experienceYears, patientsCount: $patientsCount, availableDates: $availableDates, availableTimes: $availableTimes, clinicAddress: $clinicAddress)';
+    return 'DoctorModel(id: $id, name: $name, specialty: $specialty, about: $about, imageUrl: $imageUrl, rating: $rating, reviewsCount: $reviewsCount, experienceYears: $experienceYears, patientsCount: $patientsCount, availableDates: $availableDates, availableTimes: $availableTimes, clinicAddress: $clinicAddress, consultationFee: $consultationFee)';
   }
 
   @override
@@ -86,7 +90,8 @@ class _DoctorModel extends DoctorModel {
             patientsCount == other.patientsCount &&
             _listEquals(availableDates, other.availableDates) &&
             _listEquals(availableTimes, other.availableTimes) &&
-            clinicAddress == other.clinicAddress;
+            clinicAddress == other.clinicAddress &&
+            consultationFee == other.consultationFee;
   }
 
   @override
@@ -104,6 +109,7 @@ class _DoctorModel extends DoctorModel {
         Object.hashAll(availableDates),
         Object.hashAll(availableTimes),
         clinicAddress,
+        consultationFee,
       );
 }
 

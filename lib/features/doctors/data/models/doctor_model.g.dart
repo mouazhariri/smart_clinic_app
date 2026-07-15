@@ -37,4 +37,5 @@ Map<String, dynamic> _$DoctorModelToJson(DoctorModel instance) =>
           .toList(),
       'availableTimes': instance.availableTimes,
       'clinicAddress': instance.clinicAddress,
+      'consultationFee': instance.consultationFee,
     };
