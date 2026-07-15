@@ -61,6 +61,7 @@ class DoctorsLocalDataSourceImpl implements DoctorsLocalDataSource {
         availableDates: dates,
         availableTimes: const ['09:30 AM', '11:30 AM', '03:00 PM', '05:00 PM'],
         clinicAddress: 'address_family_care_clinic',
+        consultationFee: 500,
       ),
     ];
   }

@@ -11,8 +11,16 @@ part 'doctors_controller.g.dart';
 class DoctorsController extends _$DoctorsController {
   @override
   FutureOr<DoctorsState> build() async {
-    Future<void>.microtask(() async { await getDoctors(); });
-    return DoctorsState.init();
+  final repo = ref.read(doctorsRepositoryProvider);
+
+  final response = await repo.getDoctors();
+
+  return DoctorsState(
+    doctors: AsyncData(response.data ?? []),
+    searchQuery: '',
+  );
+    // Future<void>.microtask(() async { await getDoctors(); });
+    // return DoctorsState.init();
   }
 
   Future<List<Doctor>?> getDoctors() async {
@@ -33,7 +41,7 @@ class DoctorsController extends _$DoctorsController {
         return null;
       }
 
-      final doctors = response.data?.map((model) => model.toEntity()).toList() ?? [];
+      final doctors = response.data?.map((model) => model).toList() ?? [];
       state = AsyncData(state.value!.copyWith(doctors: AsyncData(doctors)));
       return doctors;
     } catch (e, st) {
@@ -55,5 +63,5 @@ final doctorDetailsProvider = FutureProvider.family<Doctor, String>((ref, id) as
   if (response.hasFailed || response.data == null) {
     throw response.message ?? 'Something went wrong';
   }
-  return response.data!.toEntity();
+  return response.data!;
 });

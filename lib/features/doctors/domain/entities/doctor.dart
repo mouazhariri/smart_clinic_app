@@ -14,6 +14,7 @@ class Doctor extends Equatable {
     required this.availableDates,
     required this.availableTimes,
     required this.clinicAddress,
+    this.consultationFee = 0,
   });
 
   final String id;
@@ -28,6 +29,7 @@ class Doctor extends Equatable {
   final List<DateTime> availableDates;
   final List<String> availableTimes;
   final String clinicAddress;
+  final double consultationFee;
 
   @override
   List<Object?> get props => [
@@ -43,5 +45,131 @@ class Doctor extends Equatable {
         availableDates,
         availableTimes,
         clinicAddress,
+        consultationFee,
       ];
+}
+
+
+class FakeDoctors {
+  FakeDoctors._();
+
+  static final List<Doctor> doctors = [
+    Doctor(
+      id: '1',
+      name: 'Dr. Sarah Johnson',
+      specialty: 'cardiology',
+      about:
+          'Experienced cardiologist specializing in heart disease prevention and treatment.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1559839734-2b71ea197ec2',
+      rating: 4.9,
+      reviewsCount: 312,
+      experienceYears: 12,
+      patientsCount: 2400,
+      clinicAddress: 'Downtown Medical Center',
+      consultationFee: 120,
+      availableDates: _dates,
+      availableTimes: _times,
+    ),
+    Doctor(
+      id: '2',
+      name: 'Dr. Michael Brown',
+      specialty: 'dentist',
+      about:
+          'Expert dentist providing cosmetic and restorative dental care.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d',
+      rating: 4.8,
+      reviewsCount: 189,
+      experienceYears: 9,
+      patientsCount: 1700,
+      clinicAddress: 'Smile Dental Clinic',
+      consultationFee: 90,
+      availableDates: _dates,
+      availableTimes: _times,
+    ),
+    Doctor(
+      id: '3',
+      name: 'Dr. Emily Wilson',
+      specialty: 'neurology',
+      about:
+          'Neurologist focused on brain and nervous system disorders.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1594824476967-48c8b964273f',
+      rating: 4.7,
+      reviewsCount: 275,
+      experienceYears: 15,
+      patientsCount: 3200,
+      clinicAddress: 'City Hospital',
+      consultationFee: 150,
+      availableDates: _dates,
+      availableTimes: _times,
+    ),
+    Doctor(
+      id: '4',
+      name: 'Dr. Olivia Martinez',
+      specialty: 'dermatology',
+      about:
+          'Treating skin, hair and nail diseases using the latest technology.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1595152772835-219674b2a8a6',
+      rating: 4.9,
+      reviewsCount: 410,
+      experienceYears: 11,
+      patientsCount: 2900,
+      clinicAddress: 'Skin Care Clinic',
+      consultationFee: 110,
+      availableDates: _dates,
+      availableTimes: _times,
+    ),
+    Doctor(
+      id: '5',
+      name: 'Dr. David Miller',
+      specialty: 'orthopedic',
+      about:
+          'Orthopedic surgeon specializing in sports injuries and joint replacement.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1622253692010-333f2da6031d',
+      rating: 4.8,
+      reviewsCount: 356,
+      experienceYears: 18,
+      patientsCount: 4100,
+      clinicAddress: 'Orthopedic Center',
+      consultationFee: 140,
+      availableDates: _dates,
+      availableTimes: _times,
+    ),
+    Doctor(
+      id: '6',
+      name: 'Dr. Sophia Lee',
+      specialty: 'pediatrics',
+      about:
+          'Providing compassionate healthcare for infants, children and adolescents.',
+      imageUrl:
+          'https://images.unsplash.com/photo-1651008376811-b90baee60c1',
+      rating: 5.0,
+      reviewsCount: 520,
+      experienceYears: 13,
+      patientsCount: 5000,
+      clinicAddress: 'Children Medical Center',
+      consultationFee: 100,
+      availableDates: _dates,
+      availableTimes: _times,
+    ),
+  ];
+
+  static final List<DateTime> _dates = List.generate(
+    7,
+    (i) => DateTime.now().add(Duration(days: i)),
+  );
+
+  static const List<String> _times = [
+    '09:00 AM',
+    '10:00 AM',
+    '11:00 AM',
+    '12:00 PM',
+    '02:00 PM',
+    '03:00 PM',
+    '04:00 PM',
+  ];
 }

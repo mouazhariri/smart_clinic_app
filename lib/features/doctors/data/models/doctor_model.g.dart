@@ -23,6 +23,7 @@ _DoctorModel _$DoctorModelFromJson(Map<String, dynamic> json) => _DoctorModel(
       .map((e) => e as String)
       .toList(),
   clinicAddress: json['clinicAddress'] as String,
+  consultationFee: (json['consultationFee'] as num?)?.toDouble() ?? 0,
 );
 
 Map<String, dynamic> _$DoctorModelToJson(_DoctorModel instance) =>
@@ -41,4 +42,5 @@ Map<String, dynamic> _$DoctorModelToJson(_DoctorModel instance) =>
           .toList(),
       'availableTimes': instance.availableTimes,
       'clinicAddress': instance.clinicAddress,
+      'consultationFee': instance.consultationFee,
     };

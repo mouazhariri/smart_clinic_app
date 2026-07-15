@@ -20,16 +20,48 @@ class $AssetsIconsGen {
   /// File path: assets/icons/app_icon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
 
+  /// File path: assets/icons/brain_ic.svg
+  SvgGenImage get brainIc => const SvgGenImage('assets/icons/brain_ic.svg');
+
   /// File path: assets/icons/doctor_headphone.svg
   SvgGenImage get doctorHeadphone =>
       const SvgGenImage('assets/icons/doctor_headphone.svg');
+
+  /// File path: assets/icons/ears_ic.svg
+  SvgGenImage get earsIc => const SvgGenImage('assets/icons/ears_ic.svg');
+
+  /// File path: assets/icons/heart_ic.svg
+  SvgGenImage get heartIc => const SvgGenImage('assets/icons/heart_ic.svg');
+
+  /// File path: assets/icons/liver_ic.svg
+  SvgGenImage get liverIc => const SvgGenImage('assets/icons/liver_ic.svg');
+
+  /// File path: assets/icons/reins_ic.svg
+  SvgGenImage get reinsIc => const SvgGenImage('assets/icons/reins_ic.svg');
+
+  /// File path: assets/icons/spine_ic.svg
+  SvgGenImage get spineIc => const SvgGenImage('assets/icons/spine_ic.svg');
 
   /// File path: assets/icons/syria_flag_icon.svg
   SvgGenImage get syriaFlagIcon =>
       const SvgGenImage('assets/icons/syria_flag_icon.svg');
 
+  /// File path: assets/icons/women_ic.svg
+  SvgGenImage get womenIc => const SvgGenImage('assets/icons/women_ic.svg');
+
   /// List of all assets
-  List<dynamic> get values => [appIcon, doctorHeadphone, syriaFlagIcon];
+  List<dynamic> get values => [
+    appIcon,
+    brainIc,
+    doctorHeadphone,
+    earsIc,
+    heartIc,
+    liverIc,
+    reinsIc,
+    spineIc,
+    syriaFlagIcon,
+    womenIc,
+  ];
 }
 
 class $AssetsImagesGen {

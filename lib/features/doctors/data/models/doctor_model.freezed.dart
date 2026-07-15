@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DoctorModel {
 
- String get id; String get name; String get specialty; String get about; String get imageUrl; double get rating; int get reviewsCount; int get experienceYears; int get patientsCount; List<DateTime> get availableDates; List<String> get availableTimes; String get clinicAddress;
+ String get id; String get name; String get specialty; String get about; String get imageUrl; double get rating; int get reviewsCount; int get experienceYears; int get patientsCount; List<DateTime> get availableDates; List<String> get availableTimes; String get clinicAddress; double get consultationFee;
 /// Create a copy of DoctorModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $DoctorModelCopyWith<DoctorModel> get copyWith => _$DoctorModelCopyWithImpl<Doct
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoctorModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.specialty, specialty) || other.specialty == specialty)&&(identical(other.about, about) || other.about == about)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewsCount, reviewsCount) || other.reviewsCount == reviewsCount)&&(identical(other.experienceYears, experienceYears) || other.experienceYears == experienceYears)&&(identical(other.patientsCount, patientsCount) || other.patientsCount == patientsCount)&&const DeepCollectionEquality().equals(other.availableDates, availableDates)&&const DeepCollectionEquality().equals(other.availableTimes, availableTimes)&&(identical(other.clinicAddress, clinicAddress) || other.clinicAddress == clinicAddress));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DoctorModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.specialty, specialty) || other.specialty == specialty)&&(identical(other.about, about) || other.about == about)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewsCount, reviewsCount) || other.reviewsCount == reviewsCount)&&(identical(other.experienceYears, experienceYears) || other.experienceYears == experienceYears)&&(identical(other.patientsCount, patientsCount) || other.patientsCount == patientsCount)&&const DeepCollectionEquality().equals(other.availableDates, availableDates)&&const DeepCollectionEquality().equals(other.availableTimes, availableTimes)&&(identical(other.clinicAddress, clinicAddress) || other.clinicAddress == clinicAddress)&&(identical(other.consultationFee, consultationFee) || other.consultationFee == consultationFee));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,specialty,about,imageUrl,rating,reviewsCount,experienceYears,patientsCount,const DeepCollectionEquality().hash(availableDates),const DeepCollectionEquality().hash(availableTimes),clinicAddress);
+int get hashCode => Object.hash(runtimeType,id,name,specialty,about,imageUrl,rating,reviewsCount,experienceYears,patientsCount,const DeepCollectionEquality().hash(availableDates),const DeepCollectionEquality().hash(availableTimes),clinicAddress,consultationFee);
 
 @override
 String toString() {
-  return 'DoctorModel(id: $id, name: $name, specialty: $specialty, about: $about, imageUrl: $imageUrl, rating: $rating, reviewsCount: $reviewsCount, experienceYears: $experienceYears, patientsCount: $patientsCount, availableDates: $availableDates, availableTimes: $availableTimes, clinicAddress: $clinicAddress)';
+  return 'DoctorModel(id: $id, name: $name, specialty: $specialty, about: $about, imageUrl: $imageUrl, rating: $rating, reviewsCount: $reviewsCount, experienceYears: $experienceYears, patientsCount: $patientsCount, availableDates: $availableDates, availableTimes: $availableTimes, clinicAddress: $clinicAddress, consultationFee: $consultationFee)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $DoctorModelCopyWith<$Res>  {
   factory $DoctorModelCopyWith(DoctorModel value, $Res Function(DoctorModel) _then) = _$DoctorModelCopyWithImpl;
 @useResult
 $Res call({
- String id, String name, String specialty, String about, String imageUrl, double rating, int reviewsCount, int experienceYears, int patientsCount, List<DateTime> availableDates, List<String> availableTimes, String clinicAddress
+ String id, String name, String specialty, String about, String imageUrl, double rating, int reviewsCount, int experienceYears, int patientsCount, List<DateTime> availableDates, List<String> availableTimes, String clinicAddress, double consultationFee
 });
 
 
@@ -65,7 +65,7 @@ class _$DoctorModelCopyWithImpl<$Res>
 
 /// Create a copy of DoctorModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? specialty = null,Object? about = null,Object? imageUrl = null,Object? rating = null,Object? reviewsCount = null,Object? experienceYears = null,Object? patientsCount = null,Object? availableDates = null,Object? availableTimes = null,Object? clinicAddress = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? specialty = null,Object? about = null,Object? imageUrl = null,Object? rating = null,Object? reviewsCount = null,Object? experienceYears = null,Object? patientsCount = null,Object? availableDates = null,Object? availableTimes = null,Object? clinicAddress = null,Object? consultationFee = null,}) {
   return _then(_self.copyWith(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -79,7 +79,8 @@ as int,patientsCount: null == patientsCount ? _self.patientsCount : patientsCoun
 as int,availableDates: null == availableDates ? _self.availableDates : availableDates // ignore: cast_nullable_to_non_nullable
 as List<DateTime>,availableTimes: null == availableTimes ? _self.availableTimes : availableTimes // ignore: cast_nullable_to_non_nullable
 as List<String>,clinicAddress: null == clinicAddress ? _self.clinicAddress : clinicAddress // ignore: cast_nullable_to_non_nullable
-as String,
+as String,consultationFee: null == consultationFee ? _self.consultationFee : consultationFee // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 
@@ -164,10 +165,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String specialty,  String about,  String imageUrl,  double rating,  int reviewsCount,  int experienceYears,  int patientsCount,  List<DateTime> availableDates,  List<String> availableTimes,  String clinicAddress)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String id,  String name,  String specialty,  String about,  String imageUrl,  double rating,  int reviewsCount,  int experienceYears,  int patientsCount,  List<DateTime> availableDates,  List<String> availableTimes,  String clinicAddress,  double consultationFee)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DoctorModel() when $default != null:
-return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_that.rating,_that.reviewsCount,_that.experienceYears,_that.patientsCount,_that.availableDates,_that.availableTimes,_that.clinicAddress);case _:
+return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_that.rating,_that.reviewsCount,_that.experienceYears,_that.patientsCount,_that.availableDates,_that.availableTimes,_that.clinicAddress,_that.consultationFee);case _:
   return orElse();
 
 }
@@ -185,10 +186,10 @@ return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String specialty,  String about,  String imageUrl,  double rating,  int reviewsCount,  int experienceYears,  int patientsCount,  List<DateTime> availableDates,  List<String> availableTimes,  String clinicAddress)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String id,  String name,  String specialty,  String about,  String imageUrl,  double rating,  int reviewsCount,  int experienceYears,  int patientsCount,  List<DateTime> availableDates,  List<String> availableTimes,  String clinicAddress,  double consultationFee)  $default,) {final _that = this;
 switch (_that) {
 case _DoctorModel():
-return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_that.rating,_that.reviewsCount,_that.experienceYears,_that.patientsCount,_that.availableDates,_that.availableTimes,_that.clinicAddress);case _:
+return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_that.rating,_that.reviewsCount,_that.experienceYears,_that.patientsCount,_that.availableDates,_that.availableTimes,_that.clinicAddress,_that.consultationFee);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +206,10 @@ return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String specialty,  String about,  String imageUrl,  double rating,  int reviewsCount,  int experienceYears,  int patientsCount,  List<DateTime> availableDates,  List<String> availableTimes,  String clinicAddress)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String id,  String name,  String specialty,  String about,  String imageUrl,  double rating,  int reviewsCount,  int experienceYears,  int patientsCount,  List<DateTime> availableDates,  List<String> availableTimes,  String clinicAddress,  double consultationFee)?  $default,) {final _that = this;
 switch (_that) {
 case _DoctorModel() when $default != null:
-return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_that.rating,_that.reviewsCount,_that.experienceYears,_that.patientsCount,_that.availableDates,_that.availableTimes,_that.clinicAddress);case _:
+return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_that.rating,_that.reviewsCount,_that.experienceYears,_that.patientsCount,_that.availableDates,_that.availableTimes,_that.clinicAddress,_that.consultationFee);case _:
   return null;
 
 }
@@ -220,7 +221,7 @@ return $default(_that.id,_that.name,_that.specialty,_that.about,_that.imageUrl,_
 @JsonSerializable()
 
 class _DoctorModel extends DoctorModel {
-  const _DoctorModel({required this.id, required this.name, required this.specialty, required this.about, required this.imageUrl, required this.rating, required this.reviewsCount, required this.experienceYears, required this.patientsCount, required final  List<DateTime> availableDates, required final  List<String> availableTimes, required this.clinicAddress}): _availableDates = availableDates,_availableTimes = availableTimes,super._();
+  const _DoctorModel({required this.id, required this.name, required this.specialty, required this.about, required this.imageUrl, required this.rating, required this.reviewsCount, required this.experienceYears, required this.patientsCount, required final  List<DateTime> availableDates, required final  List<String> availableTimes, required this.clinicAddress, this.consultationFee = 0}): _availableDates = availableDates,_availableTimes = availableTimes,super._();
   factory _DoctorModel.fromJson(Map<String, dynamic> json) => _$DoctorModelFromJson(json);
 
 @override final  String id;
@@ -247,6 +248,7 @@ class _DoctorModel extends DoctorModel {
 }
 
 @override final  String clinicAddress;
+@override@JsonKey() final  double consultationFee;
 
 /// Create a copy of DoctorModel
 /// with the given fields replaced by the non-null parameter values.
@@ -261,16 +263,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoctorModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.specialty, specialty) || other.specialty == specialty)&&(identical(other.about, about) || other.about == about)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewsCount, reviewsCount) || other.reviewsCount == reviewsCount)&&(identical(other.experienceYears, experienceYears) || other.experienceYears == experienceYears)&&(identical(other.patientsCount, patientsCount) || other.patientsCount == patientsCount)&&const DeepCollectionEquality().equals(other._availableDates, _availableDates)&&const DeepCollectionEquality().equals(other._availableTimes, _availableTimes)&&(identical(other.clinicAddress, clinicAddress) || other.clinicAddress == clinicAddress));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DoctorModel&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.specialty, specialty) || other.specialty == specialty)&&(identical(other.about, about) || other.about == about)&&(identical(other.imageUrl, imageUrl) || other.imageUrl == imageUrl)&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.reviewsCount, reviewsCount) || other.reviewsCount == reviewsCount)&&(identical(other.experienceYears, experienceYears) || other.experienceYears == experienceYears)&&(identical(other.patientsCount, patientsCount) || other.patientsCount == patientsCount)&&const DeepCollectionEquality().equals(other._availableDates, _availableDates)&&const DeepCollectionEquality().equals(other._availableTimes, _availableTimes)&&(identical(other.clinicAddress, clinicAddress) || other.clinicAddress == clinicAddress)&&(identical(other.consultationFee, consultationFee) || other.consultationFee == consultationFee));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,specialty,about,imageUrl,rating,reviewsCount,experienceYears,patientsCount,const DeepCollectionEquality().hash(_availableDates),const DeepCollectionEquality().hash(_availableTimes),clinicAddress);
+int get hashCode => Object.hash(runtimeType,id,name,specialty,about,imageUrl,rating,reviewsCount,experienceYears,patientsCount,const DeepCollectionEquality().hash(_availableDates),const DeepCollectionEquality().hash(_availableTimes),clinicAddress,consultationFee);
 
 @override
 String toString() {
-  return 'DoctorModel(id: $id, name: $name, specialty: $specialty, about: $about, imageUrl: $imageUrl, rating: $rating, reviewsCount: $reviewsCount, experienceYears: $experienceYears, patientsCount: $patientsCount, availableDates: $availableDates, availableTimes: $availableTimes, clinicAddress: $clinicAddress)';
+  return 'DoctorModel(id: $id, name: $name, specialty: $specialty, about: $about, imageUrl: $imageUrl, rating: $rating, reviewsCount: $reviewsCount, experienceYears: $experienceYears, patientsCount: $patientsCount, availableDates: $availableDates, availableTimes: $availableTimes, clinicAddress: $clinicAddress, consultationFee: $consultationFee)';
 }
 
 
@@ -281,7 +283,7 @@ abstract mixin class _$DoctorModelCopyWith<$Res> implements $DoctorModelCopyWith
   factory _$DoctorModelCopyWith(_DoctorModel value, $Res Function(_DoctorModel) _then) = __$DoctorModelCopyWithImpl;
 @override @useResult
 $Res call({
- String id, String name, String specialty, String about, String imageUrl, double rating, int reviewsCount, int experienceYears, int patientsCount, List<DateTime> availableDates, List<String> availableTimes, String clinicAddress
+ String id, String name, String specialty, String about, String imageUrl, double rating, int reviewsCount, int experienceYears, int patientsCount, List<DateTime> availableDates, List<String> availableTimes, String clinicAddress, double consultationFee
 });
 
 
@@ -298,7 +300,7 @@ class __$DoctorModelCopyWithImpl<$Res>
 
 /// Create a copy of DoctorModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? specialty = null,Object? about = null,Object? imageUrl = null,Object? rating = null,Object? reviewsCount = null,Object? experienceYears = null,Object? patientsCount = null,Object? availableDates = null,Object? availableTimes = null,Object? clinicAddress = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = null,Object? name = null,Object? specialty = null,Object? about = null,Object? imageUrl = null,Object? rating = null,Object? reviewsCount = null,Object? experienceYears = null,Object? patientsCount = null,Object? availableDates = null,Object? availableTimes = null,Object? clinicAddress = null,Object? consultationFee = null,}) {
   return _then(_DoctorModel(
 id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
@@ -312,7 +314,8 @@ as int,patientsCount: null == patientsCount ? _self.patientsCount : patientsCoun
 as int,availableDates: null == availableDates ? _self._availableDates : availableDates // ignore: cast_nullable_to_non_nullable
 as List<DateTime>,availableTimes: null == availableTimes ? _self._availableTimes : availableTimes // ignore: cast_nullable_to_non_nullable
 as List<String>,clinicAddress: null == clinicAddress ? _self.clinicAddress : clinicAddress // ignore: cast_nullable_to_non_nullable
-as String,
+as String,consultationFee: null == consultationFee ? _self.consultationFee : consultationFee // ignore: cast_nullable_to_non_nullable
+as double,
   ));
 }
 
