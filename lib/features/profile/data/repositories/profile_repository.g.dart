@@ -2,33 +2,50 @@
 
 part of 'profile_repository.dart';
 
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(profileRepository)
 final profileRepositoryProvider = ProfileRepositoryProvider._();
 
-final class ProfileRepositoryProvider extends $FunctionalProvider<
-    ProfileRepository, ProfileRepository, ProfileRepository> with $Provider<ProfileRepository> {
+final class ProfileRepositoryProvider
+    extends
+        $FunctionalProvider<
+          ProfileRepository,
+          ProfileRepository,
+          ProfileRepository
+        >
+    with $Provider<ProfileRepository> {
   ProfileRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'profileRepositoryProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'profileRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
-  String debugGetCreateSourceHash() => r'profile-repository-hash';
+  String debugGetCreateSourceHash() => _$profileRepositoryHash();
 
   @$internal
   @override
-  $ProviderElement<ProfileRepository> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $ProviderElement<ProfileRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
-  ProfileRepository create(Ref ref) => profileRepository(ref);
+  ProfileRepository create(Ref ref) {
+    return profileRepository(ref);
+  }
 
+  /// {@macro riverpod.override_with_value}
   Override overrideWithValue(ProfileRepository value) {
     return $ProviderOverride(
       origin: this,
@@ -36,3 +53,5 @@ final class ProfileRepositoryProvider extends $FunctionalProvider<
     );
   }
 }
+
+String _$profileRepositoryHash() => r'7a2a6e9ef0de19068eaca066b14223e751e14d04';

@@ -20,12 +20,16 @@ class $AssetsIconsGen {
   /// File path: assets/icons/app_icon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
 
+  /// File path: assets/icons/doctor_headphone.svg
+  SvgGenImage get doctorHeadphone =>
+      const SvgGenImage('assets/icons/doctor_headphone.svg');
+
   /// File path: assets/icons/syria_flag_icon.svg
   SvgGenImage get syriaFlagIcon =>
       const SvgGenImage('assets/icons/syria_flag_icon.svg');
 
   /// List of all assets
-  List<dynamic> get values => [appIcon, syriaFlagIcon];
+  List<dynamic> get values => [appIcon, doctorHeadphone, syriaFlagIcon];
 }
 
 class $AssetsImagesGen {

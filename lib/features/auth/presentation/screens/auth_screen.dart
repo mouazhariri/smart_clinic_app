@@ -1,8 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_clinic_app/gen/assets.gen.dart';
 
 import 'package:smart_clinic_app/src/application/router/app_routes.dart';
+import 'package:smart_clinic_app/src/core/shared_widgets/custom_button_widget.dart';
 import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 import 'package:smart_clinic_app/src/resourses/font_manager/app_text_style.dart';
 
@@ -26,11 +28,10 @@ class AuthLandingScreen extends StatelessWidget {
                   color: AppColors.primary,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  Icons.medical_services_outlined,
-                  color: AppColors.white,
-                  size: 46,
-                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Assets.icons.doctorHeadphone.svg(),
+                )
               ),
               const SizedBox(height: 34),
               Text(
@@ -52,15 +53,42 @@ class AuthLandingScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 28),
-              Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  _FeatureChip(label: context.tr('trusted_doctors')),
-                  _FeatureChip(label: context.tr('quick_booking')),
-                  _FeatureChip(label: context.tr('safe_reliable')),
-                ],
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  const double gap = 12;
+                  final double cellWidth = (constraints.maxWidth - gap) / 2;
+
+                  return Column(
+                    children: [
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: cellWidth,
+                            child: _FeatureChip(
+                              label: context.tr('trusted_doctors'),
+                            ),
+                          ),
+                          const SizedBox(width: gap),
+                          SizedBox(
+                            width: cellWidth,
+                            child: _FeatureChip(
+                              label: context.tr('quick_booking'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Center(
+                        child: SizedBox(
+                          width: cellWidth,
+                          child: _FeatureChip(
+                            label: context.tr('safe_reliable'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                },
               ),
               const Spacer(flex: 3),
               _AuthActionButton(
@@ -124,16 +152,16 @@ class AuthLandingScreen extends StatelessWidget {
   }
 }
 
-class _FeatureChip extends StatelessWidget {
-  const _FeatureChip({required this.label});
+class _FeatureCard extends StatelessWidget {
+  const _FeatureCard({required this.label});
 
   final String label;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 104,
       height: 40,
-      padding: const EdgeInsets.symmetric(horizontal: 18),
       decoration: BoxDecoration(
         color: AppColors.authLightBlue,
         borderRadius: BorderRadius.circular(8),
@@ -142,6 +170,30 @@ class _FeatureChip extends StatelessWidget {
       child: Text(
         label,
         style: AppTextStyle.rubikSemiBold12.copyWith(color: AppColors.primary),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+}
+
+class _FeatureChip extends StatelessWidget {
+  const _FeatureChip({required this.label});
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 50,
+      padding: const EdgeInsets.symmetric(horizontal: 18),
+      decoration: BoxDecoration(
+        color: AppColors.authLightBlue,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      alignment: Alignment.center,
+      child: Text(
+        label,
+        style: AppTextStyle.rubikSemiBold14.copyWith(color: AppColors.primary),
       ),
     );
   }
@@ -164,25 +216,30 @@ class _AuthActionButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      height: 46,
-      child: FilledButton(
-        onPressed: onPressed,
-        style: FilledButton.styleFrom(
-          elevation: 0,
-          backgroundColor: backgroundColor,
-          foregroundColor: foregroundColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-            side: BorderSide(color: borderColor ?? backgroundColor),
-          ),
-        ),
-        child: Text(
-          label,
-          style: AppTextStyle.rubikSemiBold14.copyWith(color: foregroundColor),
-        ),
-      ),
-    );
+    return 
+    
+    CustomButtonWidget(text: label, onTap: onPressed, isFiled: true, height: 50, width: double.infinity,color: foregroundColor,backgroundColor: backgroundColor,);
+    // SizedBox(
+    //   width: double.infinity,
+    //   height: 50,
+    //   child: 
+      
+    //   FilledButton(
+    //     onPressed: onPressed,
+    //     style: FilledButton.styleFrom(
+    //       elevation: 0,
+    //       backgroundColor: backgroundColor,
+    //       foregroundColor: foregroundColor,
+    //       shape: RoundedRectangleBorder(
+    //         borderRadius: BorderRadius.circular(8),
+    //         side: BorderSide(color: borderColor ?? backgroundColor),
+    //       ),
+    //     ),
+    //     child: Text(
+    //       label,
+    //       style: AppTextStyle.rubikSemiBold14.copyWith(color: foregroundColor),
+    //     ),
+    //   ),
+    // );
   }
 }

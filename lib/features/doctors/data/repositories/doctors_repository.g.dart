@@ -2,33 +2,50 @@
 
 part of 'doctors_repository.dart';
 
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(doctorsRepository)
 final doctorsRepositoryProvider = DoctorsRepositoryProvider._();
 
-final class DoctorsRepositoryProvider extends $FunctionalProvider<
-    DoctorsRepository, DoctorsRepository, DoctorsRepository> with $Provider<DoctorsRepository> {
+final class DoctorsRepositoryProvider
+    extends
+        $FunctionalProvider<
+          DoctorsRepository,
+          DoctorsRepository,
+          DoctorsRepository
+        >
+    with $Provider<DoctorsRepository> {
   DoctorsRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'doctorsRepositoryProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'doctorsRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
-  String debugGetCreateSourceHash() => r'doctors-repository-hash';
+  String debugGetCreateSourceHash() => _$doctorsRepositoryHash();
 
   @$internal
   @override
-  $ProviderElement<DoctorsRepository> $createElement($ProviderPointer pointer) =>
-      $ProviderElement(pointer);
+  $ProviderElement<DoctorsRepository> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
 
   @override
-  DoctorsRepository create(Ref ref) => doctorsRepository(ref);
+  DoctorsRepository create(Ref ref) {
+    return doctorsRepository(ref);
+  }
 
+  /// {@macro riverpod.override_with_value}
   Override overrideWithValue(DoctorsRepository value) {
     return $ProviderOverride(
       origin: this,
@@ -36,3 +53,5 @@ final class DoctorsRepositoryProvider extends $FunctionalProvider<
     );
   }
 }
+
+String _$doctorsRepositoryHash() => r'e56a4a73bd826f7d7f1456112f1575d10b84343a';

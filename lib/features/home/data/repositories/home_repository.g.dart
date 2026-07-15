@@ -16,15 +16,15 @@ final class HomeRepositoryProvider
     extends $FunctionalProvider<HomeRepository, HomeRepository, HomeRepository>
     with $Provider<HomeRepository> {
   HomeRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'homeRepositoryProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'homeRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$homeRepositoryHash();
@@ -39,6 +39,7 @@ final class HomeRepositoryProvider
     return homeRepository(ref);
   }
 
+  /// {@macro riverpod.override_with_value}
   Override overrideWithValue(HomeRepository value) {
     return $ProviderOverride(
       origin: this,
@@ -47,4 +48,4 @@ final class HomeRepositoryProvider
   }
 }
 
-String _$homeRepositoryHash() => r'home-repository-hash';
+String _$homeRepositoryHash() => r'd47adde9c808ff28c377635767ae88c0f3562911';

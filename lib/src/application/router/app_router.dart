@@ -54,7 +54,7 @@ class AppRouter {
         _fadeRoute(
           path: AppRoutes.signUpScreen,
           builder: (context, state) => SignupScreen(
-            phoneNumber: state.extra is String ? state.extra as String : '',
+            // phoneNumber: state.extra is String ? state.extra as String : '',
           ),
         ),
         _fadeRoute(

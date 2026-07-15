@@ -2,15 +2,17 @@
 
 part of 'home_model.dart';
 
-HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => HomeModel(
-      userNameKey: json['userNameKey'] as String? ?? 'sample_user_name',
-      bannerTitleKey:
-          json['bannerTitleKey'] as String? ?? 'healthcare_made_easy',
-      bannerDescriptionKey: json['bannerDescriptionKey'] as String? ??
-          'healthcare_made_easy_desc',
-    );
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
 
-Map<String, dynamic> _$HomeModelToJson(HomeModel instance) =>
+_HomeModel _$HomeModelFromJson(Map<String, dynamic> json) => _HomeModel(
+  userNameKey: json['userNameKey'] as String,
+  bannerTitleKey: json['bannerTitleKey'] as String,
+  bannerDescriptionKey: json['bannerDescriptionKey'] as String,
+);
+
+Map<String, dynamic> _$HomeModelToJson(_HomeModel instance) =>
     <String, dynamic>{
       'userNameKey': instance.userNameKey,
       'bannerTitleKey': instance.bannerTitleKey,

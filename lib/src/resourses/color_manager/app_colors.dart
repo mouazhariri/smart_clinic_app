@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 abstract class AppColors {
-  static const Color primary = Color(0xFF005AAB);
+  static const Color primary = Color(0xFF1D4ED8);
   static const Color secondPrimary = Color(0xFF135BEC);
   static const Color thirdPrimary = Color(0xFFF6EAE5);
   static const Color primaryOpacity = Color(0xFFFFECDC);

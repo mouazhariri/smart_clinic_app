@@ -15,15 +15,15 @@ final homeControllerProvider = HomeControllerProvider._();
 final class HomeControllerProvider
     extends $AsyncNotifierProvider<HomeController, HomeState> {
   HomeControllerProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'homeControllerProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'homeControllerProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
   String debugGetCreateSourceHash() => _$homeControllerHash();
@@ -33,21 +33,22 @@ final class HomeControllerProvider
   HomeController create() => HomeController();
 }
 
-String _$homeControllerHash() => r'home-controller-hash';
+String _$homeControllerHash() => r'7634682deec686441891d9729b69d8c2c4843c53';
 
 abstract class _$HomeController extends $AsyncNotifier<HomeState> {
   FutureOr<HomeState> build();
-
   @$mustCallSuper
   @override
   void runBuild() {
     final ref = this.ref as $Ref<AsyncValue<HomeState>, HomeState>;
-    final element = ref.element
-        as $ClassProviderElement<
-            AnyNotifier<AsyncValue<HomeState>, HomeState>,
-            AsyncValue<HomeState>,
-            Object?,
-            Object?>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<HomeState>, HomeState>,
+              AsyncValue<HomeState>,
+              Object?,
+              Object?
+            >;
     element.handleCreate(ref, build);
   }
 }

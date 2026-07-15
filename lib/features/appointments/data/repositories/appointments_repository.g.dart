@@ -2,36 +2,50 @@
 
 part of 'appointments_repository.dart';
 
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
 @ProviderFor(appointmentsRepository)
 final appointmentsRepositoryProvider = AppointmentsRepositoryProvider._();
 
-final class AppointmentsRepositoryProvider extends $FunctionalProvider<
-        AppointmentsRepository, AppointmentsRepository, AppointmentsRepository>
+final class AppointmentsRepositoryProvider
+    extends
+        $FunctionalProvider<
+          AppointmentsRepository,
+          AppointmentsRepository,
+          AppointmentsRepository
+        >
     with $Provider<AppointmentsRepository> {
   AppointmentsRepositoryProvider._()
-      : super(
-          from: null,
-          argument: null,
-          retry: null,
-          name: r'appointmentsRepositoryProvider',
-          isAutoDispose: false,
-          dependencies: null,
-          $allTransitiveDependencies: null,
-        );
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'appointmentsRepositoryProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
 
   @override
-  String debugGetCreateSourceHash() => r'appointments-repository-hash';
+  String debugGetCreateSourceHash() => _$appointmentsRepositoryHash();
 
   @$internal
   @override
   $ProviderElement<AppointmentsRepository> $createElement(
     $ProviderPointer pointer,
-  ) =>
-      $ProviderElement(pointer);
+  ) => $ProviderElement(pointer);
 
   @override
-  AppointmentsRepository create(Ref ref) => appointmentsRepository(ref);
+  AppointmentsRepository create(Ref ref) {
+    return appointmentsRepository(ref);
+  }
 
+  /// {@macro riverpod.override_with_value}
   Override overrideWithValue(AppointmentsRepository value) {
     return $ProviderOverride(
       origin: this,
@@ -39,3 +53,6 @@ final class AppointmentsRepositoryProvider extends $FunctionalProvider<
     );
   }
 }
+
+String _$appointmentsRepositoryHash() =>
+    r'80ca05657b8d5bfaa6aa70e3df25a7e6c61e867d';

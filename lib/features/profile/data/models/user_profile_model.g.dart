@@ -2,8 +2,12 @@
 
 part of 'user_profile_model.dart';
 
-UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
-    UserProfileModel(
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
+    _UserProfileModel(
       fullNameKey: json['fullNameKey'] as String,
       emailKey: json['emailKey'] as String,
       phoneKey: json['phoneKey'] as String,
@@ -11,7 +15,7 @@ UserProfileModel _$UserProfileModelFromJson(Map<String, dynamic> json) =>
       themeKey: json['themeKey'] as String,
     );
 
-Map<String, dynamic> _$UserProfileModelToJson(UserProfileModel instance) =>
+Map<String, dynamic> _$UserProfileModelToJson(_UserProfileModel instance) =>
     <String, dynamic>{
       'fullNameKey': instance.fullNameKey,
       'emailKey': instance.emailKey,

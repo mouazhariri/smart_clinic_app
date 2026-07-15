@@ -10,14 +10,11 @@ class SignupFieldLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: AlignmentDirectional.centerEnd,
-      child: Padding(
-        padding: const EdgeInsetsDirectional.only(end: 8),
-        child: Text(
-          label,
-          style: AppTextStyle.rubikRegular12.copyWith(color: AppColors.bodyColor),
-        ),
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(start: 8),
+      child: Text(
+        label,
+        style: AppTextStyle.rubikRegular12.copyWith(color: AppColors.bodyColor),
       ),
     );
   }

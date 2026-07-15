@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_clinic_app/src/core/utils/extenssions/int_extenssion.dart';
+import 'package:smart_clinic_app/src/core/utils/extenssions/widget_extensions.dart';
+import 'package:smart_clinic_app/src/resourses/font_manager/app_text_style.dart';
 
 import '../../../../../src/application/router/app_routes.dart';
 import '../../../../../src/core/shared_widgets/app_toast.dart';
@@ -9,9 +12,9 @@ import '../../../../../src/resourses/color_manager/app_colors.dart';
 import '../controller/signUp_controller.dart';
 import '../../domain/model/signUp_params.dart';
 import '../../domain/model/signup_response.dart';
-import '../widgets/signup_screen/signup_otp_step.dart';
-import '../widgets/signup_screen/signup_personal_info_step.dart';
-import '../widgets/signup_screen/signup_phone_step.dart';
+import '../widgets/signup_screen/steps/signup_otp_step.dart';
+import '../widgets/signup_screen/steps/signup_personal_info_step.dart';
+import '../widgets/signup_screen/steps/signup_phone_step.dart';
 import '../widgets/signup_screen/signup_progress_header.dart';
 
 /// Three-step signup flow (phone → OTP → personal information) implemented as a
@@ -53,8 +56,9 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
   void _setInitialPhone(String phone) {
     if (phone.isEmpty) return;
     final normalized = phone.replaceAll(RegExp(r'\D'), '');
-    final national =
-        normalized.startsWith('963') ? normalized.replaceFirst('963', '') : normalized;
+    final national = normalized.startsWith('963')
+        ? normalized.replaceFirst('963', '')
+        : normalized;
     _nationalPhoneController.text = national;
     _fullPhoneController.text = '963$national';
   }
@@ -83,15 +87,18 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   void _onConfirmOtp() => _goToStep(2);
 
-  Future<void> _onResendOtp() =>
-      ref.read(signUpControllerProvider.notifier).sendOtp(_fullPhoneController.text);
+  Future<void> _onResendOtp() => ref
+      .read(signUpControllerProvider.notifier)
+      .sendOtp(_fullPhoneController.text);
 
   void _onCreateAccount(PersonalInfo info) {
-    ref.read(signUpControllerProvider.notifier).signUp(
+    ref
+        .read(signUpControllerProvider.notifier)
+        .signUp(
           SignupParams(
             fullName: info.fullName,
             mobileNumber: _fullPhoneController.text,
-            qid: info.qid,
+            qid: info.nationalId,
             password: info.password,
             otp: null,
           ),
@@ -100,8 +107,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ref.listen<AsyncValue<SignupResponseModel?>>(signUpControllerProvider,
-        (previous, next) {
+    ref.listen<AsyncValue<SignupResponseModel?>>(signUpControllerProvider, (
+      previous,
+      next,
+    ) {
       final wasLoading = previous is AsyncLoading;
       if (wasLoading && next is AsyncData) {
         context.go(AppRoutes.homeScreen);
@@ -122,17 +131,20 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
         backgroundColor: AppColors.authBackground,
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _SignupTopBar(onBack: _onBack),
               Padding(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 12),
+                padding: const EdgeInsets.fromLTRB(20, 8, 20, 22),
                 child: SignupProgressHeader(
                   stepLabel: context.tr(_stepLabelKey(_currentStep)),
                   progress: (_currentStep + 1) / _stepCount,
-                  title: context.tr(_titleKey(_currentStep)),
-                  subtitle: context.tr(_subtitleKey(_currentStep)),
+                  title: context.tr('signup_card_title'),
+                  subtitle: context.tr('signup_card_subtitle'),
                 ),
               ),
+
+              25.verticalSpace,
               Expanded(
                 child: PageView(
                   controller: _pageController,
@@ -142,15 +154,21 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
                       nationalPhoneController: _nationalPhoneController,
                       fullPhoneController: _fullPhoneController,
                       onSendCode: _onSendCode,
+                      title: _titleKey(_currentStep),
+                      subtitle: _subtitleKey(_currentStep),
                     ),
                     SignupOtpStep(
                       phone: _fullPhoneController.text,
                       onConfirm: _onConfirmOtp,
                       onResend: _onResendOtp,
+                      title: _titleKey(_currentStep),
+                      subtitle: _subtitleKey(_currentStep),
                     ),
                     SignupPersonalInfoStep(
                       onSubmit: _onCreateAccount,
                       isSubmitting: isSubmitting,
+                      title: _titleKey(_currentStep),
+                      subtitle: _subtitleKey(_currentStep),
                     ),
                   ],
                 ),
@@ -169,10 +187,10 @@ class _SignupScreenState extends ConsumerState<SignupScreen> {
       const ['join_us_now', 'enter_otp_title', 'personal_info_title'][step];
 
   static String _subtitleKey(int step) => const [
-        'join_us_subtitle',
-        'otp_sent_message',
-        'personal_info_subtitle',
-      ][step];
+    'join_us_subtitle',
+    'otp_sent_message',
+    'personal_info_subtitle',
+  ][step];
 }
 
 class _SignupTopBar extends StatelessWidget {

@@ -1,40 +1,45 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/core/utils/extenssions/int_extenssion.dart';
+import 'package:smart_clinic_app/src/core/utils/extenssions/widget_extensions.dart';
 
-import '../../../../../../src/resourses/color_manager/app_colors.dart';
-import '../../../../../../src/resourses/font_manager/app_text_style.dart';
-import 'signup_auth_input.dart';
-import 'signup_field_label.dart';
-import 'signup_primary_button.dart';
+import '../../../../../../../src/resourses/color_manager/app_colors.dart';
+import '../../../../../../../src/resourses/font_manager/app_text_style.dart';
+import '../signup_auth_input.dart';
+import '../signup_field_label.dart';
+import '../signup_primary_button.dart';
 
-const int _kQidLength = 11;
+const int _kSyrianIdLength = 11;
 const int _kMinPasswordLength = 6;
 
 /// Payload emitted by [SignupPersonalInfoStep] once its form is valid.
 class PersonalInfo {
   const PersonalInfo({
     required this.fullName,
-    required this.qid,
+    required this.nationalId,
     required this.password,
   });
 
   final String fullName;
-  final String qid;
+  final String nationalId;
   final String password;
 }
 
-/// Step 3 — collects the account details: full name, Qatar ID and password.
+/// Step 3 — collects the account details: full name, Syrian National ID and password.
 class SignupPersonalInfoStep extends StatefulWidget {
   const SignupPersonalInfoStep({
     super.key,
     required this.onSubmit,
     this.isSubmitting = false,
+    required this.title,
+    required this.subtitle,
   });
 
   /// Invoked with the validated personal info; the screen creates the account.
   final void Function(PersonalInfo info) onSubmit;
   final bool isSubmitting;
-
+  final String title;
+  final String subtitle;
   @override
   State<SignupPersonalInfoStep> createState() => _SignupPersonalInfoStepState();
 }
@@ -42,14 +47,14 @@ class SignupPersonalInfoStep extends StatefulWidget {
 class _SignupPersonalInfoStepState extends State<SignupPersonalInfoStep> {
   final _formKey = GlobalKey<FormState>();
   final _fullNameController = TextEditingController();
-  final _qidController = TextEditingController();
+  final _nationalIdController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _obscurePassword = true;
 
   @override
   void dispose() {
     _fullNameController.dispose();
-    _qidController.dispose();
+    _nationalIdController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
@@ -61,17 +66,19 @@ class _SignupPersonalInfoStepState extends State<SignupPersonalInfoStep> {
     return null;
   }
 
-  String? _validateQid(String? value) {
+  String? _validateNationalId(String? value) {
     final digits = (value ?? '').replaceAll(RegExp(r'\D'), '');
-    if (digits.isEmpty) return context.tr('please_enter_qatar_id');
-    if (digits.length != _kQidLength) return context.tr('invalid_qatar_id');
+    if (digits.isEmpty) return context.tr('please_enter_national_id');
+    if (digits.length != _kSyrianIdLength)
+      return context.tr('invalid_national_id');
     return null;
   }
 
   String? _validatePassword(String? value) {
     final text = value ?? '';
     if (text.isEmpty) return context.tr('please_enter_password');
-    if (text.length < _kMinPasswordLength) return context.tr('password_too_short');
+    if (text.length < _kMinPasswordLength)
+      return context.tr('password_too_short');
     return null;
   }
 
@@ -81,7 +88,7 @@ class _SignupPersonalInfoStepState extends State<SignupPersonalInfoStep> {
     widget.onSubmit(
       PersonalInfo(
         fullName: _fullNameController.text.trim(),
-        qid: _qidController.text.replaceAll(RegExp(r'\D'), ''),
+        nationalId: _nationalIdController.text.replaceAll(RegExp(r'\D'), ''),
         password: _passwordController.text,
       ),
     );
@@ -96,7 +103,24 @@ class _SignupPersonalInfoStepState extends State<SignupPersonalInfoStep> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 8),
+              Text(
+              context.tr(widget.title),
+              textAlign: TextAlign.start,
+              style: AppTextStyle.rubikBold22.copyWith(
+                color: AppColors.authTitle,
+                fontSize: 19,
+                height: 1,
+              ),
+            ).symmetricPadding(horizontal: 14),
+            10.verticalSpace,
+            Text(
+              context.tr(widget.subtitle),
+              // textAlign: TextAlign.end,
+              style: AppTextStyle.rubikRegular14.copyWith(
+                color: AppColors.authSubtitle,
+              ),
+            ).symmetricPadding(horizontal: 14),
+            const SizedBox(height: 28),
             SignupFieldLabel(label: context.tr('full_name')),
             const SizedBox(height: 8),
             SignupAuthInput(
@@ -107,15 +131,15 @@ class _SignupPersonalInfoStepState extends State<SignupPersonalInfoStep> {
               validator: _validateName,
             ),
             const SizedBox(height: 18),
-            SignupFieldLabel(label: context.tr('qid')),
+            SignupFieldLabel(label: context.tr('national_id')),
             const SizedBox(height: 8),
             SignupAuthInput(
-              controller: _qidController,
-              hintText: context.tr('qid_hint'),
+              controller: _nationalIdController,
+              hintText: context.tr('national_id_hint'),
               keyboardType: TextInputType.number,
-              maxLength: _kQidLength,
+              maxLength: _kSyrianIdLength,
               textInputAction: TextInputAction.next,
-              validator: _validateQid,
+              validator: _validateNationalId,
             ),
             const SizedBox(height: 18),
             SignupFieldLabel(label: context.tr('password')),

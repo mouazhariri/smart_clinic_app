@@ -49,16 +49,17 @@ abstract class AppointmentModel with _$AppointmentModel {
     );
   }
 
-  AppointmentModel copyWith({AppointmentStatus? status}) {
-    return AppointmentModel(
-      id: id,
-      doctorId: doctorId,
-      doctorName: doctorName,
-      specialty: specialty,
-      date: date,
-      time: time,
-      status: status ?? this.status,
-      clinicAddress: clinicAddress,
-    );
-  }
+  // @override
+  // AppointmentModel copyWith({AppointmentStatus? status}) {
+  //   return AppointmentModel(
+  //     id: id,
+  //     doctorId: doctorId,
+  //     doctorName: doctorName,
+  //     specialty: specialty,
+  //     date: date,
+  //     time: time,
+  //     status: status ?? this.status,
+  //     clinicAddress: clinicAddress,
+  //   );
+  // }
 }

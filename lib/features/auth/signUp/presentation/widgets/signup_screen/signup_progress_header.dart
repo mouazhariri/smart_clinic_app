@@ -34,22 +34,9 @@ class SignupProgressHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                width: 42,
-                height: 42,
-                decoration: BoxDecoration(
-                  color: AppColors.authFlagPlaceholder,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: const Icon(
-                  Icons.person_outline,
-                  color: AppColors.authIcon,
-                  size: 24,
-                ),
-              ),
-              const Spacer(),
-              Flexible(
+                   Flexible(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -71,6 +58,20 @@ class SignupProgressHeader extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+         
+              Container(
+                width: 42,
+                height: 42,
+                decoration: BoxDecoration(
+                  color: AppColors.authFlagPlaceholder,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: const Icon(
+                  Icons.person_outline,
+                  color: AppColors.authIcon,
+                  size: 24,
                 ),
               ),
             ],

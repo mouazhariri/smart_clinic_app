@@ -54,7 +54,7 @@ class CustomButtonWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(
               side: BorderSide(
                   color: color ?? backgroundColor ?? AppColors.transparent),
-              borderRadius: BorderRadius.circular(radius ?? 25))),
+              borderRadius: BorderRadius.circular(radius ?? 8))),
       onPressed: onTap != null
           ? () {
               onTap!();

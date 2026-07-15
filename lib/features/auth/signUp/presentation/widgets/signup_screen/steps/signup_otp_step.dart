@@ -1,15 +1,17 @@
 import 'dart:async';
 
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' as local;
 import 'package:flutter/material.dart';
 import 'package:pinput/pinput.dart';
+import 'package:smart_clinic_app/src/core/utils/extenssions/int_extenssion.dart';
+import 'package:smart_clinic_app/src/core/utils/extenssions/widget_extensions.dart';
 
-import '../../../../../../src/resourses/color_manager/app_colors.dart';
-import '../../../../../../src/resourses/font_manager/app_text_style.dart';
-import 'signup_primary_button.dart';
+import '../../../../../../../src/resourses/color_manager/app_colors.dart';
+import '../../../../../../../src/resourses/font_manager/app_text_style.dart';
+import '../signup_primary_button.dart';
 
 const int _kOtpSeconds = 90;
-const int _kOtpLength = 6;
+const int _kOtpLength = 4;
 
 /// Step 2 — verifies the OTP sent to [phone].
 ///
@@ -20,10 +22,13 @@ class SignupOtpStep extends StatefulWidget {
     required this.phone,
     required this.onConfirm,
     required this.onResend,
+        required this.title,
+    required this.subtitle,
   });
 
   final String phone;
-
+  final String title;
+  final String subtitle;
   /// Invoked once the OTP passes local validation; the screen advances to step 3.
   final VoidCallback onConfirm;
 
@@ -106,8 +111,32 @@ class _SignupOtpStepState extends State<SignupOtpStep> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            _MaskedPhone(phone: widget.phone),
-            const SizedBox(height: 24),
+              Text(
+              context.tr(widget.title),
+              textAlign: TextAlign.start,
+              style: AppTextStyle.rubikBold22.copyWith(
+                color: AppColors.authTitle,
+                fontSize: 19,
+                height: 1,
+              ),
+            ).symmetricPadding(horizontal: 14),
+            10.verticalSpace,
+           
+            FittedBox(
+              child: Row(
+                children: [
+                   Text(
+                context.tr(widget.subtitle),
+                // textAlign: TextAlign.end,
+                style: AppTextStyle.rubikRegular14.copyWith(
+                  color: AppColors.authSubtitle,
+                ),
+              ).symmetricPadding(horizontal: 14),
+                  _MaskedPhone(phone: widget.phone),
+                ],
+              ),
+            ),
+            const SizedBox(height: 40),
             _OtpField(controller: _otpController, focusNode: _focusNode),
             const SizedBox(height: 24),
             _OtpTimerRow(
@@ -173,6 +202,7 @@ class _OtpField extends StatelessWidget {
       textDirection: TextDirection.ltr,
       child: Center(
         child: Pinput(
+          onTapUpOutside: (event) =>  FocusScope.of(context).unfocus(),
           controller: controller,
           focusNode: focusNode,
           length: _kOtpLength,
@@ -189,7 +219,7 @@ class _OtpField extends StatelessWidget {
               return context.tr('please_enter_code');
             }
             if (value.length < _kOtpLength) {
-              return context.tr('code_must_be_6_numbers');
+              return context.tr('code_must_be_4_numbers');
             }
             return null;
           },
