@@ -59,30 +59,25 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Spacer(flex: 2),
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Text(
-                    context.tr('welcome_back_title'),
-                    textAlign: TextAlign.end,
-                    style: AppTextStyle.rubikBold22.copyWith(
-                      color: AppColors.authTitle,
-                      fontSize: 28,
-                      height: 1.1,
-                    ),
+                Text(
+                  context.tr('welcome_back_title'),
+                  // textAlign: TextAlign.end,
+                  style: AppTextStyle.rubikBold22.copyWith(
+                    color: AppColors.authTitle,
+                    fontSize: 28,
+                    height: 1.1,
                   ),
                 ),
                 const SizedBox(height: 8),
-                Align(
-                  alignment: AlignmentDirectional.centerEnd,
-                  child: Text(
-                    context.tr('signin_subtitle'),
-                    textAlign: TextAlign.end,
-                    style: AppTextStyle.rubikRegular14.copyWith(
-                      color: AppColors.authSubtitle,
-                      height: 1.35,
-                    ),
+                Text(
+                  context.tr('signin_subtitle'),
+                  // textAlign: TextAlign.end,
+                  style: AppTextStyle.rubikRegular14.copyWith(
+                    color: AppColors.authSubtitle,
+                    height: 1.35,
                   ),
                 ),
                 const SizedBox(height: 28),
@@ -93,6 +88,14 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(
+                        width: 82,
+                        child: _CountryCodeBox(
+                          onTap: () {},
+                        ),
+                      ),
+                       const SizedBox(width: 8),
+
                       Expanded(
                         child: _AuthTextField(
                           controller: _nationalPhoneController,
@@ -108,13 +111,7 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                           onChanged: _onPhoneChanged,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      SizedBox(
-                        width: 82,
-                        child: _CountryCodeBox(
-                          onTap: () {},
-                        ),
-                      ),
+                     
                     ],
                   ),
                 ),
