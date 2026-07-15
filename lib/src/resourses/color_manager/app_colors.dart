@@ -188,6 +188,20 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color authIconMuted = Color(0xFFD4DAE4);
   static const Color authIcon = Color(0xFFB8C1D1);
   static const Color authFlagPlaceholder = Color(0xFFD9DDE6);
+
+  // ── Home dashboard design system ──────────────────────────────────
+  static const Color dashBackground = Color(0xFFF8FAFC); // bg-Main
+  static const Color dashPrimary = Color(0xFF1D4ED8); // Primary (bright blue)
+  static const Color dashPrimaryBg = Color(0xFFEFF6FF); // bg-Primary
+  static const Color dashText = Color(0xFF0F172A); // Dark
+  static const Color dashSubtitle = Color(0xFF64748B); // Subtitle
+  static const Color dashBodyNeutral = Color(0xFF475569); // Body-Neutral
+  static const Color dashPlaceholder = Color(0xFF94A3B8); // Placeholder
+  static const Color dashBorder = Color(0xFFE2E8F0); // Border
+  static const Color dashNeutralBg = Color(0xFFF1F5F9); // bg-Neutral / Dividers
+  static const Color dashRating = Color(0xFFF59E0B); // Warning (rating star)
+  static const Color dashIconBg = Color(0xFFFBFBFB); // specialty icon tile
+  static const Color dashHairline = Color(0xFFF1F1F1); // inner hairline border
 }
 
 
