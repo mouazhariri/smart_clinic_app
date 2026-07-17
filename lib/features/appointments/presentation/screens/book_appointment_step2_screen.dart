@@ -194,7 +194,7 @@ class BookAppointmentStep2Screen extends StatelessWidget {
                             Text(
                               '#أ ج ل - 9874',
                               textAlign: TextAlign.right,
-                              style: AppTextStyle.tajawalBold10.copyWith(
+                              style: AppTextStyle.tajawalBold12.copyWith(
                                 color: AppColors.dashPrimary,
                               ),
                             ),
@@ -267,7 +267,6 @@ class BookAppointmentStep2Screen extends StatelessWidget {
                 ),
               ),
             ),
-          ),
           // Payment details (from design)
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -432,6 +431,8 @@ class BookAppointmentStep2Screen extends StatelessWidget {
             ),
           ),
         ],
+          ),
+
       ),
     );
   }
