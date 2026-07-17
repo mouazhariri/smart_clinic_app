@@ -7,6 +7,7 @@ import '../../../../src/application/router/app_routes.dart';
 import '../../../../src/core/shared_widgets/app_loader.dart';
 import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../src/resourses/font_manager/app_text_style.dart';
+import '../../../doctors/domain/entities/doctor.dart';
 import '../../../doctors/presentation/controller/doctors_controller.dart';
 import '../../../doctors/presentation/widgets/smart_clinic_app_bar.dart';
 import '../controller/appointments_controller.dart';
@@ -14,9 +15,19 @@ import '../controller/appointments_state.dart';
 import '../widgets/appointment_date_selector.dart';
 import '../widgets/appointment_summary.dart';
 import '../widgets/available_time_widget.dart';
+import '../widgets/booking_confirm_button.dart';
+import '../widgets/booking_section_header.dart';
 
+/// Clean, structured booking appointment screen.
+/// Follows clean architecture by separating:
+/// - UI layout (this screen)
+/// - State management (Riverpod controller)
+/// - Widget components (separate files)
 class BookAppointmentScreen extends ConsumerWidget {
-  const BookAppointmentScreen({super.key, required this.doctorId});
+  const BookAppointmentScreen({
+    super.key,
+    required this.doctorId,
+  });
 
   final String doctorId;
 
@@ -31,83 +42,107 @@ class BookAppointmentScreen extends ConsumerWidget {
       backgroundColor: AppColors.background,
       body: doctorAsync.when(
         loading: () => const Center(child: AppLoader()),
-        error: (_, __) => Center(child: Text(context.tr('no_doctors_found'))),
-        data: (doctor) => Column(
-          children: [
-            SmartClinicAppBar(
-              title: context.tr('book_appointment'),
-              subtitle: context.tr(doctor.name),
-              showBackButton: true,
+        error: (_, stackTrace) => _ErrorState(doctorId: doctorId),
+        data: (doctor) => _BookingContent(
+              doctor: doctor,
+              appointmentState: appointmentState,
+              appointmentController: appointmentController,
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(context.tr('select_date'), style: AppTextStyle.interBold18),
-                    const SizedBox(height: 12),
-                    AppointmentDateSelector(
-                      dates: doctor.availableDates,
-                      selectedDate: appointmentState.selectedDate,
-                      onSelected: appointmentController.selectDate,
-                    ),
-                    const SizedBox(height: 24),
-                    Text(context.tr('available_time'), style: AppTextStyle.interBold18),
-                    const SizedBox(height: 12),
-                    AvailableTimeWidget(
-                      times: doctor.availableTimes,
-                      selectedTime: appointmentState.selectedTime,
-                      onSelected: appointmentController.selectTime,
-                    ),
-                    const SizedBox(height: 24),
-                    AppointmentSummary(
-                      doctor: doctor,
-                      selectedDate: appointmentState.selectedDate,
-                      selectedTime: appointmentState.selectedTime,
-                    ),
-                    const SizedBox(height: 24),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 56,
-                      child: FilledButton(
-                        onPressed: appointmentState.canConfirm(doctor) && !appointmentState.bookingState.isLoading
-                            ? () async {
-                                final booked = await appointmentController.bookAppointment(doctor);
-                                if (context.mounted && booked) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(context.tr('appointment_booked_successfully'))),
-                                  );
-                                  context.go(AppRoutes.appointmentsScreen);
-                                }
-                              }
-                            : null,
-                        style: FilledButton.styleFrom(
-                          backgroundColor: AppColors.primary,
-                          disabledBackgroundColor: AppColors.disabledButton,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(18),
-                          ),
-                        ),
-                        child: appointmentState.bookingState.isLoading
-                            ? const SizedBox(
-                                width: 22,
-                                height: 22,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: AppColors.white,
-                                ),
-                              )
-                            : Text(context.tr('confirm_booking')),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
       ),
     );
+  }
+}
+
+/// Separate error widget to keep screen clean.
+class _ErrorState extends StatelessWidget {
+  const _ErrorState({required this.doctorId});
+  final String doctorId;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Text(context.tr('no_doctors_found')),
+    );
+  }
+}
+
+/// Main content for booking, separated for readability.
+class _BookingContent extends StatelessWidget {
+  const _BookingContent({
+    required this.doctor,
+    required this.appointmentState,
+    required this.appointmentController,
+  });
+
+  final Doctor doctor;
+  final AppointmentsState appointmentState;
+  final AppointmentsController appointmentController;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SmartClinicAppBar(
+          title: context.tr('book_appointment'),
+          subtitle: doctor.name,
+          showBackButton: true,
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20, 8, 20, 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                BookingSectionHeader(title: context.tr('select_date')),
+                const SizedBox(height: 12),
+                AppointmentDateSelector(
+                  dates: doctor.availableDates,
+                  selectedDate: appointmentState.selectedDate,
+                  onSelected: appointmentController.selectDate,
+                ),
+                const SizedBox(height: 24),
+                BookingSectionHeader(title: context.tr('available_time')),
+                const SizedBox(height: 12),
+                AvailableTimeWidget(
+                  times: doctor.availableTimes,
+                  selectedTime: appointmentState.selectedTime,
+                  onSelected: appointmentController.selectTime,
+                ),
+                const SizedBox(height: 24),
+                AppointmentSummary(
+                  doctor: doctor,
+                  selectedDate: appointmentState.selectedDate,
+                  selectedTime: appointmentState.selectedTime,
+                ),
+                const SizedBox(height: 24),
+                BookingConfirmButton(
+                  isEnabled: appointmentState.canConfirm(doctor) &&
+                      !appointmentState.bookingState.isLoading,
+                  isLoading: appointmentState.bookingState.isLoading,
+                  onPressed: () => _handleConfirm(context, doctor, appointmentController, appointmentState),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Future<void> _handleConfirm(
+    BuildContext context,
+    Doctor doctor,
+    AppointmentsController controller,
+    AppointmentsState state,
+  ) async {
+    final booked = await controller.bookAppointment(doctor);
+    if (context.mounted && booked) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(context.tr('appointment_booked_successfully')),
+        ),
+      );
+      context.go(AppRoutes.appointmentsScreen);
+    }
   }
 }

@@ -35,7 +35,7 @@ class DoctorBottomBar extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child:   CustomButtonWidget(
+            child: CustomButtonWidget(
               text: context.tr('book_appointment'),
               isFiled: true,
               height: 60,
@@ -46,18 +46,8 @@ class DoctorBottomBar extends StatelessWidget {
               style: AppTextStyle.interSemiBold16.copyWith(
                 color: AppColors.white,
               ),
-              onTap: (){},
+              onTap: () => context.push(AppRoutes.bookAppointmentPath(doctor.id)),
             ),
-            
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   style: ElevatedButton.styleFrom(
-            //     backgroundColor: AppColors.primary,
-            //     minimumSize: const Size(double.infinity, 52),
-            //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            //   ),
-            //   child: Text(context.tr('book_appointment'), style: const TextStyle(color: Colors.white)),
-            // ),
           ),
         ],
       ),
