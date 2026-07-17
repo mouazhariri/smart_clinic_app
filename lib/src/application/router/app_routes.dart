@@ -13,6 +13,8 @@ abstract class AppRoutes {
   static const String doctorsScreen = '/doctors';
   static const String doctorDetailsScreen = '/doctors/:doctorId';
   static const String bookAppointmentScreen = '/doctors/:doctorId/book';
+  static const String bookAppointmentConfirmScreen = '/doctors/:doctorId/confirm';
+  static const String bookAppointmentSuccessScreen = '/doctors/:doctorId/success';
   static const String appointmentsScreen = '/appointments';
   static const String profileScreen = '/profile';
 

@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_clinic_app/features/appointments/presentation/screens/appointments_screen.dart';
 import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_screen.dart';
+import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_step2_screen.dart';
+import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_success_screen.dart';
 import 'package:smart_clinic_app/features/auth/presentation/screens/auth_screen.dart';
 import 'package:smart_clinic_app/features/auth/signIn/presentation/screens/sign_in_screen.dart';
 import 'package:smart_clinic_app/features/auth/signUp/presentation/screens/signup_screen.dart';
@@ -21,6 +23,11 @@ import 'package:smart_clinic_app/features/splash/presentation/pages/splash.dart'
 import 'app_routes.dart';
 import 'custom_navigation_observer.dart';
 import 'fallback_screen.dart';
+
+String _monthNameSimple(int month) {
+  const names = ['', 'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+  return names[month.clamp(1, 12)];
+}
 
 final GlobalKey<NavigatorState> rootKey = GlobalKey<NavigatorState>();
 
@@ -86,6 +93,42 @@ class AppRouter {
           builder: (context, state) => BookAppointmentScreen(
             doctorId: state.pathParameters['doctorId']!,
           ),
+        ),
+        _fadeRoute(
+          path: AppRoutes.bookAppointmentConfirmScreen,
+          builder: (context, state) {
+            final extra = state.extra as Map<dynamic, dynamic>? ?? {};
+            final doctor = extra['doctor'] as Doctor?;
+            final selectedDate = extra['selectedDate'] as DateTime?;
+            final selectedTime = extra['selectedTime'] as String?;
+            if (doctor == null) {
+              return const FallbackScreen();
+            }
+            return BookAppointmentStep2Screen(
+              doctorName: doctor.name,
+              doctorSpecialty: doctor.specialty,
+              doctorImageUrl: doctor.imageUrl ?? '',
+              appointmentDateTime: selectedDate != null && selectedTime != null
+                  ? '${selectedDate!.day} ${_monthNameSimple(selectedDate!.month)} • $selectedTime'
+                  : '--',
+            );
+          },
+        ),
+        _fadeRoute(
+          path: AppRoutes.bookAppointmentSuccessScreen,
+          builder: (context, state) {
+            final extra = state.extra as Map<dynamic, dynamic>? ?? {};
+            final doctor = extra['doctor'] as Doctor?;
+            if (doctor == null) {
+              return const FallbackScreen();
+            }
+            return BookAppointmentSuccessScreen(
+              doctorName: doctor.name,
+              doctorSpecialty: doctor.specialty,
+              doctorImageUrl: doctor.imageUrl ?? '',
+              appointmentInfo: extra['appointmentInfo'] as String? ?? '--',
+            );
+          },
         ),
         _fadeRoute(
           path: AppRoutes.appointmentsScreen,

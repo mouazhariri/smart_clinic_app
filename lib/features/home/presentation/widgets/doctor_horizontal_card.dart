@@ -212,7 +212,7 @@ class DoctorHorizontalCard extends StatelessWidget {
     final url = doctor.imageUrl;
     if (url == null || url.isEmpty) {
       return Container(
-        height: 80,
+        height: 100,
         color: AppColors.border,
         alignment: Alignment.center,
         child: const Icon(Icons.person, color: Colors.white, size: 32),
@@ -221,7 +221,7 @@ class DoctorHorizontalCard extends StatelessWidget {
     return Image.network(
       url,
       width: double.infinity,
-      height: 80,
+      height: 100,
       fit: BoxFit.cover,
       errorBuilder: (_, __, ___) => Container(
         height: 80,
@@ -278,3 +278,4 @@ class _StatCell extends StatelessWidget {
     );
   }
 }
+
