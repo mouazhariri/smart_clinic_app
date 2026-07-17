@@ -9,7 +9,6 @@ import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../src/resourses/font_manager/app_text_style.dart';
 import '../../../doctors/domain/entities/doctor.dart';
 import '../../../doctors/presentation/controller/doctors_controller.dart';
-import '../../../doctors/presentation/widgets/smart_clinic_app_bar.dart';
 import '../controller/appointments_controller.dart';
 import '../controller/appointments_state.dart';
 import '../widgets/date_card.dart';
@@ -18,14 +17,11 @@ import '../widgets/doctor_info_banner.dart';
 import '../widgets/notes_field.dart';
 import '../widgets/booking_confirm_bar.dart';
 
-/// Clean booking screen following Figma design, structured with clean architecture.
-/// Separates screen layout (this file) from widget components.
+/// Clean booking screen following design screenshot.
+/// Uses controller for state, doctor model for test data.
+/// Ready for endpoint connection via repository/data source.
 class BookAppointmentScreen extends ConsumerStatefulWidget {
-  const BookAppointmentScreen({
-    super.key,
-    required this.doctorId,
-  });
-
+  const BookAppointmentScreen({super.key, required this.doctorId});
   final String doctorId;
 
   @override
@@ -33,18 +29,13 @@ class BookAppointmentScreen extends ConsumerStatefulWidget {
 }
 
 class _BookAppointmentScreenState extends ConsumerState<BookAppointmentScreen> {
-  int selectedDateIndex = 6; // Sunday 15 (matches design default selection)
-  String? selectedTime;
   final TextEditingController _notesController = TextEditingController();
 
-  final List<Map<String, String>> dates = [
-    {'label': 'الجمعة', 'number': '20'},
-    {'label': 'الخميس', 'number': '19'},
-    {'label': 'الأربعاء', 'number': '18'},
-    {'label': 'الثلاثاء', 'number': '17'},
-    {'label': 'الاثنين', 'number': '16'},
-    {'label': 'الأحد', 'number': '15'},
-  ];
+  @override
+  void dispose() {
+    _notesController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,81 +45,63 @@ class _BookAppointmentScreenState extends ConsumerState<BookAppointmentScreen> {
               appointments: AsyncData([]),
               bookingState: AsyncData(null),
             );
-    final appointmentController = ref.read(appointmentsControllerProvider.notifier);
+    final controller = ref.read(appointmentsControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: AppColors.dashBackground,
-      body: doctorAsync.when(
-        loading: () => const Center(child: AppLoader()),
-        error: (_, __) => _ErrorState(),
-        data: (doctor) => _BookingDesignContent(
-              doctor: doctor,
-              appointmentState: appointmentState,
-              appointmentController: appointmentController,
-              selectedDateIndex: selectedDateIndex,
-              selectedTime: selectedTime,
-              onSelectDate: (index) => setState(() => selectedDateIndex = index),
-              onSelectTime: (time) => setState(() => selectedTime = time),
-              notesController: _notesController,
-            ),
+      body: SafeArea(
+        child: doctorAsync.when(
+          loading: () => const Center(child: AppLoader()),
+          error: (_, __) => const _ErrorState(),
+          data: (doctor) => _BookingDesignContent(
+                doctor: doctor,
+                appointmentState: appointmentState,
+                controller: controller,
+                notesController: _notesController,
+              ),
+        ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _notesController.dispose();
-    super.dispose();
   }
 }
 
 class _ErrorState extends StatelessWidget {
+  const _ErrorState();
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text('حدث خطأ', style: AppTextStyle.tajawalBold18),
-    );
+    return Center(child: Text(context.tr('no_doctors_found'), style: AppTextStyle.tajawalBold18));
   }
 }
 
-/// Main content following the clean design pattern.
-/// Keeps widget logic separate from layout.
 class _BookingDesignContent extends StatelessWidget {
   const _BookingDesignContent({
     required this.doctor,
     required this.appointmentState,
-    required this.appointmentController,
-    required this.selectedDateIndex,
-    required this.selectedTime,
-    required this.onSelectDate,
-    required this.onSelectTime,
+    required this.controller,
     required this.notesController,
   });
-
   final Doctor doctor;
   final AppointmentsState appointmentState;
-  final AppointmentsController appointmentController;
-  final int selectedDateIndex;
-  final String? selectedTime;
-  final ValueChanged<int> onSelectDate;
-  final ValueChanged<String> onSelectTime;
+  final AppointmentsController controller;
   final TextEditingController notesController;
 
   @override
   Widget build(BuildContext context) {
+    // Build date cards from doctor model (test data ready for endpoint)
+    final dates = doctor.availableDates;
+    // Build time slots from doctor model
+    final times = doctor.availableTimes;
+
     return CustomScrollView(
       slivers: [
-        // Header
+        // Header bar matching design
         SliverToBoxAdapter(
           child: Container(
             height: 60,
             padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
             decoration: BoxDecoration(
-            color: AppColors.white,
-
-              border: Border(
-                bottom: BorderSide(width: 1, color: AppColors.innerBorder),
-              ),
+              color: AppColors.white,
+              border: Border(bottom: BorderSide(width: 1, color: AppColors.innerBorder)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -150,9 +123,9 @@ class _BookingDesignContent extends StatelessWidget {
             ),
           ),
         ),
-        // Doctor banner
+        // Doctor banner (from FakeDoctors model)
         SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           sliver: SliverToBoxAdapter(
             child: DoctorInfoBanner(
               name: doctor.name,
@@ -161,17 +134,18 @@ class _BookingDesignContent extends StatelessWidget {
             ),
           ),
         ),
-        // Date selection section
+        // Section title: select date
         SliverPadding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
+          padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
           sliver: SliverToBoxAdapter(
             child: Text(
-              'اختر التاريخ',
+              context.tr('select_date'),
               textAlign: TextAlign.right,
               style: AppTextStyle.tajawalBold16.copyWith(color: AppColors.dark),
             ),
           ),
         ),
+        // Date cards from doctor.availableDates (test data from FakeDoctors)
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           sliver: SliverToBoxAdapter(
@@ -179,183 +153,89 @@ class _BookingDesignContent extends StatelessWidget {
               height: 88,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
-                itemCount: 6,
+                itemCount: dates.isNotEmpty ? dates.length : 1,
                 separatorBuilder: (_, __) => const SizedBox(width: 8),
                 itemBuilder: (context, index) {
-                  final reversedIndex = 5 - index;
-                  final labels = ['الجمعة', 'الخميس', 'الأربعاء', 'الثلاثاء', 'الاثنين', 'الأحد'];
-                  final numbers = ['20', '19', '18', '17', '16', '15'];
+                  if (dates.isEmpty) return const SizedBox.shrink();
+                  final date = dates[index % dates.length];
+                  final selected = appointmentState.selectedDate != null &&
+                      _sameDay(date, appointmentState.selectedDate);
+                  final label = _formatDayName(context, date);
+                  final number = '${date.day}';
                   return DateCard(
-                    label: labels[reversedIndex],
-                    dayNumber: numbers[reversedIndex],
-                    isSelected: selectedDateIndex == reversedIndex,
-                    onTap: () => onSelectDate(reversedIndex),
+                    label: label,
+                    dayNumber: number,
+                    isSelected: selected,
+                    onTap: () => controller.selectDate(date),
                   );
                 },
               ),
             ),
           ),
         ),
-        // Morning time
+        // Morning session label
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
           sliver: SliverToBoxAdapter(
             child: Text(
-              'الفترة الصباحية',
+              context.tr('morning_session'),
               textAlign: TextAlign.right,
               style: AppTextStyle.tajawalRegular12.copyWith(color: AppColors.subtitle),
             ),
           ),
         ),
+        // Time slots from doctor.availableTimes
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           sliver: SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Wrap(
               spacing: 8,
-              children: [
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '10:00 ص',
-                    isSelected: selectedTime == '10:00 ص',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('10:00 ص'),
-                  ),
-                ),
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '09:30 ص',
-                    isSelected: selectedTime == '09:30 ص',
-                    isDisabled: true,
-                    onTap: () {},
-                  ),
-                ),
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '09:00 ص',
-                    isSelected: selectedTime == '09:00 ص',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('09:00 ص'),
-                  ),
-                ),
-              ],
+              runSpacing: 8,
+              children: (times.isNotEmpty ? times : ['09:00 ص', '10:00 ص', '11:00 ص', '12:00 م', '01:00 م', '02:00 م', '03:00 م', '04:00 م'])
+                  .map((time) {
+                final selected = appointmentState.selectedTime == time;
+                return TimeSlotCard(
+                  time: time,
+                  isSelected: selected,
+                  isDisabled: false,
+                  onTap: () => controller.selectTime(time),
+                );
+              }).toList(),
             ),
           ),
         ),
-        // Evening time
+        // Evening session label (design shows both sections)
         SliverPadding(
           padding: const EdgeInsets.fromLTRB(16, 24, 16, 8),
           sliver: SliverToBoxAdapter(
             child: Text(
-              'الفترة المسائية',
+              context.tr('evening_session'),
               textAlign: TextAlign.right,
               style: AppTextStyle.tajawalRegular12.copyWith(color: AppColors.subtitle),
             ),
           ),
         ),
+        // Additional time slots (evening) from doctor model
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           sliver: SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Wrap(
               spacing: 8,
-              children: [
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '11:30 ص',
-                    isSelected: selectedTime == '11:30 ص',
-                    isDisabled: true,
-                    onTap: () {},
-                  ),
-                ),
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '11:00 ص',
-                    isSelected: selectedTime == '11:00 ص',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('11:00 ص'),
-                  ),
-                ),
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '10:30 ص',
-                    isSelected: selectedTime == '10:30 ص',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('10:30 ص'),
-                  ),
-                ),
-              ],
+              runSpacing: 8,
+              children: (times.isNotEmpty ? times.skip(3).toList() : ['05:00 م', '04:30 م', '04:00 م', '06:00 م', '05:30 م'])
+                  .map((time) {
+                final selected = appointmentState.selectedTime == time;
+                return TimeSlotCard(
+                  time: time,
+                  isSelected: selected,
+                  isDisabled: false,
+                  onTap: () => controller.selectTime(time),
+                );
+              }).toList(),
             ),
           ),
         ),
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          sliver: SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '05:00 م',
-                    isSelected: selectedTime == '05:00 م',
-                    isDisabled: true,
-                    onTap: () {},
-                  ),
-                ),
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '04:30 م',
-                    isSelected: selectedTime == '04:30 م',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('04:30 م'),
-                  ),
-                ),
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '04:00 م',
-                    isSelected: selectedTime == '04:00 م',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('04:00 م'),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        SliverPadding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          sliver: SliverToBoxAdapter(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              spacing: 8,
-              children: [
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '06:00 م',
-                    isSelected: selectedTime == '06:00 م',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('06:00 م'),
-                  ),
-                ),
-                Expanded(
-                  child: TimeSlotCard(
-                    time: '05:30 م',
-                    isSelected: selectedTime == '05:30 م',
-                    isDisabled: false,
-                    onTap: () => onSelectTime('05:30 م'),
-                  ),
-                ),
-                Expanded(child: SizedBox(height: 40)),
-              ],
-            ),
-          ),
-        ),
-        // Notes
+        // Notes field
         SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
           sliver: SliverToBoxAdapter(
@@ -364,7 +244,7 @@ class _BookingDesignContent extends StatelessWidget {
               spacing: 8,
               children: [
                 Text(
-                  'ملاحظات للطبيب (اختياري)',
+                  context.tr('optional_notes_for_doctor'),
                   textAlign: TextAlign.right,
                   style: AppTextStyle.tajawalBold12.copyWith(color: AppColors.subtitle),
                 ),
@@ -373,15 +253,17 @@ class _BookingDesignContent extends StatelessWidget {
             ),
           ),
         ),
-        // Bottom confirmation bar
+        // Bottom confirmation bar connected to controller state
         SliverToBoxAdapter(
           child: BookingConfirmBar(
-            price: "75,000 ${context.tr('syrian_pound_short')}",
-            dateTimeInfo: 'الخميس، 15 يونيو • 04:30 م',
+            price: '${doctor.consultationFee.toInt()} ${context.tr('syrian_pound_short')}',
+            dateTimeInfo: appointmentState.selectedDate != null && appointmentState.selectedTime != null
+                ? '${_formatDate(context, appointmentState.selectedDate!)} • ${appointmentState.selectedTime}'
+                : '--',
             termsText: context.tr('confirm_agree_cancel_terms'),
             onConfirm: () async {
-              // if (selectedTime == null) return;
-              final booked = await appointmentController.bookAppointment(doctor);
+              if (appointmentState.selectedDate == null || appointmentState.selectedTime == null) return;
+              final booked = await controller.bookAppointment(doctor);
               if (context.mounted && booked) {
                 context.go(AppRoutes.appointmentsScreen);
               }
@@ -391,5 +273,24 @@ class _BookingDesignContent extends StatelessWidget {
         const SliverToBoxAdapter(child: SizedBox(height: 24)),
       ],
     );
+  }
+
+  bool _sameDay(DateTime a, DateTime? b) {
+    if (b == null) return false;
+    return a.year == b.year && a.month == b.month && a.day == b.day;
+  }
+
+  String _formatDayName(BuildContext context, DateTime date) {
+    final weekdays = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+    return weekdays[date.weekday % 7];
+  }
+
+  String _formatDate(BuildContext context, DateTime date) {
+    return '${date.day} ${_monthName(date.month)}';
+  }
+
+  String _monthName(int month) {
+    const names = ['', 'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'];
+    return names[month.clamp(1, 12)];
   }
 }
