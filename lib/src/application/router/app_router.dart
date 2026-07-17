@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:smart_clinic_app/features/appointments/presentation/screens/appointments_screen.dart';
-import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_screen.dart';
-import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_step2_screen.dart';
-import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_success_screen.dart';
+import 'package:smart_clinic_app/features/booking/presentation/screens/booking_confirmation_screen.dart';
+import 'package:smart_clinic_app/features/booking/presentation/screens/booking_screen.dart';
+import 'package:smart_clinic_app/features/booking/presentation/screens/booking_success_screen.dart';
 import 'package:smart_clinic_app/features/auth/presentation/screens/auth_screen.dart';
 import 'package:smart_clinic_app/features/auth/signIn/presentation/screens/sign_in_screen.dart';
 import 'package:smart_clinic_app/features/auth/signUp/presentation/screens/signup_screen.dart';
@@ -90,9 +90,14 @@ class AppRouter {
         ),
         _fadeRoute(
           path: AppRoutes.bookAppointmentScreen,
-          builder: (context, state) => BookAppointmentScreen(
-            doctorId: state.pathParameters['doctorId']!,
-          ),
+          builder: (context, state) {
+            final extra = state.extra as Map<dynamic, dynamic>? ?? {};
+            final doctor = extra['doctor'] as Doctor?;
+            if (doctor == null) {
+              return const FallbackScreen();
+            }
+            return BookingScreen(doctor: doctor);
+          },
         ),
         _fadeRoute(
           path: AppRoutes.bookAppointmentConfirmScreen,
@@ -101,16 +106,15 @@ class AppRouter {
             final doctor = extra['doctor'] as Doctor?;
             final selectedDate = extra['selectedDate'] as DateTime?;
             final selectedTime = extra['selectedTime'] as String?;
-            if (doctor == null) {
+            final price = extra['price'] as double? ?? 0.0;
+            if (doctor == null || selectedDate == null || selectedTime == null) {
               return const FallbackScreen();
             }
-            return BookAppointmentStep2Screen(
-              doctorName: doctor.name,
-              doctorSpecialty: doctor.specialty,
-              doctorImageUrl: doctor.imageUrl ?? '',
-              appointmentDateTime: selectedDate != null && selectedTime != null
-                  ? '${selectedDate!.day} ${_monthNameSimple(selectedDate!.month)} • $selectedTime'
-                  : '--',
+            return BookingConfirmationScreen(
+              doctor: doctor,
+              selectedDate: selectedDate,
+              selectedTime: selectedTime,
+              price: price,
             );
           },
         ),
@@ -119,14 +123,16 @@ class AppRouter {
           builder: (context, state) {
             final extra = state.extra as Map<dynamic, dynamic>? ?? {};
             final doctor = extra['doctor'] as Doctor?;
-            if (doctor == null) {
+            final selectedDate = extra['selectedDate'] as DateTime?;
+            final selectedTime = extra['selectedTime'] as String?;
+            if (doctor == null || selectedDate == null || selectedTime == null) {
               return const FallbackScreen();
             }
-            return BookAppointmentSuccessScreen(
-              doctorName: doctor.name,
-              doctorSpecialty: doctor.specialty,
-              doctorImageUrl: doctor.imageUrl ?? '',
-              appointmentInfo: extra['appointmentInfo'] as String? ?? '--',
+            return BookingSuccessScreen(
+              doctor: doctor,
+              selectedDate: selectedDate,
+              selectedTime: selectedTime,
+              bookingNumber: extra['bookingNumber'] as String? ?? '#أ ج ل - 9874',
             );
           },
         ),

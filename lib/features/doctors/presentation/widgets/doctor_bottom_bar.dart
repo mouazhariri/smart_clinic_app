@@ -47,7 +47,7 @@ class DoctorBottomBar extends StatelessWidget {
               style: AppTextStyle.interSemiBold16.copyWith(
                 color: AppColors.white,
               ),
-              onTap: () => context.push(AppRoutes.bookAppointmentPath(doctor.id)),
+              onTap: () => context.push(AppRoutes.bookAppointmentPath(doctor.id), extra: {'doctor': doctor}),
             ),
           ),
         ],
