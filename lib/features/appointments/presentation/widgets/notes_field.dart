@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../src/resourses/color_manager/app_colors.dart';
@@ -32,7 +33,7 @@ class NotesField extends StatelessWidget {
           height: 1.5,
         ),
         decoration: InputDecoration(
-          hintText: 'اكتب ملاحظاتك هنا...',
+          hintText: context.tr('optional_notes_for_doctor'),
           hintStyle: AppTextStyle.tajawalRegular14.copyWith(
             color: AppColors.placeholder,
           ),

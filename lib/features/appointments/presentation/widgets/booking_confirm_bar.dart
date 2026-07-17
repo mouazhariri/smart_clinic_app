@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../src/resourses/color_manager/app_colors.dart';
@@ -75,7 +76,7 @@ class BookingConfirmBar extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    'حجز موعد',
+                    context.tr('book_appointment'),
                     style: AppTextStyle.tajawalBold16.copyWith(
                       color: AppColors.white,
                     ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -134,7 +135,7 @@ class _BookingDesignContent extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    'حجز موعد',
+                    text: context.tr('book_appointment'),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: AppColors.dark,
@@ -374,9 +375,9 @@ class _BookingDesignContent extends StatelessWidget {
         // Bottom confirmation bar
         SliverToBoxAdapter(
           child: BookingConfirmBar(
-            price: '75,000 ل.س',
+            price: "75,000 ${context.tr('syrian_pound_short')}",
             dateTimeInfo: 'الخميس، 15 يونيو • 04:30 م',
-            termsText: 'بالضغط على تأكيد، أنت توافق على شروط الإلغاء',
+            termsText: context.tr('confirm_agree_cancel_terms'),
             onConfirm: () async {
               if (selectedTime == null) return;
               final booked = await appointmentController.bookAppointment(doctor);
