@@ -30,7 +30,18 @@ abstract class AppColors {
   static const navBorder      = Color(0xFFE2E8F0);
   static const cardShadow     = Color(0x19005AAB);
 
+static const Color homeCard = Color(0xffFFFFFF);
+static const Color homeShadow = Color(0x12000000);
 
+static const Color homeIconBackground = Color(0xffF8FAFC);
+
+static const Color homeChip = Color(0xffF8FAFC);
+
+static const Color homeDivider = Color(0xffEEF2F7);
+
+static const Color homeBlueLight = Color.fromARGB(255, 243, 245, 250);
+
+static const Color homeBorder = Color(0xffE7EDF5);
 static const Color metricGreen = Color(0xFFD1FAE5);
 static const Color metricGreenIcon = Color(0xFF15803D);
 
@@ -57,7 +68,15 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color partlyPaidText = Color(0xFF005B93);
   static const Color returnBg = Color(0xFFFFDCC3);
   static const Color returnText = Color(0xFFCB671E);
-
+  static const Color warning = Color(0xFFF59E0B);
+ static const border = Color(0xFFE2E8F0);
+  static const innerBorder = Color(0xFFF1F1F1);
+  static const chipBg = Color(0xFFF1F5F9);
+  static const chipText = Color(0xFF475569);
+  static const dark = Color(0xFF0F172A);
+  static const subtitle = Color(0xFF64748B);
+  static const placeholder = Color(0xFF94A3B8);
+  static const divider = Color(0xFFF1F5F9);
   // static const Color background = Color(0xffFAFAF9);
 
   static const Color fieldBackground = Color(0xFFEFF0F6);
@@ -68,7 +87,7 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color cardWhite = Color(0xFFF5F5F5);
   static const Color shadow = Color(0x0C000000);
   static const Color darkShadow = Color(0x19000000);
-  static const Color dark = Color(0xFF201C11);
+  // static const Color dark = Color(0xFF201C11);
   static const Color darkMedGrey = Color(0x1AA0A0A0);
   static const Color disabledButton = Color(0xFFA0A0A0);
   static const Color borderGrey = Color(0xFFe8e8e8);

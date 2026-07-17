@@ -9,6 +9,7 @@ import 'package:smart_clinic_app/features/auth/signUp/presentation/screens/signu
 import 'package:smart_clinic_app/features/auth/verification/presentation/screens/verification_account_screen.dart';
 import 'package:smart_clinic_app/features/chat/presentation/screen/chat_screen.dart';
 import 'package:smart_clinic_app/features/chat/presentation/screen/sessions_screen.dart';
+import 'package:smart_clinic_app/features/doctors/domain/entities/doctor.dart';
 import 'package:smart_clinic_app/features/doctors/presentation/screens/doctor_details_screen.dart';
 import 'package:smart_clinic_app/features/doctors/presentation/screens/doctors_screen.dart';
 import 'package:smart_clinic_app/features/home/presentation/screens/home_screen.dart';
@@ -65,23 +66,20 @@ class AppRouter {
         ),
         _fadeRoute(
           path: AppRoutes.homeScreen,
-          builder: (context, state) => const MainScaffold(
-            currentIndex: 0,
-            child: HomeScreen(),
-          ),
+          builder: (context, state) =>
+              const MainScaffold(currentIndex: 0, child: HomeScreen()),
         ),
         _fadeRoute(
           path: AppRoutes.doctorsScreen,
-          builder: (context, state) => const MainScaffold(
-            currentIndex: 1,
-            child: DoctorsScreen(),
-          ),
+          builder: (context, state) =>
+              const MainScaffold(currentIndex: 1, child: DoctorsScreen()),
         ),
         _fadeRoute(
           path: AppRoutes.doctorDetailsScreen,
-          builder: (context, state) => DoctorDetailsScreen(
-            doctorId: state.pathParameters['doctorId']!,
-          ),
+          builder: (context, state) {
+            final doctor = state.extra as Doctor;
+            return DoctorDetailsScreen(doctor: doctor);
+          },
         ),
         _fadeRoute(
           path: AppRoutes.bookAppointmentScreen,
@@ -91,17 +89,13 @@ class AppRouter {
         ),
         _fadeRoute(
           path: AppRoutes.appointmentsScreen,
-          builder: (context, state) => const MainScaffold(
-            currentIndex: 2,
-            child: AppointmentsScreen(),
-          ),
+          builder: (context, state) =>
+              const MainScaffold(currentIndex: 2, child: AppointmentsScreen()),
         ),
         _fadeRoute(
           path: AppRoutes.profileScreen,
-          builder: (context, state) => const MainScaffold(
-            currentIndex: 3,
-            child: ProfileScreen(),
-          ),
+          builder: (context, state) =>
+              const MainScaffold(currentIndex: 3, child: ProfileScreen()),
         ),
         _fadeRoute(
           path: AppRoutes.sessionScreen,
