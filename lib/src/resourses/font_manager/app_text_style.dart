@@ -379,6 +379,10 @@ static TextStyle tajawalMedium11 = GoogleFonts.tajawal(
   fontSize: 11,
 );
 
+static TextStyle tajawalRegular10 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w400,
+  fontSize: 10,
+);
 static TextStyle tajawalRegular12 = GoogleFonts.tajawal(
   fontWeight: FontWeight.w400,
   fontSize: 12,

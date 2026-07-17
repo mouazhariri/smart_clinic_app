@@ -178,7 +178,7 @@ class BookAppointmentSuccessScreen extends StatelessWidget {
                             children: [
                               Text(
                                 '#أ ج ل - 9874',
-                                style: AppTextStyle.tajawalBold10.copyWith(
+                                style: AppTextStyle.tajawalBold12.copyWith(
                                   color: AppColors.dashPrimary,
                                 ),
                               ),

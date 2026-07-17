@@ -122,9 +122,10 @@ class _BookingDesignContent extends StatelessWidget {
         SliverToBoxAdapter(
           child: Container(
             height: 60,
-            color: AppColors.white,
             padding: const EdgeInsets.symmetric(horizontal: 42, vertical: 12),
             decoration: BoxDecoration(
+            color: AppColors.white,
+
               border: Border(
                 bottom: BorderSide(width: 1, color: AppColors.innerBorder),
               ),
@@ -135,7 +136,7 @@ class _BookingDesignContent extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    text: context.tr('book_appointment'),
+                    context.tr('book_appointment'),
                     textAlign: TextAlign.center,
                     style: const TextStyle(
                       color: AppColors.dark,
@@ -379,7 +380,7 @@ class _BookingDesignContent extends StatelessWidget {
             dateTimeInfo: 'الخميس، 15 يونيو • 04:30 م',
             termsText: context.tr('confirm_agree_cancel_terms'),
             onConfirm: () async {
-              if (selectedTime == null) return;
+              // if (selectedTime == null) return;
               final booked = await appointmentController.bookAppointment(doctor);
               if (context.mounted && booked) {
                 context.go(AppRoutes.appointmentsScreen);

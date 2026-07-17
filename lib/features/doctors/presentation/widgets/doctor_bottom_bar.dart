@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../../src/resourses/font_manager/app_text_style.dart';
+import '../../../../src/application/router/app_routes.dart';
 import '../../../../src/core/shared_widgets/custom_button_widget.dart';
 import '../../domain/entities/doctor.dart';
 class DoctorBottomBar extends StatelessWidget {
