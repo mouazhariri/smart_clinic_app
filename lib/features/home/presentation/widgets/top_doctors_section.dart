@@ -1,5 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:smart_clinic_app/src/application/router/app_routes.dart';
 
 import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../doctors/domain/entities/doctor.dart';
@@ -7,8 +9,7 @@ import 'doctor_filter_chip.dart';
 import 'doctor_horizontal_card.dart';
 import 'home_section_header.dart';
 
-/// "Top doctors" section: a header, a row of filter chips and a horizontally
-/// scrollable list of doctor cards. Owns the active filter (SRP).
+/// "Top doctors" section: header + filter chips + horizontal doctor cards.
 class TopDoctorsSection extends StatefulWidget {
   const TopDoctorsSection({
     super.key,
@@ -19,8 +20,6 @@ class TopDoctorsSection extends StatefulWidget {
 
   final List<Doctor> doctors;
   final VoidCallback? onViewAll;
-
-  /// Extra filter chips (besides "Latest"); each maps to a [Doctor.specialty].
   final List<DoctorFilter> filters;
 
   @override
@@ -33,7 +32,9 @@ class _TopDoctorsSectionState extends State<TopDoctorsSection> {
   List<Doctor> get _visible {
     if (_selectedIndex == 0) return widget.doctors;
     final active = widget.filters[_selectedIndex - 1];
-    return widget.doctors.where((d) => d.specialty == active.specialty).toList();
+    return widget.doctors
+        .where((d) => d.specialty == active.specialty)
+        .toList();
   }
 
   @override
@@ -42,6 +43,7 @@ class _TopDoctorsSectionState extends State<TopDoctorsSection> {
       DoctorFilter(label: context.tr('latest'), specialty: ''),
       ...widget.filters,
     ];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -79,8 +81,16 @@ class _TopDoctorsSectionState extends State<TopDoctorsSection> {
             padding: EdgeInsets.zero,
             itemCount: _visible.length,
             separatorBuilder: (_, __) => const SizedBox(width: 12),
-            itemBuilder: (context, index) =>
-                DoctorHorizontalCard(doctor: _visible[index]),
+            itemBuilder: (context, index) => SizedBox(
+              width: 240,
+              child: DoctorHorizontalCard(
+                doctor: _visible[index],
+                onTap: () => context.push(
+                  AppRoutes.doctorDetailsScreen,
+                  extra: _visible[index],
+                ),
+              ),
+            ),
           ),
         ),
       ],
@@ -88,9 +98,12 @@ class _TopDoctorsSectionState extends State<TopDoctorsSection> {
   }
 }
 
-/// Describes a filter chip for the doctors list.
 class DoctorFilter {
-  const DoctorFilter({required this.label, required this.specialty, this.labelKey});
+  const DoctorFilter({
+    required this.label,
+    required this.specialty,
+    this.labelKey,
+  });
 
   final String label;
   final String? labelKey;

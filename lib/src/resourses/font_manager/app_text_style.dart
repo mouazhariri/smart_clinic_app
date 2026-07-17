@@ -359,4 +359,28 @@ class AppTextStyle {
     fontWeight: FontWeight.w500,
     fontSize: 10,
   );
+  static TextStyle tajawalSemiBold18 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w600,
+  fontSize: 18,
+);
+
+static TextStyle tajawalSemiBold16 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w600,
+  fontSize: 16,
+);
+
+static TextStyle tajawalSemiBold14 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w600,
+  fontSize: 14,
+);
+
+static TextStyle tajawalMedium11 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w500,
+  fontSize: 11,
+);
+
+static TextStyle tajawalRegular12 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w400,
+  fontSize: 12,
+);
 }

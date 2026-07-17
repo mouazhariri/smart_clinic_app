@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 /// A medical specialty shown on the home dashboard.
 ///
@@ -14,7 +15,7 @@ class Specialty extends Equatable {
 
   final String id;
   final String labelKey;
-  final IconData icon;
+  final String icon;
 
   @override
   List<Object?> get props => [id, labelKey];

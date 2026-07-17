@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../src/resourses/font_manager/app_text_style.dart';
@@ -7,11 +8,7 @@ import '../../domain/model/specialty.dart';
 
 /// A single specialty tile used in the horizontal specialties list.
 class SpecialtyTile extends StatelessWidget {
-  const SpecialtyTile({
-    super.key,
-    required this.specialty,
-    this.onTap,
-  });
+  const SpecialtyTile({super.key, required this.specialty, this.onTap});
 
   final Specialty specialty;
   final VoidCallback? onTap;
@@ -38,7 +35,7 @@ class SpecialtyTile extends StatelessWidget {
                 borderRadius: BorderRadius.circular(16),
               ),
               alignment: Alignment.center,
-              child: Icon(specialty.icon, size: 28, color: AppColors.dashPrimary),
+              child: SvgPicture.asset(specialty.icon),
             ),
             const SizedBox(height: 8),
             Text(
@@ -46,8 +43,9 @@ class SpecialtyTile extends StatelessWidget {
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
-              style: AppTextStyle.tajawalMedium12
-                  .copyWith(color: AppColors.dashSubtitle),
+              style: AppTextStyle.tajawalMedium12.copyWith(
+                color: AppColors.dashSubtitle,
+              ),
             ),
           ],
         ),

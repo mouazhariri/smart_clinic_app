@@ -27,8 +27,9 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       bottom: false,
+      top: false,
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: const EdgeInsets.fromLTRB( 16,75,16,12),
         decoration: const BoxDecoration(
           color: AppColors.white,
           border: Border(
@@ -65,29 +66,29 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                       ],
                     ),
                   ),
-                  if (locationHint != null) ...[
-                    const SizedBox(height: 4),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Flexible(
-                          child: Text(
-                            locationHint!,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: AppTextStyle.tajawalMedium14
-                                .copyWith(color: AppColors.dashSubtitle),
-                          ),
-                        ),
-                        const SizedBox(width: 4),
-                        const Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          size: 18,
-                          color: AppColors.dashSubtitle,
-                        ),
-                      ],
-                    ),
-                  ],
+                  // if (locationHint != null) ...[
+                  //   const SizedBox(height: 4),
+                  //   Row(
+                  //     mainAxisSize: MainAxisSize.min,
+                  //     children: [
+                  //       Flexible(
+                  //         child: Text(
+                  //           locationHint!,
+                  //           maxLines: 1,
+                  //           overflow: TextOverflow.ellipsis,
+                  //           style: AppTextStyle.tajawalMedium14
+                  //               .copyWith(color: AppColors.dashSubtitle),
+                  //         ),
+                  //       ),
+                  //       const SizedBox(width: 4),
+                  //       const Icon(
+                  //         Icons.keyboard_arrow_down_rounded,
+                  //         size: 18,
+                  //         color: AppColors.dashSubtitle,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ],
                 ],
               ),
             ),

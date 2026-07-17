@@ -20,6 +20,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/app_icon.png
   AssetGenImage get appIcon => const AssetGenImage('assets/icons/app_icon.png');
 
+  /// File path: assets/icons/babies_ic.svg
+  SvgGenImage get babiesIc => const SvgGenImage('assets/icons/babies_ic.svg');
+
   /// File path: assets/icons/brain_ic.svg
   SvgGenImage get brainIc => const SvgGenImage('assets/icons/brain_ic.svg');
 
@@ -52,6 +55,7 @@ class $AssetsIconsGen {
   /// List of all assets
   List<dynamic> get values => [
     appIcon,
+    babiesIc,
     brainIc,
     doctorHeadphone,
     earsIc,
