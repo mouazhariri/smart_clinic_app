@@ -55,7 +55,7 @@ class _TopDoctorsSectionState extends State<TopDoctorsSection> {
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 36,
+          height: 40,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.zero,
@@ -75,7 +75,7 @@ class _TopDoctorsSectionState extends State<TopDoctorsSection> {
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 300,
+          height: 310,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             padding: EdgeInsets.zero,

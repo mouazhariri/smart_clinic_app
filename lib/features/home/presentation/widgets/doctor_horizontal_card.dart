@@ -221,7 +221,7 @@ class DoctorHorizontalCard extends StatelessWidget {
     return Image.network(
       url,
       width: double.infinity,
-      height: 80,
+      height: 100,
       fit: BoxFit.cover,
       errorBuilder: (_, __, ___) => Container(
         height: 80,
