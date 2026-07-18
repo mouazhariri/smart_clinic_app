@@ -9,6 +9,13 @@ class ApiEndPoints {
   static const String appointments = '$domain.smart_clinic.get_appointments';
   static const String bookAppointment = '$domain.smart_clinic.book_appointment';
   static const String cancelAppointment = '$domain.smart_clinic.cancel_appointment';
+
+  //? --- Booking ---
+  static const String doctorSchedule = '$domain.smart_clinic.get_doctor_schedule';
+  static const String paymentMethods = '$domain.smart_clinic.get_payment_methods';
+  static const String createBooking = '$domain.smart_clinic.create_booking';
+  static const String confirmBooking = '$domain.smart_clinic.confirm_booking';
+  static const String cancelBooking = '$domain.smart_clinic.cancel_booking';
   static const String profile = '$domain.smart_clinic.get_profile';
 
   //? --- Customers ---

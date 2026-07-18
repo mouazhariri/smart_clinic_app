@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../../src/resourses/font_manager/app_text_style.dart';
+import '../../../../src/application/router/app_routes.dart';
 import '../../../../src/core/shared_widgets/custom_button_widget.dart';
 import '../../domain/entities/doctor.dart';
 class DoctorBottomBar extends StatelessWidget {
@@ -35,7 +36,7 @@ class DoctorBottomBar extends StatelessWidget {
           ),
           Expanded(
             flex: 2,
-            child:   CustomButtonWidget(
+            child: CustomButtonWidget(
               text: context.tr('book_appointment'),
               isFiled: true,
               height: 60,
@@ -46,18 +47,11 @@ class DoctorBottomBar extends StatelessWidget {
               style: AppTextStyle.interSemiBold16.copyWith(
                 color: AppColors.white,
               ),
-              onTap: (){},
+              onTap: () => context.push(
+      AppRoutes.bookAppointmentScreen,
+      extra: {'doctor': doctor},   // ✅ flat path + extra Map
+    ),
             ),
-            
-            // ElevatedButton(
-            //   onPressed: () {},
-            //   style: ElevatedButton.styleFrom(
-            //     backgroundColor: AppColors.primary,
-            //     minimumSize: const Size(double.infinity, 52),
-            //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            //   ),
-            //   child: Text(context.tr('book_appointment'), style: const TextStyle(color: Colors.white)),
-            // ),
           ),
         ],
       ),

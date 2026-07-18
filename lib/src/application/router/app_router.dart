@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+
 import 'package:smart_clinic_app/features/appointments/presentation/screens/appointments_screen.dart';
-import 'package:smart_clinic_app/features/appointments/presentation/screens/book_appointment_screen.dart';
 import 'package:smart_clinic_app/features/auth/presentation/screens/auth_screen.dart';
 import 'package:smart_clinic_app/features/auth/signIn/presentation/screens/sign_in_screen.dart';
 import 'package:smart_clinic_app/features/auth/signUp/presentation/screens/signup_screen.dart';
 import 'package:smart_clinic_app/features/auth/verification/presentation/screens/verification_account_screen.dart';
+import 'package:smart_clinic_app/features/booking/presentation/screens/booking_confirmation_screen.dart';
+import 'package:smart_clinic_app/features/booking/presentation/screens/booking_screen.dart';
+import 'package:smart_clinic_app/features/booking/presentation/screens/booking_success_screen.dart';
 import 'package:smart_clinic_app/features/chat/presentation/screen/chat_screen.dart';
 import 'package:smart_clinic_app/features/chat/presentation/screen/sessions_screen.dart';
 import 'package:smart_clinic_app/features/doctors/domain/entities/doctor.dart';
@@ -36,6 +39,7 @@ class AppRouter {
       observers: [CustomNavigationObserver()],
       errorBuilder: (context, state) => const FallbackScreen(),
       routes: <RouteBase>[
+        // ── Splash & onboarding ─────────────────────────────────────────────
         _fadeRoute(
           path: AppRoutes.splashScreen,
           builder: (context, state) => const SplashScreen(),
@@ -44,6 +48,8 @@ class AppRouter {
           path: AppRoutes.onBoarding,
           builder: (context, state) => const OnBoardingScreen(),
         ),
+
+        // ── Auth ────────────────────────────────────────────────────────────
         _fadeRoute(
           path: AppRoutes.authScreen,
           builder: (context, state) => const AuthLandingScreen(),
@@ -54,9 +60,7 @@ class AppRouter {
         ),
         _fadeRoute(
           path: AppRoutes.signUpScreen,
-          builder: (context, state) => SignupScreen(
-            // phoneNumber: state.extra is String ? state.extra as String : '',
-          ),
+          builder: (context, state) => const SignupScreen(),
         ),
         _fadeRoute(
           path: AppRoutes.verificationScreen,
@@ -64,6 +68,8 @@ class AppRouter {
             phone: state.extra is String ? state.extra as String : '',
           ),
         ),
+
+        // ── Main tabs ───────────────────────────────────────────────────────
         _fadeRoute(
           path: AppRoutes.homeScreen,
           builder: (context, state) =>
@@ -75,19 +81,6 @@ class AppRouter {
               const MainScaffold(currentIndex: 1, child: DoctorsScreen()),
         ),
         _fadeRoute(
-          path: AppRoutes.doctorDetailsScreen,
-          builder: (context, state) {
-            final doctor = state.extra as Doctor;
-            return DoctorDetailsScreen(doctor: doctor);
-          },
-        ),
-        _fadeRoute(
-          path: AppRoutes.bookAppointmentScreen,
-          builder: (context, state) => BookAppointmentScreen(
-            doctorId: state.pathParameters['doctorId']!,
-          ),
-        ),
-        _fadeRoute(
           path: AppRoutes.appointmentsScreen,
           builder: (context, state) =>
               const MainScaffold(currentIndex: 2, child: AppointmentsScreen()),
@@ -97,6 +90,85 @@ class AppRouter {
           builder: (context, state) =>
               const MainScaffold(currentIndex: 3, child: ProfileScreen()),
         ),
+
+        // ── Doctor details ──────────────────────────────────────────────────
+        _fadeRoute(
+          path: AppRoutes.doctorDetailsScreen,
+          builder: (context, state) {
+            final doctor = state.extra;
+            if (doctor is! Doctor) return const FallbackScreen();
+            return DoctorDetailsScreen(doctor: doctor);
+          },
+        ),
+
+        // ── Booking ─────────────────────────────────────────────────────────
+        _fadeRoute(
+          path: AppRoutes.bookAppointmentScreen,
+          builder: (context, state) {
+            final extra = state.extra;
+            if (extra is! Map) return const FallbackScreen();
+            final doctor = extra['doctor'];
+            if (doctor is! Doctor) return const FallbackScreen();
+            return BookingScreen(doctor: doctor);
+          },
+        ),
+
+        // ── Booking confirmation ─────────────────────────────────────────────
+        _fadeRoute(
+          path: AppRoutes.bookAppointmentConfirmScreen,
+          builder: (context, state) {
+            final extra = state.extra;
+            if (extra is! Map) return const FallbackScreen();
+
+            final doctor = extra['doctor'];
+            final selectedDate = extra['selectedDate'];
+            final selectedTime = extra['selectedTime'];
+            final price = extra['price'];
+
+            if (doctor is! Doctor ||
+                selectedDate is! DateTime ||
+                selectedTime is! String) {
+              return const FallbackScreen();
+            }
+
+            return BookingConfirmationScreen(
+              doctor: doctor,
+              selectedDate: selectedDate,
+              selectedTime: selectedTime,
+              price: price is double ? price : 0.0,
+            );
+          },
+        ),
+
+        // ── Booking success ──────────────────────────────────────────────────
+        _fadeRoute(
+          path: AppRoutes.bookAppointmentSuccessScreen,
+          builder: (context, state) {
+            final extra = state.extra;
+            if (extra is! Map) return const FallbackScreen();
+
+            final doctor = extra['doctor'];
+            final selectedDate = extra['selectedDate'];
+            final selectedTime = extra['selectedTime'];
+            final appointmentNumber =
+                extra['appointmentNumber'] as String? ?? '#9874';
+
+            if (doctor is! Doctor ||
+                selectedDate is! DateTime ||
+                selectedTime is! String) {
+              return const FallbackScreen();
+            }
+
+            return BookingSuccessScreen(
+              doctor: doctor,
+              selectedDate: selectedDate,
+              selectedTime: selectedTime,
+              appointmentNumber: appointmentNumber,
+            );
+          },
+        ),
+
+        // ── Chat ────────────────────────────────────────────────────────────
         _fadeRoute(
           path: AppRoutes.sessionScreen,
           builder: (context, state) => const SessionsScreen(),
@@ -120,6 +192,7 @@ class AppRouter {
         return CustomTransitionPage(
           key: state.pageKey,
           child: builder(context, state),
+          transitionDuration: const Duration(milliseconds: 250),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             return FadeTransition(opacity: animation, child: child);
           },

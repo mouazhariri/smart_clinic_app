@@ -17,7 +17,7 @@ class DoctorCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(24),
-      onTap: () => context.push(AppRoutes.doctorDetailsPath(doctor.id)),
+      onTap: () => context.push(AppRoutes.doctorDetailsScreen,extra: doctor,   ),
       child: Container(
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
@@ -36,7 +36,7 @@ class DoctorCardWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(18),
               child: AppCachedNetworkImage(
-                imageUrl: doctor.imageUrl??'',
+                imageUrl: doctor.imageUrl ?? '',
                 width: 88,
                 height: 96,
                 fit: BoxFit.cover,
@@ -63,7 +63,11 @@ class DoctorCardWidget extends StatelessWidget {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      const Icon(Icons.star_rounded, color: AppColors.ratingYellow, size: 18),
+                      const Icon(
+                        Icons.star_rounded,
+                        color: AppColors.ratingYellow,
+                        size: 18,
+                      ),
                       const SizedBox(width: 4),
                       Text(
                         '${doctor.rating} (${doctor.reviewsCount})',
@@ -77,7 +81,12 @@ class DoctorCardWidget extends StatelessWidget {
                   SizedBox(
                     height: 36,
                     child: FilledButton(
-                      onPressed: () => context.push(AppRoutes.bookAppointmentPath(doctor.id)),
+                      onPressed: () {
+                        context.push(
+                          AppRoutes.bookAppointmentScreen,
+                          extra: {'doctor': doctor}, // ✅ flat path + extra Map
+                        );
+                      },
                       style: FilledButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         shape: RoundedRectangleBorder(

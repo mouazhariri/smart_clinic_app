@@ -1,24 +1,26 @@
 abstract class AppRoutes {
-  //? init screen
-  static const String initScreen = '/';
+  // ── Init ──────────────────────────────────────────────────────────────────
   static const String splashScreen = '/splash';
   static const String onBoarding = '/onBoarding';
 
+  // ── Auth ──────────────────────────────────────────────────────────────────
   static const String authScreen = '/auth';
   static const String signInScreen = '/signIn';
   static const String signUpScreen = '/signUp';
   static const String verificationScreen = '/verification';
 
+  // ── Main ──────────────────────────────────────────────────────────────────
   static const String homeScreen = '/home';
   static const String doctorsScreen = '/doctors';
-  static const String doctorDetailsScreen = '/doctors/:doctorId';
-  static const String bookAppointmentScreen = '/doctors/:doctorId/book';
+
+  // ✅ Flat paths — no :doctorId in the path, doctorId goes in extra
+  static const String doctorDetailsScreen = '/doctor-details';
+  static const String bookAppointmentScreen = '/book-appointment';
+  static const String bookAppointmentConfirmScreen = '/book-appointment/confirm';
+  static const String bookAppointmentSuccessScreen = '/book-appointment/success';
+
   static const String appointmentsScreen = '/appointments';
   static const String profileScreen = '/profile';
-
   static const String sessionScreen = '/session';
   static const String chatScreen = '/chat';
-
-  static String doctorDetailsPath(String doctorId) => '/doctors/$doctorId';
-  static String bookAppointmentPath(String doctorId) => '/doctors/$doctorId/book';
 }
