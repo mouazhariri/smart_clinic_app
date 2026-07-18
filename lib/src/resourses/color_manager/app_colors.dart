@@ -1,9 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 abstract class AppColors {
-  static const Color primary = Color(0xFF005AAB);
+  static const Color primary = Color(0xFF1D4ED8);
   static const Color secondPrimary = Color(0xFF135BEC);
   static const Color thirdPrimary = Color(0xFFF6EAE5);
   static const Color primaryOpacity = Color(0xFFFFECDC);
@@ -29,7 +30,18 @@ abstract class AppColors {
   static const navBorder      = Color(0xFFE2E8F0);
   static const cardShadow     = Color(0x19005AAB);
 
+static const Color homeCard = Color(0xffFFFFFF);
+static const Color homeShadow = Color(0x12000000);
 
+static const Color homeIconBackground = Color(0xffF8FAFC);
+
+static const Color homeChip = Color(0xffF8FAFC);
+
+static const Color homeDivider = Color(0xffEEF2F7);
+
+static const Color homeBlueLight = Color.fromARGB(255, 243, 245, 250);
+
+static const Color homeBorder = Color(0xffE7EDF5);
 static const Color metricGreen = Color(0xFFD1FAE5);
 static const Color metricGreenIcon = Color(0xFF15803D);
 
@@ -46,6 +58,7 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color successGreen = Color(0xFF00721D);
   static const Color errorRed = Color(0xFFBB0101);
   static const Color warnYellow = Color(0xFF7A5800);
+  static const Color ratingYellow = Color(0xFFFFB800);
   static const Color filterBg = Color(0xFFF2F4F7);
   static const Color paidBg = Color(0xFFCCEACC);
   static const Color paidText = Color(0xFF4E7B4E);
@@ -55,16 +68,26 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color partlyPaidText = Color(0xFF005B93);
   static const Color returnBg = Color(0xFFFFDCC3);
   static const Color returnText = Color(0xFFCB671E);
-
+  static const Color warning = Color(0xFFF59E0B);
+ static const border = Color(0xFFE2E8F0);
+  static const innerBorder = Color(0xFFF1F1F1);
+  static const chipBg = Color(0xFFF1F5F9);
+  static const chipText = Color(0xFF475569);
+  static const dark = Color(0xFF0F172A);
+  static const subtitle = Color(0xFF64748B);
+  static const placeholder = Color(0xFF94A3B8);
+  static const divider = Color(0xFFF1F5F9);
   // static const Color background = Color(0xffFAFAF9);
 
   static const Color fieldBackground = Color(0xFFEFF0F6);
   static const Color dividerColor = Color(0xFFe9e9e9);
   static const Color white = Color(0xFFFFFFFF);
+  static const Color white70 = Color(0xB3FFFFFF);
+  static const Color transparent = Color(0x00000000);
   static const Color cardWhite = Color(0xFFF5F5F5);
   static const Color shadow = Color(0x0C000000);
   static const Color darkShadow = Color(0x19000000);
-  static const Color dark = Color(0xFF201C11);
+  // static const Color dark = Color(0xFF201C11);
   static const Color darkMedGrey = Color(0x1AA0A0A0);
   static const Color disabledButton = Color(0xFFA0A0A0);
   static const Color borderGrey = Color(0xFFe8e8e8);
@@ -172,7 +195,34 @@ static const Color metricPurpleIcon = Color(0xFF7C3AED);
   static const Color infoIconBg = Color(0xFFF2E1E3);
   static const Color infoText = Color(0xFF727784);
   static const Color methodSelectorBorder = Color(0xFFDBE0E6);
+
+  // ── Smart Clinic Auth UI ───────────────────────────
+  static const Color authBackground = Color(0xFFF7FAFE);
+  static const Color authTitle = Color(0xFF42526B);
+  static const Color authSubtitle = Color(0xFF7E8AA0);
+  static const Color authHint = Color(0xFF9AA6B7);
+  static const Color authInputBorder = Color(0xFFDDE5F0);
+  static const Color authLightBlue = Color(0xFFEFF5FE);
+  static const Color authDivider = Color(0xFFE9EEF6);
+  static const Color authIconMuted = Color(0xFFD4DAE4);
+  static const Color authIcon = Color(0xFFB8C1D1);
+  static const Color authFlagPlaceholder = Color(0xFFD9DDE6);
+
+  // ── Home dashboard design system ──────────────────────────────────
+  static const Color dashBackground = Color(0xFFF8FAFC); // bg-Main
+  static const Color dashPrimary = Color(0xFF1D4ED8); // Primary (bright blue)
+  static const Color dashPrimaryBg = Color(0xFFEFF6FF); // bg-Primary
+  static const Color dashText = Color(0xFF0F172A); // Dark
+  static const Color dashSubtitle = Color(0xFF64748B); // Subtitle
+  static const Color dashBodyNeutral = Color(0xFF475569); // Body-Neutral
+  static const Color dashPlaceholder = Color(0xFF94A3B8); // Placeholder
+  static const Color dashBorder = Color(0xFFE2E8F0); // Border
+  static const Color dashNeutralBg = Color(0xFFF1F5F9); // bg-Neutral / Dividers
+  static const Color dashRating = Color(0xFFF59E0B); // Warning (rating star)
+  static const Color dashIconBg = Color(0xFFFBFBFB); // specialty icon tile
+  static const Color dashHairline = Color(0xFFF1F1F1); // inner hairline border
 }
+
 
 class AvatarColors {
   static final List<Color> _colors = [

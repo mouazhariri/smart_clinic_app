@@ -2,6 +2,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:smart_clinic_app/src/logger/log_services/dev_logger.dart';
 
 part 'current_language.g.dart';
 
@@ -19,6 +20,7 @@ class CurrentLanguage extends _$CurrentLanguage {
     } else {
       state = 'en';
     }
+    Dev.logLine(languageCode);
   }
 
   void changeLanguage(BuildContext context, String languageCode) {

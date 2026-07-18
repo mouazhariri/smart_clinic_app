@@ -20,7 +20,7 @@ final class SignUpControllerProvider
         argument: null,
         retry: null,
         name: r'signUpControllerProvider',
-        isAutoDispose: true,
+        isAutoDispose: false,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
@@ -33,7 +33,7 @@ final class SignUpControllerProvider
   SignUpController create() => SignUpController();
 }
 
-String _$signUpControllerHash() => r'30d89d2ffb26ee3a7320ca963d7f86b0a97b8937';
+String _$signUpControllerHash() => r'50483ec7d1ba326644ce0422266c23c15f8ee083';
 
 abstract class _$SignUpController extends $AsyncNotifier<SignupResponseModel?> {
   FutureOr<SignupResponseModel?> build();

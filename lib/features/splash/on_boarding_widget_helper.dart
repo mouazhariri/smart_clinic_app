@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smart_clinic_app/src/resourses/color_manager/app_colors.dart';
 
 class OnboardingPageWidget extends StatelessWidget {
   final String? imageUrl; // Can be replaced with Lottie later
@@ -46,7 +47,7 @@ class OnboardingPageWidget extends StatelessWidget {
               description,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Colors.grey[600],
+                    color: AppColors.textSecondary,
                     height: 1.5,
                   ),
             ),

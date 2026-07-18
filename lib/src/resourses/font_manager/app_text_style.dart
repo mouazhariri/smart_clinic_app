@@ -305,4 +305,86 @@ class AppTextStyle {
     fontWeight: FontWeight.w700,
     fontSize: 25,
   );
+
+  //**************** Tajawal (home dashboard design) ******* */
+  static TextStyle tajawalBold20 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w700,
+    fontSize: 20,
+  );
+  static TextStyle tajawalExtraBold17 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w800,
+    fontSize: 17,
+  );
+  static TextStyle tajawalBold16 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w700,
+    fontSize: 16,
+  );
+  static TextStyle tajawalMedium16 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w500,
+    fontSize: 16,
+  );
+  static TextStyle tajawalRegular16 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w400,
+    fontSize: 16,
+  );
+  static TextStyle tajawalBold14 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w700,
+    fontSize: 14,
+  );
+  static TextStyle tajawalMedium14 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w500,
+    fontSize: 14,
+  );
+  static TextStyle tajawalRegular14 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w400,
+    fontSize: 14,
+  );
+  static TextStyle tajawalMedium13 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w500,
+    fontSize: 13,
+  );
+  static TextStyle tajawalBold12 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w700,
+    fontSize: 12,
+  );
+  static TextStyle tajawalMedium12 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w500,
+    fontSize: 12,
+  );
+  static TextStyle tajawalBold18 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w700,
+    fontSize: 18,
+  );
+  static TextStyle tajawalMedium10 = GoogleFonts.tajawal(
+    fontWeight: FontWeight.w500,
+    fontSize: 10,
+  );
+  static TextStyle tajawalSemiBold18 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w600,
+  fontSize: 18,
+);
+
+static TextStyle tajawalSemiBold16 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w600,
+  fontSize: 16,
+);
+
+static TextStyle tajawalSemiBold14 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w600,
+  fontSize: 14,
+);
+
+static TextStyle tajawalMedium11 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w500,
+  fontSize: 11,
+);
+
+static TextStyle tajawalRegular10 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w400,
+  fontSize: 10,
+);
+static TextStyle tajawalRegular12 = GoogleFonts.tajawal(
+  fontWeight: FontWeight.w400,
+  fontSize: 12,
+);
 }
