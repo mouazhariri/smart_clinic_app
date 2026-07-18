@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_clinic_app/features/appointments/presentation/controller/appointments_state.dart';
 
 import '../../../../src/application/router/app_routes.dart';
 import '../../../../src/resourses/color_manager/app_colors.dart';
@@ -135,8 +136,30 @@ class BookAppointmentStep2Screen extends ConsumerWidget {
                           ),
                         ],
                       ),
-                      Container(height: 1, color: AppColors.divider),
-                      // Patient info (test data from FakeDoctors)
+                      // Booking number tag
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFEFF6FF),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          spacing: 6,
+                          children: [
+                            Text(
+                              '#أ ج ل - 9874',
+                              textAlign: TextAlign.right,
+                              style: AppTextStyle.tajawalBold12.copyWith(
+                                color: AppColors.dashPrimary,
+                              ),
+                            ),
+                            Icon(Icons.tag, size: 14, color: AppColors.dashPrimary),
+                          ],
+                        ),
+                      ),
+                      // Patient info row
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -201,8 +224,7 @@ class BookAppointmentStep2Screen extends ConsumerWidget {
                 ),
               ),
             ),
-          ),
-          // Payment info card (matching screenshot)
+          // Payment details (from design)
           SliverPadding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             sliver: SliverToBoxAdapter(
@@ -355,6 +377,8 @@ class BookAppointmentStep2Screen extends ConsumerWidget {
             ),
           ),
         ],
+          ),
+
       ),
     );
   }

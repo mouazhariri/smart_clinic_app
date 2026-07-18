@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-import '../../domain/enums/booking_status.dart';
-import '../../domain/enums/payment_type.dart';
+
 import '../../domain/model/appointment_slot.dart';
 import '../../domain/model/booking.dart';
 import '../../domain/model/patient_information.dart';
@@ -43,6 +42,8 @@ class BookingState extends Equatable {
   final bool isBookingCreated;
   final bool isConfirmed;
 
+  // ── copyWith ──────────────────────────────────────────────────────────────
+  // Sentinel flags allow nullable fields to be explicitly cleared to null
   BookingState copyWith({
     bool? isLoading,
     String? doctorName,
@@ -60,22 +61,29 @@ class BookingState extends Equatable {
     String? error,
     bool? isBookingCreated,
     bool? isConfirmed,
+    // ── Sentinels ─────────────────
+    bool clearSelectedTime = false,
+    bool clearError = false,
+    bool clearSelectedDate = false,
   }) {
     return BookingState(
       isLoading: isLoading ?? this.isLoading,
       doctorName: doctorName ?? this.doctorName,
       doctorSpecialty: doctorSpecialty ?? this.doctorSpecialty,
       clinicName: clinicName ?? this.clinicName,
-      selectedDate: selectedDate ?? this.selectedDate,
-      selectedTime: selectedTime ?? this.selectedTime,
+      selectedDate:
+          clearSelectedDate ? null : (selectedDate ?? this.selectedDate),
+      selectedTime:
+          clearSelectedTime ? null : (selectedTime ?? this.selectedTime),
       availableDates: availableDates ?? this.availableDates,
       availableSlots: availableSlots ?? this.availableSlots,
-      selectedPaymentMethod: selectedPaymentMethod ?? this.selectedPaymentMethod,
+      selectedPaymentMethod:
+          selectedPaymentMethod ?? this.selectedPaymentMethod,
       patientInformation: patientInformation ?? this.patientInformation,
       price: price ?? this.price,
       notes: notes ?? this.notes,
       booking: booking ?? this.booking,
-      error: error ?? this.error,
+      error: clearError ? null : (error ?? this.error),
       isBookingCreated: isBookingCreated ?? this.isBookingCreated,
       isConfirmed: isConfirmed ?? this.isConfirmed,
     );

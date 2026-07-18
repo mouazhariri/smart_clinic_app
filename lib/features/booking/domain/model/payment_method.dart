@@ -1,41 +1,48 @@
-import 'package:equatable/equatable.dart';
-import '../enums/payment_type.dart';
+import 'package:smart_clinic_app/features/booking/domain/enums/payment_type.dart';
 
-class PaymentMethod extends Equatable {
+class PaymentMethod {
+  final String id;
+  final String name;
+  final String description;
+  final String icon;
+  final bool isSelected;
+  final PaymentType type;
+
   const PaymentMethod({
-    required this.id,
+    this.id = '',
     required this.name,
-    required this.icon,
-    required this.description,
+    this.description = '',
+    this.icon = '',
     this.isSelected = false,
     this.type = PaymentType.cash,
   });
 
-  final String id;
-  final String name;
-  final String icon;
-  final String description;
-  final bool isSelected;
-  final PaymentType type;
-
   PaymentMethod copyWith({
     String? id,
     String? name,
-    String? icon,
     String? description,
+    String? icon,
     bool? isSelected,
     PaymentType? type,
   }) {
     return PaymentMethod(
       id: id ?? this.id,
       name: name ?? this.name,
-      icon: icon ?? this.icon,
       description: description ?? this.description,
+      icon: icon ?? this.icon,
       isSelected: isSelected ?? this.isSelected,
       type: type ?? this.type,
     );
   }
 
   @override
-  List<Object?> get props => [id, name, icon, description, isSelected, type];
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PaymentMethod &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          name == other.name;
+
+  @override
+  int get hashCode => id.hashCode ^ name.hashCode;
 }

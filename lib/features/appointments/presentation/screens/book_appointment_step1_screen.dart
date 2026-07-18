@@ -130,7 +130,7 @@ class _BookAppointmentStep1ScreenState extends ConsumerState<BookAppointmentStep
                       label: item['label']!,
                       dayNumber: item['number']!,
                       isSelected: selectedDateIndex == reversedIndex,
-                      onTap: () => setState(() => selectedDateIndex = reversedIndex),
+                      onTap: () => setState(() => selectedDateIndex = reversedIndex), isDisabled: false,
                     );
                   },
                 ),

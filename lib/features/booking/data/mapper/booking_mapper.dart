@@ -1,6 +1,5 @@
 import '../../domain/model/booking.dart';
 import '../../domain/enums/booking_status.dart';
-import '../models/booking_model.dart'; // Not created yet; mapping handled inline for now
 
 class BookingMapper {
   static Booking toDomain(dynamic data) {

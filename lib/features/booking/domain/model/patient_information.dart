@@ -1,28 +1,23 @@
-import 'package:equatable/equatable.dart';
+class PatientInformation {
+  final DateTime? birthDate;
+  final String? city;
+  final String? gender;
 
-class PatientInformation extends Equatable {
   const PatientInformation({
     this.birthDate,
-    this.gender,
     this.city,
+    this.gender,
   });
-
-  final DateTime? birthDate;
-  final String? gender;
-  final String? city;
 
   PatientInformation copyWith({
     DateTime? birthDate,
-    String? gender,
     String? city,
+    String? gender,
   }) {
     return PatientInformation(
       birthDate: birthDate ?? this.birthDate,
-      gender: gender ?? this.gender,
       city: city ?? this.city,
+      gender: gender ?? this.gender,
     );
   }
-
-  @override
-  List<Object?> get props => [birthDate, gender, city];
 }
