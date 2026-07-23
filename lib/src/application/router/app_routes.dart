@@ -23,4 +23,9 @@ abstract class AppRoutes {
   static const String profileScreen = '/profile';
   static const String sessionScreen = '/session';
   static const String chatScreen = '/chat';
+  static const String appointmentTrackingScreen = '/appointment/tracking';
+static const String sessionDetailsScreen = '/appointment/session';
+  static const String privacyPolicyScreen = '/privacy-policy';
+  static const String termsPrivacyScreen = '/terms-privacy';
+  static const String changeLanguageScreen = '/change-language';
 }

@@ -12,6 +12,7 @@ abstract class DoctorModel with _$DoctorModel {
   const factory DoctorModel({
     required String id,
     required String name,
+    required String gender,
     required String specialty,
     required String about,
     required String imageUrl,
@@ -42,7 +43,7 @@ abstract class DoctorModel with _$DoctorModel {
       availableDates: availableDates,
       availableTimes: availableTimes,
       clinicAddress: clinicAddress,
-      consultationFee: consultationFee,
+      consultationFee: consultationFee, gender: gender,
     );
   }
 }

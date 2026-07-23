@@ -33,7 +33,7 @@ final class DoctorsControllerProvider
   DoctorsController create() => DoctorsController();
 }
 
-String _$doctorsControllerHash() => r'065cc2057958abf8849f61c4953b940d024e0fe3';
+String _$doctorsControllerHash() => r'14df249900f9a7510f91e28fbe0b3d23170bdda8';
 
 abstract class _$DoctorsController extends $AsyncNotifier<DoctorsState> {
   FutureOr<DoctorsState> build();

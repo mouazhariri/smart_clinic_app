@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 import '../../../src/infrastructure/storage/hive/hive_type_ids.dart';
-import '../domain/entities/appointment.dart';
+import '../domain/model/appointment.dart';
 import 'models/appointment_model.dart';
 
 class AppointmentModelHiveAdapter extends TypeAdapter<AppointmentModel> {

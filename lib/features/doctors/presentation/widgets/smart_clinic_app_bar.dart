@@ -58,7 +58,7 @@ class SmartClinicAppBar extends StatelessWidget {
                 ],
               ),
             ),
-            if (trailing != null) trailing!,
+            ?trailing,
           ],
         ),
       ),

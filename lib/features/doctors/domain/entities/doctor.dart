@@ -205,6 +205,7 @@ class Doctor extends Equatable {
   const Doctor({
     required this.id,
     required this.name,
+    required this.gender,
     required this.specialty,
     required this.about,
     required this.imageUrl,
@@ -223,6 +224,7 @@ class Doctor extends Equatable {
 
   final String id;
   final String name;
+  final String gender;
   final String specialty;
   final String? imageUrl;
   final String? about;
@@ -266,6 +268,7 @@ class FakeDoctors {
     Doctor(
       id: '1',
       name: 'Dr. Sarah Johnson',
+      gender: 'female',
       specialty: 'cardiology',
       about:
           'Experienced cardiologist specializing in heart disease prevention and treatment.',
@@ -285,6 +288,7 @@ class FakeDoctors {
     Doctor(
       id: '2',
       name: 'Dr. Michael Brown',
+      gender: "male",
       specialty: 'dentist',
       about: 'Expert dentist providing cosmetic and restorative dental care.',
       imageUrl: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d',
@@ -303,6 +307,8 @@ class FakeDoctors {
     Doctor(
       id: '3',
       name: 'Dr. Emily Wilson',
+      gender: 'female',
+
       specialty: 'neurology',
       about: 'Neurologist focused on brain and nervous system disorders.',
       imageUrl: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f',
@@ -321,6 +327,8 @@ class FakeDoctors {
     Doctor(
       id: '4',
       name: 'Dr. Olivia Martinez',
+      gender: 'female',
+
       specialty: 'dermatology',
       about:
           'Treating skin, hair and nail diseases using the latest technology.',
@@ -340,6 +348,8 @@ class FakeDoctors {
     Doctor(
       id: '5',
       name: 'Dr. David Miller',
+      gender: "male",
+
       specialty: 'orthopedic',
       about:
           'Orthopedic surgeon specializing in sports injuries and joint replacement.',
@@ -359,6 +369,8 @@ class FakeDoctors {
     Doctor(
       id: '6',
       name: 'Dr. Sophia Lee',
+      gender: 'female',
+
       specialty: 'pediatrics',
       about:
           'Providing compassionate healthcare for infants, children and adolescents.',

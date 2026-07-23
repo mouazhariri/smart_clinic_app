@@ -22,11 +22,10 @@ abstract class UserProfileModel with _$UserProfileModel {
 
   UserProfile toEntity() {
     return UserProfile(
-      fullNameKey: fullNameKey,
-      emailKey: emailKey,
-      phoneKey: phoneKey,
-      languageCode: languageCode,
-      themeKey: themeKey,
+      fullName: fullNameKey,
+      qid: phoneKey,
+      email: emailKey,
+      phoneNumber: phoneKey
     );
   }
 }

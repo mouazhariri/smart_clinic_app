@@ -30,7 +30,7 @@ class DoctorsLocalDataSourceImpl implements DoctorsLocalDataSource {
         patientsCount: 1800,
         availableDates: dates,
         availableTimes: const ['09:00 AM', '10:30 AM', '12:00 PM', '02:30 PM'],
-        clinicAddress: 'address_al_sham_medical_center',
+        clinicAddress: 'address_al_sham_medical_center', gender: "famale",
       ),
       DoctorModel(
         id: 'doctor-2',
@@ -45,7 +45,7 @@ class DoctorsLocalDataSourceImpl implements DoctorsLocalDataSource {
         patientsCount: 1260,
         availableDates: dates,
         availableTimes: const ['08:30 AM', '11:00 AM', '01:00 PM', '04:00 PM'],
-        clinicAddress: 'address_smile_clinic',
+        clinicAddress: 'address_smile_clinic', gender: 'male',
       ),
       DoctorModel(
         id: 'doctor-3',
@@ -61,7 +61,7 @@ class DoctorsLocalDataSourceImpl implements DoctorsLocalDataSource {
         availableDates: dates,
         availableTimes: const ['09:30 AM', '11:30 AM', '03:00 PM', '05:00 PM'],
         clinicAddress: 'address_family_care_clinic',
-        consultationFee: 500,
+        consultationFee: 500, gender: "famale",
       ),
     ];
   }

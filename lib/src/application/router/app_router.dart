@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:smart_clinic_app/features/appointments/presentation/screens/appointment_tracking_screen.dart';
 
 import 'package:smart_clinic_app/features/appointments/presentation/screens/appointments_screen.dart';
+import 'package:smart_clinic_app/features/appointments/presentation/screens/session_details_screen.dart';
 import 'package:smart_clinic_app/features/auth/presentation/screens/auth_screen.dart';
 import 'package:smart_clinic_app/features/auth/signIn/presentation/screens/sign_in_screen.dart';
 import 'package:smart_clinic_app/features/auth/signUp/presentation/screens/signup_screen.dart';
@@ -17,10 +19,13 @@ import 'package:smart_clinic_app/features/doctors/presentation/screens/doctor_de
 import 'package:smart_clinic_app/features/doctors/presentation/screens/doctors_screen.dart';
 import 'package:smart_clinic_app/features/home/presentation/screens/home_screen.dart';
 import 'package:smart_clinic_app/features/home/presentation/screens/main_scaffold.dart';
+import 'package:smart_clinic_app/features/profile/presentation/screens/change_language_screen.dart';
+import 'package:smart_clinic_app/features/profile/presentation/screens/privacy_policy_screen.dart';
 import 'package:smart_clinic_app/features/profile/presentation/screens/profile_screen.dart';
 import 'package:smart_clinic_app/features/splash/presentation/pages/on_boarding.dart';
 import 'package:smart_clinic_app/features/splash/presentation/pages/splash.dart';
 
+import '../../../features/profile/presentation/screens/terms_privacy_screen.dart';
 import 'app_routes.dart';
 import 'custom_navigation_observer.dart';
 import 'fallback_screen.dart';
@@ -176,6 +181,40 @@ class AppRouter {
         _fadeRoute(
           path: AppRoutes.chatScreen,
           builder: (context, state) => const ChatScreen(),
+        ),
+        _fadeRoute(
+          path: AppRoutes.appointmentTrackingScreen,
+          builder: (context, state) {
+            final id = state.extra as String?;
+            if (id == null) return const FallbackScreen();
+            return AppointmentTrackingScreen(appointmentId: id);
+          },
+        ),
+        _fadeRoute(
+          path: AppRoutes.sessionDetailsScreen,
+          builder: (context, state) {
+            final id = state.extra as String?;
+            if (id == null) return const FallbackScreen();
+            return SessionDetailsScreen(appointmentId: id);
+          },
+        ),
+        _fadeRoute(
+          path: AppRoutes.privacyPolicyScreen,
+          builder: (context, state) {
+            return PrivacyPolicyScreen();
+          },
+        ),
+        _fadeRoute(
+          path: AppRoutes.changeLanguageScreen,
+          builder: (context, state) {
+            return ChangeLanguageScreen();
+          },
+        ),
+        _fadeRoute(
+          path: AppRoutes.termsPrivacyScreen,
+          builder: (context, state) {
+            return TermsPrivacyScreen();
+          },
         ),
       ],
     );

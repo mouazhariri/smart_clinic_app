@@ -11,53 +11,78 @@ part 'doctors_controller.g.dart';
 class DoctorsController extends _$DoctorsController {
   @override
   FutureOr<DoctorsState> build() async {
-  final repo = ref.read(doctorsRepositoryProvider);
-
-  final response = await repo.getDoctors();
-
-  return DoctorsState(
-    doctors: AsyncData(response.data ?? []),
-    searchQuery: '',
-  );
-    // Future<void>.microtask(() async { await getDoctors(); });
-    // return DoctorsState.init();
+    final repo = ref.read(doctorsRepositoryProvider);
+    final response = await repo.getDoctors();
+    return DoctorsState(
+      doctors: AsyncData(response.data ?? []),
+      searchQuery: '',
+      filter: const DoctorFilter(),
+    );
   }
 
-  Future<List<Doctor>?> getDoctors() async {
+  Future<void> getDoctors() async {
+    final current = state.value;
+    if (current == null) return;
+    state = AsyncData(current.copyWith(doctors: const AsyncLoading()));
     try {
-      state = AsyncData(state.value!.copyWith(doctors: const AsyncLoading()));
       final repo = ref.read(doctorsRepositoryProvider);
       final response = await repo.getDoctors();
-
       if (response.hasFailed) {
-        state = AsyncData(
-          state.value!.copyWith(
-            doctors: AsyncError(
-              response.message ?? 'Something went wrong',
-              StackTrace.fromString(response.message ?? ''),
-            ),
+        state = AsyncData(current.copyWith(
+          doctors: AsyncError(
+            response.message ?? 'Something went wrong',
+            StackTrace.empty,
           ),
-        );
-        return null;
+        ));
+        return;
       }
-
-      final doctors = response.data?.map((model) => model).toList() ?? [];
-      state = AsyncData(state.value!.copyWith(doctors: AsyncData(doctors)));
-      return doctors;
+      state = AsyncData(current.copyWith(
+        doctors: AsyncData(response.data ?? []),
+      ));
     } catch (e, st) {
-      state = AsyncData(state.value!.copyWith(doctors: AsyncError(e, st)));
-      return null;
+      state = AsyncData(
+          current.copyWith(doctors: AsyncError(e, st)));
     }
   }
 
   void updateSearchQuery(String query) {
-    final currentState = state.value;
-    if (currentState == null) return;
-    state = AsyncData(currentState.copyWith(searchQuery: query));
+    final current = state.value;
+    if (current == null) return;
+    state = AsyncData(current.copyWith(searchQuery: query));
+  }
+
+  void applyFilter(DoctorFilter filter) {
+    final current = state.value;
+    if (current == null) return;
+    state = AsyncData(current.copyWith(filter: filter));
+  }
+
+  void clearFilter() {
+    final current = state.value;
+    if (current == null) return;
+    state = AsyncData(current.copyWith(filter: const DoctorFilter()));
+  }
+
+  void removeAvailabilityFilter() {
+    final current = state.value;
+    if (current == null) return;
+    state = AsyncData(current.copyWith(
+      filter: current.filter
+          .copyWith(availability: AvailabilityFilter.all),
+    ));
+  }
+
+  void removeGenderFilter() {
+    final current = state.value;
+    if (current == null) return;
+    state = AsyncData(current.copyWith(
+      filter: current.filter.copyWith(gender: GenderFilter.all),
+    ));
   }
 }
 
-final doctorDetailsProvider = FutureProvider.family<Doctor, String>((ref, id) async {
+final doctorDetailsProvider =
+    FutureProvider.family<Doctor, String>((ref, id) async {
   final repo = ref.read(doctorsRepositoryProvider);
   final response = await repo.getDoctorById(id);
   if (response.hasFailed || response.data == null) {

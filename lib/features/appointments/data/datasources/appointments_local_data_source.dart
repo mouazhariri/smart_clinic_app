@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
 
 import '../../../../src/infrastructure/storage/hive/hive_boxes.dart';
-import '../../domain/entities/appointment.dart';
+import '../../domain/model/appointment.dart';
 import '../models/appointment_model.dart';
 
 abstract class AppointmentsLocalDataSource {

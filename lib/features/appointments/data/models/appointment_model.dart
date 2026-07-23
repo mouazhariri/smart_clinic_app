@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../domain/entities/appointment.dart';
+import '../../domain/model/appointment.dart';
 
 part 'appointment_model.freezed.dart';
 part 'appointment_model.g.dart';
@@ -28,11 +28,11 @@ abstract class AppointmentModel with _$AppointmentModel {
       id: appointment.id,
       doctorId: appointment.doctorId,
       doctorName: appointment.doctorName,
-      specialty: appointment.specialty,
+      specialty: appointment.doctorSpecialty,
       date: appointment.date,
       time: appointment.time,
       status: appointment.status,
-      clinicAddress: appointment.clinicAddress,
+      clinicAddress: appointment.clinicAddress??"",
     );
   }
 
@@ -41,7 +41,7 @@ abstract class AppointmentModel with _$AppointmentModel {
       id: id,
       doctorId: doctorId,
       doctorName: doctorName,
-      specialty: specialty,
+      doctorSpecialty: specialty,
       date: date,
       time: time,
       status: status,

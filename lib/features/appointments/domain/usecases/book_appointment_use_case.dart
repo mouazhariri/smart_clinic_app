@@ -1,4 +1,4 @@
-import '../entities/appointment.dart';
+import '../model/appointment.dart';
 import '../repositories/appointments_repository.dart';
 
 class BookAppointmentUseCase {

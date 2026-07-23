@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../../../src/resourses/color_manager/app_colors.dart';
 import '../../../../src/resourses/font_manager/app_text_style.dart';
-import '../../domain/entities/appointment.dart';
+import '../../domain/model/appointment.dart';
 
 class AppointmentCardWidget extends StatelessWidget {
   const AppointmentCardWidget({
@@ -56,7 +56,7 @@ class AppointmentCardWidget extends StatelessWidget {
                     Text(context.tr(appointment.doctorName), style: AppTextStyle.interSemiBold16),
                     const SizedBox(height: 4),
                     Text(
-                      context.tr(appointment.specialty),
+                      context.tr(appointment.doctorSpecialty),
                       style: AppTextStyle.interRegular13.copyWith(
                         color: AppColors.textSecondary,
                       ),
@@ -96,7 +96,7 @@ class AppointmentCardWidget extends StatelessWidget {
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
-                  context.tr(appointment.clinicAddress),
+                  context.tr(appointment.clinicAddress??""),
                   style: AppTextStyle.interRegular13.copyWith(color: AppColors.textSecondary),
                 ),
               ),
@@ -126,7 +126,9 @@ class AppointmentCardWidget extends StatelessWidget {
     switch (status) {
       case AppointmentStatus.confirmed:
         return AppColors.successGreen;
-      case AppointmentStatus.pending:
+      case AppointmentStatus.inClinic:
+        return AppColors.ratingYellow;
+      case AppointmentStatus.waiting:
         return AppColors.warnYellow;
       case AppointmentStatus.completed:
         return AppColors.primary;

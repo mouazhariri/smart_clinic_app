@@ -1,27 +1,19 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/entities/user_profile.dart';
 
-class ProfileState {
-  const ProfileState({required this.profile, required this.logoutState});
+part 'profile_state.freezed.dart';
 
-  factory ProfileState.init() {
-    return const ProfileState(
-      profile: AsyncData(null),
-      logoutState: AsyncData(null),
-    );
-  }
+@freezed
+abstract class ProfileState with _$ProfileState {
+  const factory ProfileState({
+    required AsyncValue<UserProfile?> profile,
+    required AsyncValue<void> logoutState,
+  }) = _ProfileState;
 
-  final AsyncValue<UserProfile?> profile;
-  final AsyncValue<void> logoutState;
-
-  ProfileState copyWith({
-    AsyncValue<UserProfile?>? profile,
-    AsyncValue<void>? logoutState,
-  }) {
-    return ProfileState(
-      profile: profile ?? this.profile,
-      logoutState: logoutState ?? this.logoutState,
-    );
-  }
+  factory ProfileState.init() => const ProfileState(
+        profile: AsyncData(null),
+        logoutState: AsyncData(null),
+      );
 }

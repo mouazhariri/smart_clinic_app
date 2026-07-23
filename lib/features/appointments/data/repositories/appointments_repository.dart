@@ -3,7 +3,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../src/infrastructure/api/response/api_response.dart';
 import '../../../../src/infrastructure/network/services/dio_client.dart';
 import '../../../../src/logger/failure/exceptions/app_exception.dart';
-import '../../domain/entities/appointment.dart';
+import '../../domain/model/appointment.dart';
 import '../datasources/appointments_local_data_source.dart';
 import '../datasources/appointments_remote_data_source.dart';
 import '../models/appointment_model.dart';
